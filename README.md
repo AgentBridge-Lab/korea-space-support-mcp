@@ -11,6 +11,8 @@
 
 Built for Claude / Cursor / ChatGPT agents that need to recommend *concrete*, *deadline-bearing* Korean public programs to companies, startups, university labs, research teams, and consortia.
 
+![Korea Space Support MCP — web demo](docs/img/web-demo.jpg)
+
 ---
 
 ## Current snapshot
