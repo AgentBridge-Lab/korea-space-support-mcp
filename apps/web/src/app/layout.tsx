@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./styles.css";
-import { getIngestReportServer } from "../lib/api";
+import { getIngestReportServer } from "../lib/api.server";
 import { formatDate } from "../lib/format";
 
 export const metadata: Metadata = {

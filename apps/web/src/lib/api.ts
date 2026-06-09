@@ -1,6 +1,4 @@
-import type { CompanyProfile, MatchResultItem, SearchInput, SearchResultItem, SpaceProgramDetail, SpaceSourceReviewItem } from "./types";
-
-const SERVER_API_BASE_URL = process.env.API_BASE_URL ?? "http://localhost:4000";
+import type { CompanyProfile, MatchResultItem, SearchInput, SearchResultItem } from "./types";
 
 const stripUndefined = <T extends Record<string, unknown>>(obj: T): Partial<T> => {
   const out: Record<string, unknown> = {};
@@ -45,36 +43,4 @@ export const matchPrograms = async (
   if (!res.ok) throw new Error(`Match failed: ${res.status}`);
   const data = (await res.json()) as { matches: MatchResultItem[] };
   return data.matches ?? [];
-};
-
-export const getProgramServer = async (id: string): Promise<SpaceProgramDetail | null> => {
-  const res = await fetch(`${SERVER_API_BASE_URL}/space-programs/${encodeURIComponent(id)}`, {
-    cache: "no-store"
-  });
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`Detail fetch failed: ${res.status}`);
-  const data = (await res.json()) as { program: SpaceProgramDetail };
-  return data.program ?? null;
-};
-
-export const getSourcesServer = async (): Promise<SpaceSourceReviewItem[]> => {
-  try {
-    const res = await fetch(`${SERVER_API_BASE_URL}/space-sources`, { cache: "no-store" });
-    if (!res.ok) return [];
-    const data = (await res.json()) as { sources: SpaceSourceReviewItem[] };
-    return data.sources ?? [];
-  } catch {
-    return [];
-  }
-};
-
-export const getIngestReportServer = async (): Promise<{ lastCheckedAt?: string; generatedCount?: number } | null> => {
-  try {
-    const res = await fetch(`${SERVER_API_BASE_URL}/space-programs/ingest-report`, { cache: "no-store" });
-    if (!res.ok) return null;
-    const data = (await res.json()) as { report?: { lastCheckedAt?: string; generatedCount?: number } };
-    return data.report ?? null;
-  } catch {
-    return null;
-  }
 };

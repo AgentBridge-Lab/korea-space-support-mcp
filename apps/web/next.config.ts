@@ -1,19 +1,19 @@
 import path from "node:path";
 import type { NextConfig } from "next";
 
-const API_BASE_URL = process.env.API_BASE_URL ?? "http://localhost:4000";
+const monorepoRoot = path.join(__dirname, "../..");
 
 const nextConfig: NextConfig = {
   turbopack: {
-    root: path.join(__dirname, "../..")
+    root: monorepoRoot
   },
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${API_BASE_URL}/:path*`
-      }
-    ];
+  outputFileTracingRoot: monorepoRoot,
+  outputFileTracingIncludes: {
+    "/**/*": [
+      "../../data/space-programs.generated.json",
+      "../../data/space-programs.excluded.json",
+      "../../data/space-ingest-report.json"
+    ]
   }
 };
 

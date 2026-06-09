@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getIngestReportServer, getSourcesServer } from "../../lib/api";
+import { getIngestReportServer, getSourcesServer } from "../../lib/api.server";
 import { formatDate, sourceFamilyLabel } from "../../lib/format";
 import { Badge } from "../../components/Badge";
 

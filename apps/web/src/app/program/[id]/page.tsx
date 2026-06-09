@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProgramServer } from "../../../lib/api";
+import { getProgramServer } from "../../../lib/api.server";
 import {
   categoryLabel,
   dDayLabel,
