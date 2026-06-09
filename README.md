@@ -12,7 +12,16 @@
 
 기업·스타트업·대학 연구실·연구팀·컨소시엄에게 **마감일이 명확한 실제 공고**만 추천하도록 설계되었습니다. Claude, Cursor, ChatGPT 등 도구 호출이 가능한 에이전트에서 바로 사용할 수 있습니다.
 
-![Korea Space Support MCP — web demo](docs/img/web-demo.jpg)
+<table>
+<tr>
+<td width="50%"><img src="docs/img/web-search.jpg" alt="검색 페이지"/></td>
+<td width="50%"><img src="docs/img/web-detail.jpg" alt="공고 상세 페이지"/></td>
+</tr>
+<tr>
+<td align="center"><sub>필터 기반 검색 (정부톤 UI)</sub></td>
+<td align="center"><sub>공고 상세 (마감 근거 + 원기관 출처)</sub></td>
+</tr>
+</table>
 
 ---
 
