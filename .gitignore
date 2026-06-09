@@ -6,3 +6,6 @@ dist
 *.log
 *.tsbuildinfo
 .DS_Store
+.omc/
+data/space-api-mcp-smoke-report.json
+data/space-search-sample-report.json
