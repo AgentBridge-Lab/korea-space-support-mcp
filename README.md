@@ -1,5 +1,6 @@
 # Korea Space Support MCP
 
+[![verify-space](https://github.com/AgentBridge-Lab/korea-space-support-mcp/actions/workflows/verify-space.yml/badge.svg)](https://github.com/AgentBridge-Lab/korea-space-support-mcp/actions/workflows/verify-space.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%E2%89%A520-339933?logo=node.js&logoColor=white)](package.json)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white)](package.json)
