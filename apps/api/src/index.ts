@@ -347,7 +347,18 @@ server.post("/space-programs/match", async (request, reply) => {
   });
 
   const matches = programs
-    .map((program) => scoreSpaceProgramFit(program, profile))
+    .map((program) => {
+      const fit = scoreSpaceProgramFit(program, profile);
+      return {
+        ...fit,
+        agency: program.agency,
+        sourceFamily: program.sourceFamily,
+        deadline: program.applicationEndDate,
+        status: program.status,
+        defenseOrDualUse: program.defenseOrDualUse,
+        universityOrResearchPartnerRequired: program.universityOrResearchPartnerRequired
+      };
+    })
     .sort((a, b) => b.fitScore - a.fitScore);
 
   return reply.send({ matches });

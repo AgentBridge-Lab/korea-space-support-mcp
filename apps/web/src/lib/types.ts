@@ -74,6 +74,39 @@ export interface SpaceProgramDetail {
 
 export type ApplicantType = "company" | "startup_or_prefounder" | "researcher_or_lab";
 
+export type EligibilityStatus = "likely_eligible" | "needs_review" | "unlikely_eligible";
+
+export interface CompanyProfile {
+  name?: string;
+  businessType?: string;
+  region?: string;
+  foundedAt?: string;
+  industry?: string;
+  technologyAreas: string[];
+  keywords: string[];
+  employeeCount?: number;
+  hasResearchPartner?: boolean;
+  canJoinConsortium?: boolean;
+}
+
+export interface MatchResultItem {
+  programId: string;
+  title: string;
+  fitScore: number;
+  eligibilityStatus: EligibilityStatus;
+  spaceRelevance: string;
+  reasons: string[];
+  risks: string[];
+  missingInformation: string[];
+  sourceUrl: string;
+  agency?: string;
+  sourceFamily: string;
+  deadline?: string;
+  status: SpaceProgramStatus;
+  defenseOrDualUse: boolean;
+  universityOrResearchPartnerRequired?: boolean;
+}
+
 export interface SearchInput {
   query?: string;
   applicantType?: ApplicantType;

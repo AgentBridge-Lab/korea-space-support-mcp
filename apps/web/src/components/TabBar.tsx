@@ -5,7 +5,7 @@ export type TabKey = "filter" | "keyword" | "match";
 const TABS: { key: TabKey; label: string; future?: boolean }[] = [
   { key: "filter", label: "필터 검색" },
   { key: "keyword", label: "키워드 검색" },
-  { key: "match", label: "내 연구실로 매칭", future: true }
+  { key: "match", label: "내 연구실로 매칭" }
 ];
 
 export function TabBar({ active, onChange }: { active: TabKey; onChange: (key: TabKey) => void }) {

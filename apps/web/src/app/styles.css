@@ -321,6 +321,71 @@ input, select, textarea { font: inherit; }
 .skeleton { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 16px; height: 120px; }
 .skeleton-list { display: grid; gap: 12px; }
 
+/* ============ Profile form (match tab) ============ */
+.profile-form {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  display: grid;
+  gap: 14px;
+}
+.profile-presets {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (max-width: 720px) {
+  .profile-grid { grid-template-columns: 1fr; }
+}
+.profile-field {
+  display: grid; gap: 4px;
+  font-size: 13px;
+  color: var(--c-text-muted);
+  font-weight: 600;
+}
+.profile-field-wide { grid-column: 1 / -1; }
+.profile-checks { display: flex; flex-wrap: wrap; gap: 16px; }
+.profile-submit {
+  background: var(--c-primary);
+  color: #fff;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: var(--radius);
+  font-weight: 700;
+  justify-self: start;
+}
+.profile-submit:hover { background: var(--c-primary-dark); }
+
+/* ============ Match blocks ============ */
+.match-block {
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--c-border-strong);
+}
+.match-block strong { display: block; font-weight: 700; margin-bottom: 2px; }
+.match-block ul { margin: 0; padding-left: 18px; color: var(--c-text-muted); }
+.match-block-positive { background: #ecfdf5; border-left-color: var(--c-accent); }
+.match-block-positive strong { color: var(--c-accent); }
+.match-block-risk { background: #fef2f2; border-left-color: var(--c-danger); }
+.match-block-risk strong { color: var(--c-danger); }
+.match-block-missing { background: #fff7ed; border-left-color: var(--c-warning); }
+.match-block-missing strong { color: var(--c-warning); }
+
+.match-empty-callout {
+  background: var(--c-primary-soft);
+  border: 1px solid var(--c-border);
+  color: var(--c-text);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+}
+
 /* ============ Detail page ============ */
 .detail-back {
   font-size: 14px; color: var(--c-text-muted); margin-bottom: 16px;

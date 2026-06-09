@@ -1,4 +1,4 @@
-import type { SearchInput, SearchResultItem, SpaceProgramDetail } from "./types";
+import type { CompanyProfile, MatchResultItem, SearchInput, SearchResultItem, SpaceProgramDetail } from "./types";
 
 const SERVER_API_BASE_URL = process.env.API_BASE_URL ?? "http://localhost:4000";
 
@@ -21,6 +21,30 @@ export const searchPrograms = async (input: SearchInput, signal?: AbortSignal): 
   if (!res.ok) throw new Error(`Search failed: ${res.status}`);
   const data = (await res.json()) as { results: SearchResultItem[] };
   return data.results ?? [];
+};
+
+export const matchPrograms = async (
+  profile: CompanyProfile,
+  filters: SearchInput,
+  signal?: AbortSignal
+): Promise<MatchResultItem[]> => {
+  const body = {
+    companyProfile: {
+      ...profile,
+      technologyAreas: profile.technologyAreas ?? [],
+      keywords: profile.keywords ?? []
+    },
+    ...stripUndefined(filters as Record<string, unknown>)
+  };
+  const res = await fetch("/api/space-programs/match", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+    signal
+  });
+  if (!res.ok) throw new Error(`Match failed: ${res.status}`);
+  const data = (await res.json()) as { matches: MatchResultItem[] };
+  return data.matches ?? [];
 };
 
 export const getProgramServer = async (id: string): Promise<SpaceProgramDetail | null> => {

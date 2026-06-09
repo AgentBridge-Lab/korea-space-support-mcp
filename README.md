@@ -14,13 +14,19 @@
 
 <table>
 <tr>
-<td width="33%"><img src="docs/img/web-search.jpg" alt="필터 검색"/></td>
-<td width="33%"><img src="docs/img/web-keyword.jpg" alt="키워드 검색"/></td>
-<td width="33%"><img src="docs/img/web-detail.jpg" alt="공고 상세"/></td>
+<td width="50%"><img src="docs/img/web-search.jpg" alt="필터 검색"/></td>
+<td width="50%"><img src="docs/img/web-keyword.jpg" alt="키워드 검색"/></td>
 </tr>
 <tr>
 <td align="center"><sub>필터 검색 (연구실 페르소나 기본값)</sub></td>
 <td align="center"><sub>키워드 검색 (관련도순 + 추천 칩)</sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/img/web-match.jpg" alt="연구실 매칭"/></td>
+<td width="50%"><img src="docs/img/web-detail.jpg" alt="공고 상세"/></td>
+</tr>
+<tr>
+<td align="center"><sub>연구실 매칭 (fit score · 적합/위험/확인필요)</sub></td>
 <td align="center"><sub>상세 (마감 근거 + 원기관 출처)</sub></td>
 </tr>
 </table>

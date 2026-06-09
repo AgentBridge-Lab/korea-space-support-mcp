@@ -1,10 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { searchPrograms } from "../lib/api";
-import type { SearchInput, SearchResultItem } from "../lib/types";
+import { matchPrograms, searchPrograms } from "../lib/api";
+import type { CompanyProfile, MatchResultItem, SearchInput, SearchResultItem } from "../lib/types";
 import { FilterPanel } from "../components/FilterPanel";
 import { KeywordSearchBar } from "../components/KeywordSearchBar";
+import { MatchCard } from "../components/MatchCard";
+import { ProfileForm } from "../components/ProfileForm";
 import { ResultCard } from "../components/ResultCard";
 import { TabBar, type TabKey } from "../components/TabBar";
 
@@ -23,6 +25,13 @@ const KEYWORD_TAB_INPUT: SearchInput = {
   sortBy: "relevance"
 };
 
+const MATCH_TAB_INPUT: SearchInput = {
+  ...DEFAULT_INPUT,
+  applicantType: undefined,
+  sortBy: "relevance",
+  limit: 20
+};
+
 const DEBOUNCE_MS = 350;
 
 export default function HomePage() {
@@ -31,6 +40,8 @@ export default function HomePage() {
   const [queryDraft, setQueryDraft] = useState("");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResultItem[]>([]);
+  const [matches, setMatches] = useState<MatchResultItem[]>([]);
+  const [profile, setProfile] = useState<CompanyProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,6 +57,7 @@ export default function HomePage() {
   );
 
   useEffect(() => {
+    if (tab === "match") return;
     const controller = new AbortController();
     setLoading(true);
     setError(null);
@@ -57,7 +69,22 @@ export default function HomePage() {
       })
       .finally(() => setLoading(false));
     return () => controller.abort();
-  }, [effectiveInput]);
+  }, [effectiveInput, tab]);
+
+  useEffect(() => {
+    if (tab !== "match" || !profile) return;
+    const controller = new AbortController();
+    setLoading(true);
+    setError(null);
+    matchPrograms(profile, input, controller.signal)
+      .then((items) => setMatches(items))
+      .catch((err) => {
+        if ((err as Error).name === "AbortError") return;
+        setError("매칭 호출에 실패했습니다. apps/api 서버(:4000)가 실행 중인지 확인해주세요.");
+      })
+      .finally(() => setLoading(false));
+    return () => controller.abort();
+  }, [tab, profile, input]);
 
   const handleSort = useCallback((next: SearchInput["sortBy"]) => {
     setInput((prev) => ({ ...prev, sortBy: next }));
@@ -69,26 +96,36 @@ export default function HomePage() {
       setInput((prev) => ({ ...prev, sortBy: "relevance", applicantType: undefined }));
     } else if (next === "filter") {
       setInput((prev) => ({ ...prev, sortBy: prev.sortBy === "relevance" ? "deadline" : prev.sortBy }));
+    } else if (next === "match") {
+      setInput(MATCH_TAB_INPUT);
+      setLoading(false);
     }
   }, []);
 
   const handleResetFilters = useCallback(() => {
-    setInput(tab === "keyword" ? KEYWORD_TAB_INPUT : DEFAULT_INPUT);
     if (tab === "keyword") {
+      setInput(KEYWORD_TAB_INPUT);
       setQueryDraft("");
       setQuery("");
+    } else if (tab === "match") {
+      setInput(MATCH_TAB_INPUT);
+    } else {
+      setInput(DEFAULT_INPUT);
     }
   }, [tab]);
+
+  const itemCount = tab === "match" ? matches.length : results.length;
 
   const summaryText = useMemo(() => {
     if (loading) return <>검색 중…</>;
     if (error) return null;
+    if (tab === "match" && !profile) return <>프로필을 입력하면 매칭 점수 순으로 추천합니다.</>;
     return (
       <>
-        총 <strong>{results.length}</strong>건
+        총 <strong>{itemCount}</strong>건
       </>
     );
-  }, [loading, error, results.length]);
+  }, [loading, error, tab, profile, itemCount]);
 
   return (
     <main className="page">
@@ -103,35 +140,61 @@ export default function HomePage() {
         <KeywordSearchBar value={queryDraft} onChange={setQueryDraft} count={results.length} />
       ) : null}
 
+      {tab === "match" ? (
+        <ProfileForm
+          initial={profile ?? undefined}
+          onApply={(p) => setProfile(p)}
+        />
+      ) : null}
+
       <div className="search-grid">
         <FilterPanel value={input} onChange={setInput} onReset={handleResetFilters} />
 
         <section>
           <div className="results-bar">
             <span className="results-count">{summaryText}</span>
-            <label>
-              정렬:{" "}
-              <select
-                className="filter-select"
-                style={{ width: "auto", display: "inline-block", marginLeft: 4 }}
-                value={input.sortBy ?? "deadline"}
-                onChange={(e) => handleSort(e.target.value as SearchInput["sortBy"])}
-              >
-                <option value="deadline">마감일순</option>
-                <option value="relevance">관련도순</option>
-                <option value="announcement_date">공고일순</option>
-              </select>
-            </label>
+            {tab !== "match" ? (
+              <label>
+                정렬:{" "}
+                <select
+                  className="filter-select"
+                  style={{ width: "auto", display: "inline-block", marginLeft: 4 }}
+                  value={input.sortBy ?? "deadline"}
+                  onChange={(e) => handleSort(e.target.value as SearchInput["sortBy"])}
+                >
+                  <option value="deadline">마감일순</option>
+                  <option value="relevance">관련도순</option>
+                  <option value="announcement_date">공고일순</option>
+                </select>
+              </label>
+            ) : (
+              <span className="keyword-hint">fit score 내림차순</span>
+            )}
           </div>
 
           {error ? (
             <div className="error">{error}</div>
+          ) : tab === "match" && !profile ? (
+            <div className="match-empty-callout">
+              위 폼에 연구실/팀 정보를 입력하고 <strong>매칭 점수 계산</strong>을 누르면
+              회사 조건과 가까운 공고가 점수 순으로 나타납니다.
+            </div>
           ) : loading ? (
             <div className="skeleton-list">
               <div className="skeleton" />
               <div className="skeleton" />
               <div className="skeleton" />
             </div>
+          ) : tab === "match" ? (
+            matches.length === 0 ? (
+              <div className="empty">조건에 맞는 매칭 결과가 없습니다. 필터를 완화하거나 프로필을 조정해 보세요.</div>
+            ) : (
+              <div className="results-list">
+                {matches.map((item) => (
+                  <MatchCard key={item.programId} item={item} />
+                ))}
+              </div>
+            )
           ) : results.length === 0 ? (
             <div className="empty">조건에 맞는 활성 공고가 없습니다. 필터를 완화해 보세요.</div>
           ) : (
