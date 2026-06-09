@@ -110,6 +110,68 @@ input, select, textarea { font: inherit; }
   color: var(--c-text-muted); border-radius: 999px;
 }
 
+/* ============ Keyword bar ============ */
+.keyword-bar {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+.keyword-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-text);
+  margin-bottom: 8px;
+}
+.keyword-hint {
+  color: var(--c-text-muted);
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: 6px;
+}
+.keyword-input-wrap {
+  position: relative;
+}
+.keyword-input {
+  width: 100%;
+  padding: 12px 36px 12px 14px;
+  font-size: 16px;
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--c-text);
+}
+.keyword-input:focus {
+  outline: 2px solid var(--c-primary);
+  outline-offset: -1px;
+}
+.keyword-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px; height: 26px;
+  background: var(--c-surface-strong);
+  border: 0;
+  border-radius: 999px;
+  color: var(--c-text-muted);
+  font-size: 16px; line-height: 1;
+}
+.keyword-clear:hover { background: var(--c-border); color: var(--c-text); }
+.keyword-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.keyword-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+}
+
 /* ============ Search layout ============ */
 .search-grid {
   display: grid;

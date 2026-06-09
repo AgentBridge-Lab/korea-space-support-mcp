@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { searchPrograms } from "../lib/api";
 import type { SearchInput, SearchResultItem } from "../lib/types";
 import { FilterPanel } from "../components/FilterPanel";
+import { KeywordSearchBar } from "../components/KeywordSearchBar";
 import { ResultCard } from "../components/ResultCard";
 import { TabBar, type TabKey } from "../components/TabBar";
 
@@ -16,18 +17,39 @@ const DEFAULT_INPUT: SearchInput = {
   limit: 30
 };
 
+const KEYWORD_TAB_INPUT: SearchInput = {
+  ...DEFAULT_INPUT,
+  applicantType: undefined,
+  sortBy: "relevance"
+};
+
+const DEBOUNCE_MS = 350;
+
 export default function HomePage() {
   const [tab, setTab] = useState<TabKey>("filter");
   const [input, setInput] = useState<SearchInput>(DEFAULT_INPUT);
+  const [queryDraft, setQueryDraft] = useState("");
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResultItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (queryDraft === query) return;
+    const timer = setTimeout(() => setQuery(queryDraft), DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [queryDraft, query]);
+
+  const effectiveInput = useMemo<SearchInput>(
+    () => (tab === "keyword" ? { ...input, query: query.trim() || undefined } : input),
+    [tab, input, query]
+  );
+
+  useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
     setError(null);
-    searchPrograms(input, controller.signal)
+    searchPrograms(effectiveInput, controller.signal)
       .then((items) => setResults(items))
       .catch((err) => {
         if ((err as Error).name === "AbortError") return;
@@ -35,11 +57,28 @@ export default function HomePage() {
       })
       .finally(() => setLoading(false));
     return () => controller.abort();
-  }, [input]);
+  }, [effectiveInput]);
 
   const handleSort = useCallback((next: SearchInput["sortBy"]) => {
     setInput((prev) => ({ ...prev, sortBy: next }));
   }, []);
+
+  const handleTab = useCallback((next: TabKey) => {
+    setTab(next);
+    if (next === "keyword") {
+      setInput((prev) => ({ ...prev, sortBy: "relevance", applicantType: undefined }));
+    } else if (next === "filter") {
+      setInput((prev) => ({ ...prev, sortBy: prev.sortBy === "relevance" ? "deadline" : prev.sortBy }));
+    }
+  }, []);
+
+  const handleResetFilters = useCallback(() => {
+    setInput(tab === "keyword" ? KEYWORD_TAB_INPUT : DEFAULT_INPUT);
+    if (tab === "keyword") {
+      setQueryDraft("");
+      setQuery("");
+    }
+  }, [tab]);
 
   const summaryText = useMemo(() => {
     if (loading) return <>검색 중…</>;
@@ -58,14 +97,14 @@ export default function HomePage() {
         <p>마감일이 확인된 공개 공고만 보여줍니다. 가이드·포털·결과 공고는 자동 제외됩니다.</p>
       </div>
 
-      <TabBar active={tab} onChange={setTab} />
+      <TabBar active={tab} onChange={handleTab} />
+
+      {tab === "keyword" ? (
+        <KeywordSearchBar value={queryDraft} onChange={setQueryDraft} count={results.length} />
+      ) : null}
 
       <div className="search-grid">
-        <FilterPanel
-          value={input}
-          onChange={setInput}
-          onReset={() => setInput(DEFAULT_INPUT)}
-        />
+        <FilterPanel value={input} onChange={setInput} onReset={handleResetFilters} />
 
         <section>
           <div className="results-bar">

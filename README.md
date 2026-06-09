@@ -14,12 +14,14 @@
 
 <table>
 <tr>
-<td width="50%"><img src="docs/img/web-search.jpg" alt="검색 페이지"/></td>
-<td width="50%"><img src="docs/img/web-detail.jpg" alt="공고 상세 페이지"/></td>
+<td width="33%"><img src="docs/img/web-search.jpg" alt="필터 검색"/></td>
+<td width="33%"><img src="docs/img/web-keyword.jpg" alt="키워드 검색"/></td>
+<td width="33%"><img src="docs/img/web-detail.jpg" alt="공고 상세"/></td>
 </tr>
 <tr>
-<td align="center"><sub>필터 기반 검색 (정부톤 UI)</sub></td>
-<td align="center"><sub>공고 상세 (마감 근거 + 원기관 출처)</sub></td>
+<td align="center"><sub>필터 검색 (연구실 페르소나 기본값)</sub></td>
+<td align="center"><sub>키워드 검색 (관련도순 + 추천 칩)</sub></td>
+<td align="center"><sub>상세 (마감 근거 + 원기관 출처)</sub></td>
 </tr>
 </table>
 
