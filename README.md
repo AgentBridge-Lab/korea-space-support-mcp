@@ -1,5 +1,6 @@
 # Korea Space Support MCP
 
+[![Live](https://img.shields.io/badge/live-korea--space--support--mcp.vercel.app-7c3aed)](https://korea-space-support-mcp.vercel.app)
 [![verify-space](https://github.com/AgentBridge-Lab/korea-space-support-mcp/actions/workflows/verify-space.yml/badge.svg)](https://github.com/AgentBridge-Lab/korea-space-support-mcp/actions/workflows/verify-space.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%E2%89%A520-339933?logo=node.js&logoColor=white)](package.json)
@@ -30,6 +31,19 @@
 <td align="center"><sub>상세 (마감 근거 + 원기관 출처)</sub></td>
 </tr>
 </table>
+
+---
+
+## 🌐 라이브 데모
+
+**👉 https://korea-space-support-mcp.vercel.app**
+
+- `/` — 검색 (필터/키워드/매칭 3탭)
+- `/program/[id]` — 공고 상세
+- `/about` — 수집 정책 · 출처 17종 · 면책
+- `/api/space-programs/search`, `/match`, `/[id]`, `/ingest-report`, `/space-sources` — REST API
+
+Vercel(Hobby) 단일 배포. 데이터는 매주 월 09:00 KST에 maintainer 머신의 launchd 잡으로 ingest → git push → Vercel 재배포.
 
 ---
 
