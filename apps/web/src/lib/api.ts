@@ -1,4 +1,4 @@
-import type { CompanyProfile, MatchResultItem, SearchInput, SearchResultItem, SpaceProgramDetail } from "./types";
+import type { CompanyProfile, MatchResultItem, SearchInput, SearchResultItem, SpaceProgramDetail, SpaceSourceReviewItem } from "./types";
 
 const SERVER_API_BASE_URL = process.env.API_BASE_URL ?? "http://localhost:4000";
 
@@ -55,6 +55,17 @@ export const getProgramServer = async (id: string): Promise<SpaceProgramDetail |
   if (!res.ok) throw new Error(`Detail fetch failed: ${res.status}`);
   const data = (await res.json()) as { program: SpaceProgramDetail };
   return data.program ?? null;
+};
+
+export const getSourcesServer = async (): Promise<SpaceSourceReviewItem[]> => {
+  try {
+    const res = await fetch(`${SERVER_API_BASE_URL}/space-sources`, { cache: "no-store" });
+    if (!res.ok) return [];
+    const data = (await res.json()) as { sources: SpaceSourceReviewItem[] };
+    return data.sources ?? [];
+  } catch {
+    return [];
+  }
 };
 
 export const getIngestReportServer = async (): Promise<{ lastCheckedAt?: string; generatedCount?: number } | null> => {

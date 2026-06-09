@@ -76,6 +76,18 @@ export type ApplicantType = "company" | "startup_or_prefounder" | "researcher_or
 
 export type EligibilityStatus = "likely_eligible" | "needs_review" | "unlikely_eligible";
 
+export interface SpaceSourceReviewItem {
+  sourceFamily: string;
+  sourceName: string;
+  officialUrl: string;
+  sourceType: string;
+  mvpStatus: string;
+  collectionPolicy: string;
+  coverage: string;
+  knownGaps: string[];
+  notes: string[];
+}
+
 export interface CompanyProfile {
   name?: string;
   businessType?: string;

@@ -44,6 +44,7 @@ export default function HomePage() {
   const [profile, setProfile] = useState<CompanyProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   useEffect(() => {
     if (queryDraft === query) return;
@@ -147,7 +148,16 @@ export default function HomePage() {
         />
       ) : null}
 
-      <div className="search-grid">
+      <button
+        type="button"
+        className="filter-sheet-toggle"
+        onClick={() => setFilterOpen((v) => !v)}
+        aria-expanded={filterOpen}
+      >
+        {filterOpen ? "필터 닫기" : "필터 열기"}
+      </button>
+
+      <div className={`search-grid${filterOpen ? " filter-open" : ""}`}>
         <FilterPanel value={input} onChange={setInput} onReset={handleResetFilters} />
 
         <section>
@@ -196,7 +206,16 @@ export default function HomePage() {
               </div>
             )
           ) : results.length === 0 ? (
-            <div className="empty">조건에 맞는 활성 공고가 없습니다. 필터를 완화해 보세요.</div>
+            <div className="empty">
+              {tab === "keyword" && query
+                ? `"${query}"에 해당하는 활성 공고가 없습니다. 다른 키워드를 시도해 보세요.`
+                : "조건에 맞는 활성 공고가 없습니다. 필터를 완화해 보세요."}
+              <div style={{ marginTop: 12 }}>
+                <button type="button" className="filter-reset" style={{ width: "auto", padding: "8px 14px" }} onClick={handleResetFilters}>
+                  필터 초기화
+                </button>
+              </div>
+            </div>
           ) : (
             <div className="results-list">
               {results.map((item) => (
@@ -206,6 +225,7 @@ export default function HomePage() {
           )}
         </section>
       </div>
+      <div className="filter-sheet-backdrop" onClick={() => setFilterOpen(false)} />
     </main>
   );
 }

@@ -30,6 +30,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               {report?.lastCheckedAt ? (
                 <span className="refresh-chip">최근 갱신 {formatDate(report.lastCheckedAt)}</span>
               ) : null}
+              <Link href="/about">서비스 소개</Link>
               <a href="https://github.com/AgentBridge-Lab/korea-space-support-mcp" target="_blank" rel="noreferrer">
                 GitHub
               </a>
@@ -39,6 +40,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {children}
         <footer className="footer">
           <span>Korea Space Support MCP · MIT License · 자동 수집 metadata. 신청 전 원문 확인 필수.</span>
+          <span>
+            <Link href="/about">수집정책</Link>
+            <a href="https://github.com/AgentBridge-Lab/korea-space-support-mcp" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+          </span>
         </footer>
       </body>
     </html>
