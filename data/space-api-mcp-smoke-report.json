@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-06-09T04:56:42.417Z",
+  "api": {
+    "port": 52221,
+    "health": {
+      "ok": true,
+      "service": "bidscout-api"
+    },
+    "researcherCount": 5,
+    "defenseCount": 5,
+    "sampleProgramId": "space-kasa-discovered-B000000003163Ho2oI1",
+    "stderr": ""
+  },
+  "mcp": {
+    "toolNames": [
+      "search_tenders",
+      "get_tender_detail",
+      "match_tenders_to_company",
+      "list_space_sources",
+      "classify_space_notice",
+      "get_space_ingest_report",
+      "search_space_programs",
+      "get_space_program_detail",
+      "match_space_programs_to_company",
+      "summarize_space_program",
+      "check_space_program_eligibility"
+    ],
+    "researcherCount": 5,
+    "defenseCount": 5,
+    "generatedCount": 48,
+    "stderr": ""
+  },
+  "warnings": [],
+  "failures": []
+}

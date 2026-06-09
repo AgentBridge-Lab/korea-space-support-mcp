@@ -1,0 +1,40 @@
+{
+  "startedAt": "2026-06-09T07:35:42.119Z",
+  "finishedAt": "2026-06-09T07:37:00.145Z",
+  "durationMs": 78026,
+  "previousGeneratedCount": 48,
+  "currentGeneratedCount": 51,
+  "previousExcludedCount": 0,
+  "currentExcludedCount": 0,
+  "added": [
+    {
+      "id": "space-kstartup-discovered-178002",
+      "sourceFamily": "KSTARTUP",
+      "title": "'26-2차 방산 중소기업 컨설팅 지원사업 지원대상기업 모집 공고문",
+      "status": "active",
+      "applicationEndDate": "2026-06-25",
+      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=178002&pbancEndYn=N"
+    },
+    {
+      "id": "space-bizinfo-discovered-PBLN_000000000122927",
+      "sourceFamily": "BIZINFO",
+      "title": "[대전] 2026년 하반기 우주산업 혁신 기반 조성사업 지원기업 모집 공고",
+      "status": "active",
+      "applicationEndDate": "2026-06-12",
+      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122927"
+    },
+    {
+      "id": "space-bizinfo-discovered-PBLN_000000000122923",
+      "sourceFamily": "BIZINFO",
+      "title": "[대전] 2026년 K-방산 생태계 활성화 및 강소기업 맞춤형 패키지 지원사업 대한민국국제방위산업전(KADEX 2026) 대전관(기업공동홍보관) 참여기업 모집 공고",
+      "status": "active",
+      "applicationEndDate": "2026-06-19",
+      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122923"
+    }
+  ],
+  "removed": [],
+  "deadlineChanged": [],
+  "statusChanged": [],
+  "newExcluded": [],
+  "resolvedExcluded": []
+}

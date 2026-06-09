@@ -1,0 +1,29 @@
+{
+  "name": "bidscout-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm --workspace @bidscout/shared run build && npm --workspace @bidscout/api run dev",
+    "dev:mcp": "npm --workspace @bidscout/shared run build && npm --workspace @bidscout/mcp run dev",
+    "dev:web": "npm --workspace @bidscout/shared run build && npm --workspace @bidscout/web run dev",
+    "ingest:space": "node scripts/ingest-space-programs.mjs",
+    "check:space": "npm --workspace @bidscout/shared run build && node scripts/evaluate-space-mvp.mjs",
+    "check:space-search": "npm --workspace @bidscout/shared run build && node scripts/verify-space-search-samples.mjs",
+    "check:space-surfaces": "npm --workspace @bidscout/shared run build && npm --workspace @bidscout/api run build && npm --workspace @bidscout/mcp run build && node scripts/verify-space-api-mcp-smoke.mjs",
+    "report:space": "node scripts/report-space-refresh.mjs",
+    "refresh:space": "node scripts/run-space-refresh.mjs",
+    "refresh:space:scheduled": "node scripts/run-scheduled-space-refresh.mjs",
+    "verify:space": "npm run check:space && npm run check:space-search && npm run check:space-surfaces && npm test && npm run typecheck && npm run build",
+    "build": "npm --workspace @bidscout/shared run build && npm --workspace @bidscout/api run build && npm --workspace @bidscout/mcp run build && npm --workspace @bidscout/web run build",
+    "typecheck": "npm --workspace @bidscout/shared run typecheck && npm --workspace @bidscout/api run typecheck && npm --workspace @bidscout/mcp run typecheck && npm --workspace @bidscout/web run typecheck",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

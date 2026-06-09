@@ -1,0 +1,271 @@
+{
+  "generatedCount": 51,
+  "discoveredSourceCount": 53,
+  "excludedCount": 0,
+  "sourceFamilies": [
+    "ADD",
+    "BIZINFO",
+    "DJTP",
+    "GNTP",
+    "ITP",
+    "JNTP",
+    "KARI",
+    "KASA",
+    "KASI",
+    "KSTARTUP",
+    "MOLIT_KAIA",
+    "TIPA_SMTECH"
+  ],
+  "discoveredSourceFamilies": {
+    "ADD": 3,
+    "BIZINFO": 17,
+    "DJTP": 9,
+    "GNTP": 2,
+    "ITP": 1,
+    "JNTP": 1,
+    "KARI": 10,
+    "KASA": 5,
+    "KASI": 1,
+    "KSTARTUP": 2,
+    "MOLIT_KAIA": 1,
+    "TIPA_SMTECH": 1
+  },
+  "generatedSourceFamilies": {
+    "ADD": 3,
+    "BIZINFO": 17,
+    "DJTP": 7,
+    "GNTP": 2,
+    "ITP": 1,
+    "JNTP": 1,
+    "KARI": 10,
+    "KASA": 5,
+    "KASI": 1,
+    "KSTARTUP": 2,
+    "MOLIT_KAIA": 1,
+    "TIPA_SMTECH": 1
+  },
+  "excludedSourceFamilies": {},
+  "discoveryRunAudit": [
+    {
+      "label": "KARI",
+      "status": "ok",
+      "discoveredCount": 10,
+      "durationMs": 400
+    },
+    {
+      "label": "KASI",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 1552
+    },
+    {
+      "label": "KASA",
+      "status": "ok",
+      "discoveredCount": 5,
+      "durationMs": 970
+    },
+    {
+      "label": "DAPA",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 663
+    },
+    {
+      "label": "ADD",
+      "status": "ok",
+      "discoveredCount": 3,
+      "durationMs": 404
+    },
+    {
+      "label": "KRIT",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 385
+    },
+    {
+      "label": "KSTARTUP",
+      "status": "ok",
+      "discoveredCount": 2,
+      "durationMs": 2699
+    },
+    {
+      "label": "KEIT",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 688
+    },
+    {
+      "label": "KIAT",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 842
+    },
+    {
+      "label": "TIPA_SMTECH",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 491
+    },
+    {
+      "label": "DJTP",
+      "status": "ok",
+      "discoveredCount": 9,
+      "durationMs": 951
+    },
+    {
+      "label": "JNTP",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 645
+    },
+    {
+      "label": "ITP",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 19914
+    },
+    {
+      "label": "GNTP",
+      "status": "ok",
+      "discoveredCount": 2,
+      "durationMs": 2891
+    },
+    {
+      "label": "KAIA",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 454
+    },
+    {
+      "label": "BIZINFO",
+      "status": "ok",
+      "discoveredCount": 17,
+      "durationMs": 9702
+    }
+  ],
+  "sourceFamilyAudit": [
+    {
+      "sourceFamily": "ADD",
+      "discoveredCount": 3,
+      "normalizedCount": 3,
+      "generatedCount": 3,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 3,
+      "closedCount": 0
+    },
+    {
+      "sourceFamily": "BIZINFO",
+      "discoveredCount": 17,
+      "normalizedCount": 17,
+      "generatedCount": 17,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 6,
+      "closedCount": 11
+    },
+    {
+      "sourceFamily": "DJTP",
+      "discoveredCount": 9,
+      "normalizedCount": 7,
+      "generatedCount": 7,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 3,
+      "closedCount": 4
+    },
+    {
+      "sourceFamily": "GNTP",
+      "discoveredCount": 2,
+      "normalizedCount": 2,
+      "generatedCount": 2,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 2,
+      "closedCount": 0
+    },
+    {
+      "sourceFamily": "ITP",
+      "discoveredCount": 1,
+      "normalizedCount": 1,
+      "generatedCount": 1,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 0,
+      "closedCount": 1
+    },
+    {
+      "sourceFamily": "JNTP",
+      "discoveredCount": 1,
+      "normalizedCount": 1,
+      "generatedCount": 1,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 1,
+      "closedCount": 0
+    },
+    {
+      "sourceFamily": "KARI",
+      "discoveredCount": 10,
+      "normalizedCount": 10,
+      "generatedCount": 10,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 1,
+      "closedCount": 9
+    },
+    {
+      "sourceFamily": "KASA",
+      "discoveredCount": 5,
+      "normalizedCount": 5,
+      "generatedCount": 5,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 3,
+      "closedCount": 2
+    },
+    {
+      "sourceFamily": "KASI",
+      "discoveredCount": 1,
+      "normalizedCount": 1,
+      "generatedCount": 1,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 0,
+      "closedCount": 1
+    },
+    {
+      "sourceFamily": "KSTARTUP",
+      "discoveredCount": 2,
+      "normalizedCount": 2,
+      "generatedCount": 2,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 2,
+      "closedCount": 0
+    },
+    {
+      "sourceFamily": "MOLIT_KAIA",
+      "discoveredCount": 1,
+      "normalizedCount": 1,
+      "generatedCount": 1,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 0,
+      "closedCount": 1
+    },
+    {
+      "sourceFamily": "TIPA_SMTECH",
+      "discoveredCount": 1,
+      "normalizedCount": 1,
+      "generatedCount": 1,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 1,
+      "closedCount": 0
+    }
+  ],
+  "activeCount": 22,
+  "closedCount": 29,
+  "lastCheckedAt": "2026-06-09T07:35:42.252Z"
+}
