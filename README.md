@@ -43,22 +43,24 @@
 - `/about` — 수집 정책 · 출처 17종 · 면책
 - `/api/space-programs/search`, `/match`, `/[id]`, `/ingest-report`, `/space-sources` — REST API
 
-Vercel(Hobby) 단일 배포. 데이터는 매주 월 09:00 KST에 maintainer 머신의 launchd 잡으로 ingest → git push → Vercel 재배포.
+Vercel(Hobby) 단일 배포. 기존 macOS launchd 설정은 매주 월 09:00 KST에 ingest → git push → Vercel 재배포하도록 구성되어 있습니다.
 
 ---
 
-## 현재 데이터 스냅샷
+## 현재 데이터 스냅샷 (2026-10-26 KST)
 
 | 항목 | 값 |
 |---|---|
-| 생성된 공고 | **51건** |
-| 활성(마감일 ≥ 오늘) | 22건 |
-| 출처 패밀리 | 12개 (KARI · KASA · KASI · DAPA · ADD · TIPA/SMTECH · KAIA · DJTP · JNTP · GNTP · ITP · Bizinfo) |
-| Bizinfo 원기관 출처 URL 보유율 | 17 / 17 |
+| 생성된 공고 | **33건** |
+| 활성(마감일 ≥ 기준일) / 마감 | **11건 / 22건** |
+| 출처 패밀리 | 9개 (KARI · KASA · ADD · KRIT · KAIA · DJTP · GNTP · ITP · Bizinfo) |
+| 수집 경로 확인 / 수집 오류 | 16개 / 0건 |
+| 첨부파일에서 마감일 확인 | 7건 (PDF 6건 · HWPX 1건) |
+| Bizinfo 원기관 출처 URL 보유율 | 4 / 4 |
 | 제외(마감일 판독 불가 등) | 0 |
-| 자동 갱신 주기 | 매주 월 09:00 KST (launchd) |
+| 자동 갱신 설정 | 매주 월 09:00 KST (기존 macOS launchd) |
 
-수치는 매 `npm run ingest:space` 시점에 갱신됩니다.
+이 표는 2026-10-26 수집 결과입니다. 출처별 현황은 `data/space-ingest-report.json`, 변경 내역과 진행 중 공고는 [최신화 보고서](docs/space-refresh-2026-10-26.md)를 참고하세요. 기관과 기업마당에 함께 게시된 공고는 출처별 레코드로 집계합니다.
 
 ---
 
@@ -100,8 +102,9 @@ cd korea-space-support-mcp
 npm install
 
 # (선택) 출처에서 새로 ingest 하려면 Python 의존성 1회 설치
-python3 -m pip install --user curl_cffi beautifulsoup4 pyyaml olefile
-# PDF 마감일 추출에는 pdftotext(빌드된 poppler 등)도 사용됩니다
+python3 -m pip install --user curl_cffi beautifulsoup4 pyyaml olefile pypdf
+# Windows에서는 python3 대신 python 사용. PYTHON 환경변수로 실행 경로 지정 가능.
+# PDF 마감일은 pdftotext를 우선 사용하고, 없으면 pypdf로 추출합니다.
 
 # 사전 생성된 데이터 즉시 조회
 cat data/space-programs.generated.json | jq '.[].title' | head
@@ -215,7 +218,7 @@ npm run verify:space
 #           Node 테스트 → typecheck → build (shared + api + mcp + web)
 ```
 
-현재 상태: **테스트 13/13 PASS**, 경고 0건, 실패 0건.
+현재 상태: **테스트 16/16 PASS**, 경고 0건, 실패 0건.
 
 ---
 

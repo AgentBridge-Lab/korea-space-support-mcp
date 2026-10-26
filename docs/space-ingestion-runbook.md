@@ -31,6 +31,14 @@ Commands:
 npm run refresh:space
 ```
 
+The refresh command works on Windows as well as macOS/Linux. Install the Python
+packages with `python -m pip install curl_cffi olefile pypdf` on Windows (use
+`python3` on macOS/Linux). Set `PYTHON` to an executable path when needed. PDF
+deadline extraction uses `pdftotext` when available, otherwise `pypdf`. Python
+subprocess output is UTF-8 so Korean metadata survives Windows pipes.
+Legacy HWP files use the `@ohah/hwpjs` reader installed by `npm ci`, with the
+existing `olefile` extractor retained as a fallback.
+
 Use the scheduled wrapper when running from cron, launchd, systemd, or another scheduler:
 
 ```bash
@@ -200,6 +208,7 @@ ADD:
 
 KAIA/MOLIT:
 
+- Use `https://www.kaia.re.kr/KAIA/contents/K30101000000.do` and its `schM=view&id=...` detail links after the 2026 site redesign. The former `/portal/bbs/...` endpoints return 404.
 - Include aviation, aerospace, UAM, AAM, drone, autonomous-flight, airport-safety, and explicit space/aerospace infrastructure R&D notices.
 - Mark UAM/drone/aviation-only notices as adjacent unless the text is explicitly space/aerospace.
 
@@ -315,6 +324,7 @@ Attachment handling policy:
 
 - Download public attachments only for metadata extraction needed to determine application dates.
 - PDF: use `pdftotext`.
+- If `pdftotext` is unavailable, use Python `pypdf` for text extraction.
 - HWPX: use ZIP/XML or `PrvText.txt` extraction.
 - Legacy HWP: best-effort HWP 5.x BodyText extraction.
 - Do not store full attachment text in generated records.

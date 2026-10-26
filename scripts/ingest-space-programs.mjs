@@ -1,11 +1,25 @@
-import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
 const now = new Date().toISOString();
 const execFileAsync = promisify(execFile);
+const pythonCommand = process.env.PYTHON ?? (process.platform === "win32" ? "python" : "python3");
+// Python writes Korean metadata through pipes on Windows as well as Unix.
+process.env.PYTHONIOENCODING = "utf-8";
+let pdfTextBackend = "pdftotext";
+
+const extractPdfText = async (path) => {
+  const command = pdfTextBackend === "pdftotext" ? "pdftotext" : pythonCommand;
+  const args = pdfTextBackend === "pdftotext"
+    ? [path, "-"]
+    : ["-c", "import sys; from pypdf import PdfReader; print('\\n'.join(page.extract_text() or '' for page in PdfReader(sys.argv[1]).pages))", path];
+  const { stdout } = await execFileAsync(command, args, { maxBuffer: 8 * 1024 * 1024 });
+  return stdout.replace(/\s+/g, " ").trim();
+};
 
 const verifyIngestionDependencies = async () => {
   const missing = [];
@@ -13,13 +27,18 @@ const verifyIngestionDependencies = async () => {
   try {
     await execFileAsync("pdftotext", ["-v"]);
   } catch {
-    missing.push("pdftotext");
+    try {
+      await execFileAsync(pythonCommand, ["-c", "import pypdf"]);
+      pdfTextBackend = "pypdf";
+    } catch {
+      missing.push("pdftotext or Python package pypdf");
+    }
   }
 
   try {
-    await execFileAsync("python3", ["-c", "import curl_cffi, olefile"]);
+    await execFileAsync(pythonCommand, ["-c", "import curl_cffi, olefile"]);
   } catch {
-    missing.push("python3 packages: curl_cffi olefile");
+    missing.push(`${pythonCommand} packages: curl_cffi olefile`);
   }
 
   if (missing.length > 0) {
@@ -35,7 +54,7 @@ const djtpBusinessNoticeListUrl = "https://www.djtp.or.kr/pbanc?mid=a20101000000
 const gntpSupportListUrl = "https://www.gntp.or.kr/biz/apply";
 const jntpMainUrl = "https://www.jntp.or.kr/base/main/view";
 const jntpAnnouncementListUrl = "https://www.jntp.or.kr/base/apiAnnouncement/List?menuLevel=2&menuNo=45";
-const kaiaListUrl = "https://www.kaia.re.kr/portal/bbs/list/B0000029.do?menuNo=200110";
+const kaiaListUrl = "https://www.kaia.re.kr/KAIA/contents/K30101000000.do";
 const kariResearchListUrl = "https://www.kari.re.kr/kor/article/ATCLd4f64ac47";
 const kasiNoticeListUrl = "https://www.kasi.re.kr/kor/publication/post/notice";
 const kritNoticeListUrl = "https://www.krit.re.kr/krit/bbs/notice_list.do?gotoMenuNo=05010000";
@@ -110,7 +129,7 @@ except Exception as error:
 `;
 
   try {
-    const { stdout } = await execFileAsync("python3", ["-c", script, url], {
+    const { stdout } = await execFileAsync(pythonCommand, ["-c", script, url], {
       maxBuffer: 16 * 1024 * 1024
     });
     const result = JSON.parse(stdout);
@@ -146,7 +165,7 @@ except Exception as error:
     print(json.dumps({"ok": False, "error": str(error)}, ensure_ascii=False))
 `;
 
-  const { stdout } = await execFileAsync("python3", ["-c", script, url], {
+  const { stdout } = await execFileAsync(pythonCommand, ["-c", script, url], {
     maxBuffer: 32 * 1024 * 1024
   });
   const result = JSON.parse(stdout);
@@ -165,6 +184,7 @@ const toJinaReaderUrl = (url) =>
 
 const fetchWithJina = async (url) => {
   const response = await fetch(toJinaReaderUrl(url), {
+    signal: AbortSignal.timeout(30000),
     headers: {
       "user-agent": "KoreaSpaceSupportMCP/0.1 metadata-only source discovery"
     }
@@ -198,6 +218,7 @@ const fetchPage = async (url, options = {}) => {
       }
       if (strategy === "node") {
         const response = await fetch(url, {
+          signal: AbortSignal.timeout(30000),
           method,
           headers: {
             "user-agent": "KoreaSpaceSupportMCP/0.1 metadata-only source review",
@@ -291,7 +312,8 @@ const formatDate = (year, month, day) => {
 
 const noYearDateRangePattern =
   /(\d{1,2})\s*(?:[.]|월)\s*(\d{1,2})\s*(?:일)?(?:\([^)]*\))?[\s\S]{0,30}?[~∼～\-–—]\s*(?:(\d{1,2})\s*(?:[.]|월)\s*)?(\d{1,2})\s*(?:일)?(?:\([^)]*\))?/;
-const deadlineAnchors = ["마감일", "접수 기간", "접수기간", "신청기간", "모집기간", "공모기간", "제출기간", "신청 기간", "재공모 일정", "재공모일정", "공모 일정", "공모일정"];
+// Eligibility clauses also say "마감일"; prefer the actual application table.
+const deadlineAnchors = ["접수 기간", "접수기간", "서류 접수", "서류접수", "신청기간", "모집기간", "공모기간", "제출기간", "신청 기간", "재공모 일정", "재공모일정", "공모 일정", "공모일정", "마감일"];
 const variableDeadlinePattern =
   /(?:신청|접수|모집|공모|제출|지원)[^\n.]{0,80}(?:상시|예산\s*소진|차수별\s*상이|별도\s*공지|수시\s*접수|선착순)|(?:상시|예산\s*소진|차수별\s*상이|수시\s*접수|선착순)[^\n.]{0,80}(?:신청|접수|모집|공모|제출|지원)/;
 
@@ -397,7 +419,7 @@ const classifyKaiaNotice = (text) => {
 };
 
 const classifyKasaNotice = (text) => {
-  if (/편의점|관리위탁|채용|합격자|인사|행사|이벤트|선정결과/.test(text)) return undefined;
+  if (/편의점|관리위탁|채용|합격자|인사|행사|이벤트|선정결과|발주계획|수요조사|연구시설장비.*심의/.test(text)) return undefined;
   if (procurementNoticePattern.test(text) || nonProgramNoticePattern.test(text)) return undefined;
 
   if (/인공위성|위성|통신·항법|통신항법/.test(text)) {
@@ -408,7 +430,7 @@ const classifyKasaNotice = (text) => {
       technologyAreas: ["인공위성", "탑재체", "위성통신", "우주기술"]
     };
   }
-  if (/우주기술실용화|투·융자|투융자|사업화|우주항공 분야/.test(text)) {
+  if (/우주기술실용화|우주신기술|혁신제품|투·융자|투융자|사업화|우주항공 분야/.test(text)) {
     return {
       spaceCategory: "space_commercialization",
       relevanceScore: 90,
@@ -430,6 +452,14 @@ const classifyKasaNotice = (text) => {
       relevanceScore: 76,
       industries: ["항공우주", "항공", "첨단제조", "R&D"],
       technologyAreas: ["항공기체", "항공우주 부품", "첨단제조"]
+    };
+  }
+  if (/드론|UAM|AAM|무인이동체/i.test(text)) {
+    return {
+      spaceCategory: "drone_uam_adjacent",
+      relevanceScore: 72,
+      industries: ["드론", "UAM", "R&D"],
+      technologyAreas: ["무인기", "자율비행", "실증"]
     };
   }
   return undefined;
@@ -967,7 +997,7 @@ const classifyTipaSmtechNotice = (text) => {
 };
 
 const classifyBizinfoNotice = (text) => {
-  if (/전후방산업|인턴십|코믹콘|게임|뷰티|관광|숙박|소상공인|착한가격|묘목|포럼|피칭\s*행사|컨퍼런스|세미나|경진대회|공모전|아이디어\s*대회|전시관\s*참가|전시회\s*참가|박람회\s*참가/.test(text)) return undefined;
+  if (/전후방산업|인턴십|코믹콘|게임|뷰티|관광|숙박|소상공인|착한가격|묘목|포럼|피칭\s*행사|컨퍼런스|세미나|경진대회|공모전|아이디어\s*대회|전시관|전시회|박람회/.test(text)) return undefined;
   if (procurementNoticePattern.test(text) || nonProgramNoticePattern.test(text)) return undefined;
 
   if (/위성|우주산업|우주항공|국제우주대회|우주항공용|우주\s*기업|우주\s*분야/.test(text)) {
@@ -978,7 +1008,7 @@ const classifyBizinfoNotice = (text) => {
       technologyAreas: ["우주산업", "위성", "우주기술 사업화"]
     };
   }
-  if (/항공부품|항공산업|항공\s*기업|항공\s*분야|항공우주/.test(text)) {
+  if (/항공\s*(?:부품|산업|기업|분야|기술|기체|제조|우주)/.test(text)) {
     return {
       spaceCategory: "aviation_industry",
       relevanceScore: 72,
@@ -994,7 +1024,8 @@ const classifyBizinfoNotice = (text) => {
       technologyAreas: ["드론", "무인이동체", "실증", "사업화"]
     };
   }
-  if (/(?<!후)방산|국방|방위\s*R&D|K방산/.test(text)) {
+  if (/(?<![후소])방산|(?<!한)국방|방위\s*R&D|K방산/.test(text)
+      && /위성|우주|항공|드론|무인기|무인이동체|감시정찰|C4I/i.test(text)) {
     return {
       spaceCategory: "defense_aerospace_adjacent",
       relevanceScore: 66,
@@ -1308,6 +1339,7 @@ const discoverKasaSources = async () => {
       participationType: "우주항공청 R&D/사업 공고",
       consortiumRequired: false,
       inferDateFromText: false,
+      preferHtmlDeadline: true,
       preferCurlCffi: true,
       seedAttachmentUrls: fileMatch
         ? [`https://www.kasa.go.kr/cmm/fms/zipDownload.do?atchFileIdStr=${encodeURIComponent(fileMatch[1])}&zipFileName=zipDownload.zip`]
@@ -1497,6 +1529,7 @@ const fetchKeitSupportList = async ({ year, searchTerm, pageIndex }) => {
     orderBySe: "default"
   });
   const response = await fetch(keitSupportListJsonUrl, {
+    signal: AbortSignal.timeout(30000),
     method: "POST",
     headers: {
       "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -1848,11 +1881,11 @@ const discoverKaiaSources = async () => {
   const discovered = [];
 
   for (const row of rows) {
-    const link = row.match(/<a\s+[^>]*href="([^"]*\/portal\/bbs\/view\/B0000029\/(\d+)\.do[^"]*)"[^>]*>([\s\S]*?)<\/a>/i);
+    const link = row.match(/<a\s+[^>]*href="([^"]*[?&](?:amp;)?id=(\d+)[^"]*)"[^>]*>([\s\S]*?)<\/a>/i);
     if (!link) continue;
 
     const cellTexts = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((match) => stripHtml(match[1]));
-    const businessName = cellTexts[1] ?? "";
+    const businessName = cellTexts[2] ?? "";
     const title = stripHtml(link[3]);
     const combinedText = `${businessName} ${title}`;
     const classification = classifyKaiaNotice(combinedText);
@@ -1862,7 +1895,7 @@ const discoverKaiaSources = async () => {
 
     discovered.push({
       id: `space-kaia-discovered-${link[2]}`,
-      url: normalizeUrl(kaiaListUrl, link[1]),
+      url: normalizeAbsoluteUrl(kaiaListUrl, link[1]),
       source: "kaia_discovered_notice",
       sourceFamily: "MOLIT_KAIA",
       agency: "국토교통과학기술진흥원",
@@ -1937,9 +1970,6 @@ const findDate = (text) => {
 };
 
 const findDeadline = (text) => {
-  const isoRange = text.match(/20\d{2}-\d{2}-\d{2}\s*~\s*(20\d{2}-\d{2}-\d{2})/);
-  if (isoRange) return isoRange[1];
-
   const toDate = (year, month, day) => {
     const monthNumber = Number.parseInt(month, 10);
     const dayNumber = Number.parseInt(day, 10);
@@ -2025,10 +2055,7 @@ const extractPdfTextFromAttachments = async (urls) => {
       dir = await mkdtemp(join(tmpdir(), "space-attachment-"));
       const pdfPath = join(dir, "attachment.pdf");
       await writeFile(pdfPath, binary.bytes);
-      const { stdout } = await execFileAsync("pdftotext", [pdfPath, "-"], {
-        maxBuffer: 8 * 1024 * 1024
-      });
-      const text = stdout.replace(/\s+/g, " ").trim();
+      const text = await extractPdfText(pdfPath);
       if (text.length > 0) return text;
     } catch {
       // Try the next attachment.
@@ -2064,13 +2091,21 @@ with zipfile.ZipFile(path) as z:
         parts.append(html.unescape(text))
 print(re.sub(r"\s+", " ", " ".join(parts)).strip())
 `;
-  const { stdout } = await execFileAsync("python3", ["-c", script, path], {
+  const { stdout } = await execFileAsync(pythonCommand, ["-c", script, path], {
     maxBuffer: 8 * 1024 * 1024
   });
   return stdout.replace(/\s+/g, " ").trim();
 };
 
 const extractLegacyHwpText = async (path) => {
+  try {
+    const { toMarkdown } = await import("@ohah/hwpjs");
+    const { markdown } = toMarkdown(await readFile(path), { image: "blob" });
+    const text = cleanNoticeText(stripHtml(markdown));
+    if (text) return text;
+  } catch {
+    // Retain the legacy extractor for unsupported native runtimes or damaged files.
+  }
   const script = String.raw`
 import re
 import sys
@@ -2107,7 +2142,7 @@ for name in ole.listdir(streams=True):
 
 print(re.sub(r"\\s+", " ", " ".join(parts)).strip())
 `;
-  const { stdout } = await execFileAsync("python3", ["-c", script, path], {
+  const { stdout } = await execFileAsync(pythonCommand, ["-c", script, path], {
     maxBuffer: 12 * 1024 * 1024
   });
   return stdout.replace(/\s+/g, " ").trim();
@@ -2131,10 +2166,7 @@ const extractAttachmentText = async (urls, announcementDate) => {
       if (binary.bytes.subarray(0, 4).equals(Buffer.from("%PDF"))) {
         const pdfPath = join(dir, "attachment.pdf");
         await writeFile(pdfPath, binary.bytes);
-        const { stdout } = await execFileAsync("pdftotext", [pdfPath, "-"], {
-          maxBuffer: 8 * 1024 * 1024
-        });
-        const text = stdout.replace(/\s+/g, " ").trim();
+        const text = await extractPdfText(pdfPath);
         if (text.length > 0) {
           const result = { text, url, format: "pdf" };
           if (findDeadline(text) ?? findNoYearDeadline(text, announcementDate)) return result;
@@ -2358,9 +2390,11 @@ const normalizeProgram = async (source) => {
     ...(source.seedAttachmentUrls ?? []),
     ...extractAttachmentUrls(html, source.url)
   ])];
-  const attachmentResult = source.defaultDeadline ? undefined : await extractAttachmentText(attachmentUrls, pageAnnouncementDate);
+  const htmlDeadline = findDeadline(relevantText);
+  const attachmentResult = source.defaultDeadline || (source.preferHtmlDeadline && htmlDeadline)
+    ? undefined
+    : await extractAttachmentText(attachmentUrls, pageAnnouncementDate);
   const attachmentText = attachmentResult?.text;
-  const htmlDeadline = source.sourceFamily === "KASA" ? undefined : findDeadline(relevantText);
   const htmlNoYearDeadline = findNoYearDeadline(text, pageAnnouncementDate);
   const attachmentDirectDeadline = attachmentText ? findDeadline(attachmentText) : undefined;
   const attachmentNoYearDeadline = attachmentText && !attachmentDirectDeadline
@@ -2478,6 +2512,7 @@ const runDiscovery = async (label, discover) => {
   }
 };
 
+const main = async () => {
 await verifyIngestionDependencies();
 
 const discoverySources = [
@@ -2498,16 +2533,20 @@ const discoverySources = [
   ["KAIA", discoverKaiaSources],
   ["BIZINFO", discoverBizinfoSources]
 ];
-const discoveredSources = [];
-for (const [label, discover] of discoverySources) {
-  discoveredSources.push(...(await runDiscovery(label, discover)));
-}
+const discoveredSources = (await Promise.all(discoverySources.map(async ([label, discover]) => {
+  const discovered = await runDiscovery(label, discover);
+  console.log(`${label}: ${discovered.length} notices discovered`);
+  return discovered;
+}))).flat();
 
 const sources = dedupeSources(discoveredSources);
 const results = [];
-for (const source of sources) {
+let completedCount = 0;
+const normalizeSource = async (source) => {
   try {
-    results.push(await normalizeProgram(source));
+    const program = await normalizeProgram(source);
+    console.log(`Normalized ${++completedCount}/${sources.length}: [${source.sourceFamily}] ${source.defaultTitle}`);
+    return program;
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     const missingDeadline = describeMissingDeadline({
@@ -2517,7 +2556,8 @@ for (const source of sources) {
       attachmentUrls: source.seedAttachmentUrls ?? [],
       error: errorMessage
     });
-    results.push({
+    completedCount += 1;
+    return {
       id: source.id,
       source: source.source,
       sourceFamily: source.sourceFamily,
@@ -2556,8 +2596,12 @@ for (const source of sources) {
       missingDeadlineReasonCategory: missingDeadline.reasonCategory,
       error: errorMessage,
       lastCheckedAt: now
-    });
+    };
   }
+};
+// Bound per-origin traffic and retain discovery order in the generated files.
+for (let index = 0; index < sources.length; index += 4) {
+  results.push(...await Promise.all(sources.slice(index, index + 4).map(normalizeSource)));
 }
 
 const programNoticeResults = results.filter((program) => program.applicationEndDate);
@@ -2627,3 +2671,10 @@ await writeFile("data/space-ingest-report.json", `${JSON.stringify(ingestReport,
 console.log(
   `Wrote ${programNoticeResults.length} records to data/space-programs.generated.json (${discoveredSources.length} discovered, ${excludedResults.length} excluded without deadline)`
 );
+};
+
+export { classifyBizinfoNotice, classifyKasaNotice, findDeadline };
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await main();
+}

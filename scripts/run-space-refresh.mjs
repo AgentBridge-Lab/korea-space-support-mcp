@@ -15,7 +15,10 @@ const loadJson = async (path, fallback) => {
 };
 
 const runNpmScript = async (script) => {
-  const child = execFile("npm", ["run", script], {
+  // npm exposes its JS entry point, avoiding .cmd shell handling on Windows.
+  const command = process.env.npm_execpath ? process.execPath : "npm";
+  const args = process.env.npm_execpath ? [process.env.npm_execpath, "run", script] : ["run", script];
+  const child = execFile(command, args, {
     maxBuffer: 32 * 1024 * 1024
   });
 

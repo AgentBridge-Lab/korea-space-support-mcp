@@ -21,9 +21,10 @@
     "verify:space": "npm run check:space && npm run check:space-search && npm run check:space-surfaces && npm test && npm run typecheck && npm run build",
     "build": "npm --workspace @bidscout/shared run build && npm --workspace @bidscout/api run build && npm --workspace @bidscout/mcp run build && npm --workspace @bidscout/web run build",
     "typecheck": "npm --workspace @bidscout/shared run typecheck && npm --workspace @bidscout/api run typecheck && npm --workspace @bidscout/mcp run typecheck && npm --workspace @bidscout/web run typecheck",
-    "test": "npm run test --workspaces --if-present"
+    "test": "npm run test --workspaces --if-present && node --test scripts/ingest-space-programs.test.mjs"
   },
   "devDependencies": {
+    "@ohah/hwpjs": "^0.1.0-rc.10",
     "typescript": "^5.9.3"
   }
 }
