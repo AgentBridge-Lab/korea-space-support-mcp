@@ -25,7 +25,7 @@ export default async function AboutPage() {
       <header className="page-header">
         <h1>이 서비스에 대하여</h1>
         <p>
-          마감일이 명확한 한국 공공 우주·항공·국방우주 R&D 지원사업 공고만 수집해, 에이전트와
+          마감일이 명확한 한국 공공 우주·항공·국방우주 R&D 공고와 한국 연구자가 참여할 수 있는 NASA 공고를 수집해, 에이전트와
           사람 모두가 곧바로 활용할 수 있도록 검색·매칭 인터페이스로 제공합니다.
         </p>
       </header>
@@ -40,6 +40,7 @@ export default async function AboutPage() {
                 <li>기업·스타트업·연구자·대학 연구실·연구팀·컨소시엄을 대상으로 한 공개 공고</li>
                 <li>신청 마감일이 HTML/PDF/HWP 본문에서 확인된 공고</li>
                 <li>우주·항공·국방우주·드론/UAM·천문·위성·발사체·부품소재 R&D 지원</li>
+                <li>2026년 4월 1일~10월 26일에 새로 공고된 NASA 국제공동연구·관측 기회</li>
               </ul>
             </div>
             <div>
@@ -64,6 +65,11 @@ export default async function AboutPage() {
             <li>
               방산/이중용도 공고는 <strong>공개 metadata</strong>만 노출하며, 보안 요건·수출통제 정보는
               원문에서 확인해야 합니다.
+            </li>
+            <li>
+              NASA 국제참여 공고는 한국 기관의 직접 연구비 지원과 구분합니다. 자체 재원 참여,
+              미국 주관팀 협력, 관측시간 신청 등 공고별 참여 방식을 확인하세요. 필수 NOI·Step-1이
+              있으면 그 마감을 신규 신청 마감으로 표시하며, 마감 시각은 한국시간으로 변환합니다.
             </li>
             <li>
               마감일은 자동 추출되며 <strong>근거 출처</strong>를 함께 보관합니다(공식 HTML 본문/첨부 PDF

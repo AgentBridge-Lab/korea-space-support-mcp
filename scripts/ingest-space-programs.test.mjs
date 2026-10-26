@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { classifyBizinfoNotice, classifyKasaNotice, findDeadline } from "./ingest-space-programs.mjs";
+import { classifyBizinfoNotice, classifyKasaNotice, dedupeSources, findDeadline } from "./ingest-space-programs.mjs";
+
+test("distinct NASA observing cycles on one NSPIRES page remain separate records", () => {
+  const url = "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=D.3";
+  const sources = ["swift", "fermi", "tess"].map((cycle) => ({ id: `space-nasa-${cycle}`, url, normalizedProgram: { id: `space-nasa-${cycle}` } }));
+  assert.deepEqual(dedupeSources(sources).map((source) => source.id), sources.map((source) => source.id));
+});
 
 test("application tables take priority over eligibility dates and research periods", () => {
   assert.equal(findDeadline("연구기간 2026-11-01 ~ 2027-07-31 접수 기간: 2026.10.20.(화) ~ 2026.11.03.(화) 18시까지"), "2026-11-03");

@@ -38,6 +38,7 @@ Source terms and storage-scope review is tracked in `docs/space-source-terms-rev
 | DJTP | 대전테크노파크 | Regional space/defense-aerospace cluster | Candidate | Daejeon space-industry, defense-space materials/parts, drone, and unmanned-system support notices only | PDF-first feed; preserve Daejeon eligibility and exclude exhibitions/results |
 | JNTP | 전남테크노파크 | Regional satellite/drone/aerospace cluster | Candidate | Jeonnam satellite, space, drone, UAM, and unmanned-system support notices only | Preserve Jeonnam eligibility; exclude generic regional R&D/support |
 | ITP | 인천테크노파크 | Regional PAV/drone/aviation cluster | Candidate | Incheon drone, PAV/UAM/AAV, and aviation-industry support notices only | Uses public reader fallback when direct fetch returns an error page; exclude airport-only startup and generic event notices |
+| NASA_INTERNATIONAL | NASA 및 NASA 국제공동임무 | International research and observing | Reviewed | 2026-04-01 through 2026-10-26 first published calls, new ROSES elements, and observing cycles; public metadata and source URLs only | Korean-institution PI, unfunded collaborator, and open observing-time eligibility are distinguished; no NASA funding is implied for Korean institutions; see `docs/nasa-international-opportunities-2026-10-26.md` |
 | Regional TP/cluster | 사천/대전/전남 등 | Regional aerospace cluster | Backlog | Regional cluster notices only | Add source-specific parsers after beta feedback |
 
 ## Required Fields
@@ -130,7 +131,7 @@ Move all other sources to backlog until ingestion quality and classification acc
 
 ## Current Ingestion Notes
 
-`npm run ingest:space` currently uses automated discovery for KARI, KASI, KASA, DAPA, ADD, KRIT, K-Startup, KEIT 지원사업공고, KIAT 사업공고, TIPA/SMTECH, DJTP, JNTP, ITP, KAIA, Bizinfo, and GNTP. It must not merge hand-authored or curated real notice records into the generated dataset.
+`npm run ingest:space` currently uses automated discovery for KARI, KASI, KASA, DAPA, ADD, KRIT, K-Startup, KEIT 지원사업공고, KIAT 사업공고, TIPA/SMTECH, DJTP, JNTP, ITP, KAIA, Bizinfo, GNTP, and NASA_INTERNATIONAL. NASA source selectors are reviewed, while titles, publication dates, deadlines, and document URLs are read from official sources. It must not merge hand-authored real notice records into the generated dataset.
 
 KASA and DAPA reject some normal Node/curl requests. The ingestion script therefore follows the same pattern as `insane-search`: try standard fetches where possible, use `r.jina.ai` as a reader fallback, and use `curl_cffi` TLS impersonation for blocked government pages. KARI, KASI, KAIA, and Bizinfo are currently readable through direct public-list parsing. This is still public-page metadata collection; it does not access login-gated, restricted, classified, or non-public content.
 

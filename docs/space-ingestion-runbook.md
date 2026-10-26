@@ -169,6 +169,18 @@ adjacentOnly / adjacent_only:
 
 ## Source Rules
 
+NASA international calls:
+
+- The user-requested publication window is inclusive: 2026-04-01 through 2026-10-26. Use the original dated call or newly opened program-element announcement, not the generic ROSES omnibus release, modification timestamp, or proposal deadline.
+- `scripts/ingest-nasa-programs.mjs` discovers official NASA ROSES announcements, follows NSPIRES, and reads the program PDFs and foreign-participation policy. The reviewed source selectors contain participation decisions; generated records come from public sources.
+- Include a new program element, final text that opens a previously TBD opportunity, or a new observing cycle. Exclude correction-only notices, deadline extensions, results, events, and US-only institutional/student schemes.
+- Distinguish foreign PI / Co-I participation without exchange of funds, US-led unfunded Collaborators, and worldwide observing-time applications. Do not describe Korean institutions as NASA grant recipients.
+- Use the first mandatory NOI, Step-1, or Phase-1 deadline as the new-entry deadline. An optional NOI must not override a proposal deadline. Ignore invitation-only budget due dates and the NSPIRES administrative Close date.
+- Preserve source timezone offsets, including daylight saving time. ARK observing Phase-1, NIAC, JWST and IRTF have different closing times.
+- XRISM Key Program is a NASA/JAXA joint-mission opportunity submitted through JAXA, not the NASA US/Canada GO submission route.
+- Keep review decisions in `data/nasa-review-audit.json` and attach the dated announcement and eligibility evidence URLs to each generated record.
+- `NASA_HTTP_CACHE_DIR` may point to an untracked temporary directory for a one-hour public-source cache during research. Never commit cached notice bodies or PDFs.
+
 KASA:
 
 - Use public business notices only.

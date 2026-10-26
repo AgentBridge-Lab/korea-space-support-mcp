@@ -60,6 +60,12 @@ Before changing a source from `metadata_only` to broader storage:
 
 ## Runtime Expectations
 
+NASA_INTERNATIONAL follows the same metadata-only storage policy. Official NASA,
+NSPIRES, STScI, NASA IRTF and NASA/JAXA call documents are used for publication,
+deadline and foreign-participation evidence. Third-party mission documents may
+have separate rights; no full documents are redistributed. NASA participation
+eligibility is recorded separately from direct grant eligibility for Korean institutions.
+
 `list_space_sources` and `/space-sources` expose source review metadata from `packages/shared/src/space-sources.ts`. Programs returned by search/detail tools should keep official source URLs visible. Program summaries should continue to warn that the official notice and attachments must be checked before applying.
 
 ## Change Control

@@ -221,6 +221,18 @@ export const spaceSourceReviews: SpaceSourceReview[] = [
     coverage: "Aviation, UAM, drone, aerospace infrastructure, and aviation safety R&D notices.",
     knownGaps: ["Many notices are aviation-only and should not be marketed as core space programs."],
     notes: ["Use adjacent categories unless the notice is explicitly space/aerospace."]
+  },
+  {
+    sourceFamily: "NASA_INTERNATIONAL",
+    sourceName: "NASA·국제공동임무 (한국 연구자 참여)",
+    officialUrl: "https://science.nasa.gov/researchers/solicitations/roses-2025/",
+    sourceType: "official_international_research_calls",
+    mvpStatus: "metadata_only",
+    ...metadataOnlyLegalPolicy,
+    collectionPolicy: "Collect calls newly opened from 2026-04-01 through 2026-10-26 with official evidence of participation by researchers at Korean institutions. Exclude corrections, deadline extensions, and US-only institutional calls.",
+    coverage: "ROSES research, NIAC unfunded partnerships, and worldwide observing opportunities for NASA/international missions.",
+    knownGaps: ["Participation does not imply NASA funding to Korean institutions; roles, own-funding commitments, and mandatory preliminary deadlines vary by call."],
+    notes: ["Preserve the publication announcement, program document, foreign-participation evidence, submission route and deadline timezone. XRISM Key Program uses JAXA submission."]
   }
 ];
 

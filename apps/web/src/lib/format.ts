@@ -1,6 +1,11 @@
 export const formatDate = (iso?: string): string => {
   if (!iso) return "—";
-  return iso.replace(/^(\d{4})-(\d{2})-(\d{2}).*/, "$1.$2.$3");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) return iso.replaceAll("-", ".");
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "—";
+  const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(date);
+  const part = (type: string) => parts.find((value) => value.type === type)?.value ?? "";
+  return `${part("year")}.${part("month")}.${part("day")} ${part("hour")}:${part("minute")} KST`;
 };
 
 export const daysUntil = (iso?: string): number | null => {
@@ -8,9 +13,12 @@ export const daysUntil = (iso?: string): number | null => {
   const target = new Date(iso);
   if (Number.isNaN(target.getTime())) return null;
   const now = new Date();
-  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const startOfTarget = new Date(target.getFullYear(), target.getMonth(), target.getDate());
-  return Math.round((startOfTarget.getTime() - startOfToday.getTime()) / 86_400_000);
+  const koreaDay = (date: Date) => {
+    const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(date);
+    const part = (type: string) => Number(parts.find((value) => value.type === type)?.value);
+    return Date.UTC(part("year"), part("month") - 1, part("day"));
+  };
+  return Math.round((koreaDay(target) - koreaDay(now)) / 86_400_000);
 };
 
 export const dDayLabel = (iso?: string): string => {
@@ -59,7 +67,8 @@ export const SOURCE_FAMILY_LABELS: Record<string, string> = {
   KAIA: "국토교통과학기술진흥원 (KAIA)",
   MOLIT_KAIA: "국토교통부/KAIA",
   BIZINFO: "기업마당 (Bizinfo)",
-  MOTIE_KEIT_KIAT: "산업부/KEIT/KIAT"
+  MOTIE_KEIT_KIAT: "산업부/KEIT/KIAT",
+  NASA_INTERNATIONAL: "NASA 국제참여"
 };
 
 export const sourceFamilyLabel = (key?: string): string => {

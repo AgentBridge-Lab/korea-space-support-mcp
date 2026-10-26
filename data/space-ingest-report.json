@@ -1,6 +1,6 @@
 {
-  "generatedCount": 33,
-  "discoveredSourceCount": 35,
+  "generatedCount": 58,
+  "discoveredSourceCount": 60,
   "excludedCount": 0,
   "sourceFamilies": [
     "ADD",
@@ -11,7 +11,8 @@
     "KARI",
     "KASA",
     "KRIT",
-    "MOLIT_KAIA"
+    "MOLIT_KAIA",
+    "NASA_INTERNATIONAL"
   ],
   "discoveredSourceFamilies": {
     "ADD": 3,
@@ -22,7 +23,8 @@
     "KARI": 10,
     "KASA": 6,
     "KRIT": 1,
-    "MOLIT_KAIA": 1
+    "MOLIT_KAIA": 1,
+    "NASA_INTERNATIONAL": 25
   },
   "generatedSourceFamilies": {
     "ADD": 3,
@@ -33,7 +35,8 @@
     "KARI": 10,
     "KASA": 6,
     "KRIT": 1,
-    "MOLIT_KAIA": 1
+    "MOLIT_KAIA": 1,
+    "NASA_INTERNATIONAL": 25
   },
   "excludedSourceFamilies": {},
   "discoveryRunAudit": [
@@ -41,97 +44,103 @@
       "label": "KARI",
       "status": "ok",
       "discoveredCount": 10,
-      "durationMs": 531
-    },
-    {
-      "label": "TIPA_SMTECH",
-      "status": "ok",
-      "discoveredCount": 0,
-      "durationMs": 605
-    },
-    {
-      "label": "KAIA",
-      "status": "ok",
-      "discoveredCount": 1,
-      "durationMs": 680
-    },
-    {
-      "label": "KRIT",
-      "status": "ok",
-      "discoveredCount": 1,
-      "durationMs": 987
-    },
-    {
-      "label": "DJTP",
-      "status": "ok",
-      "discoveredCount": 8,
-      "durationMs": 1064
-    },
-    {
-      "label": "DAPA",
-      "status": "ok",
-      "discoveredCount": 0,
-      "durationMs": 1309
-    },
-    {
-      "label": "KIAT",
-      "status": "ok",
-      "discoveredCount": 0,
-      "durationMs": 1600
-    },
-    {
-      "label": "KEIT",
-      "status": "ok",
-      "discoveredCount": 0,
-      "durationMs": 1870
-    },
-    {
-      "label": "JNTP",
-      "status": "ok",
-      "discoveredCount": 0,
-      "durationMs": 1868
-    },
-    {
-      "label": "ITP",
-      "status": "ok",
-      "discoveredCount": 1,
-      "durationMs": 1869
-    },
-    {
-      "label": "KASA",
-      "status": "ok",
-      "discoveredCount": 6,
-      "durationMs": 2252
-    },
-    {
-      "label": "GNTP",
-      "status": "ok",
-      "discoveredCount": 1,
-      "durationMs": 2645
-    },
-    {
-      "label": "KASI",
-      "status": "ok",
-      "discoveredCount": 0,
-      "durationMs": 2816
-    },
-    {
-      "label": "KSTARTUP",
-      "status": "ok",
-      "discoveredCount": 0,
-      "durationMs": 3741
+      "durationMs": 513
     },
     {
       "label": "ADD",
       "status": "ok",
       "discoveredCount": 3,
-      "durationMs": 5643
+      "durationMs": 544
+    },
+    {
+      "label": "KAIA",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 571
+    },
+    {
+      "label": "TIPA_SMTECH",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 751
+    },
+    {
+      "label": "KRIT",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 871
+    },
+    {
+      "label": "KEIT",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 947
+    },
+    {
+      "label": "DJTP",
+      "status": "ok",
+      "discoveredCount": 8,
+      "durationMs": 1115
+    },
+    {
+      "label": "KIAT",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 1361
+    },
+    {
+      "label": "ITP",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 1349
+    },
+    {
+      "label": "JNTP",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 1454
+    },
+    {
+      "label": "KASI",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 1787
+    },
+    {
+      "label": "KASA",
+      "status": "ok",
+      "discoveredCount": 6,
+      "durationMs": 2801
+    },
+    {
+      "label": "GNTP",
+      "status": "ok",
+      "discoveredCount": 1,
+      "durationMs": 2833
+    },
+    {
+      "label": "KSTARTUP",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 3320
     },
     {
       "label": "BIZINFO",
       "status": "ok",
       "discoveredCount": 4,
-      "durationMs": 9085
+      "durationMs": 9210
+    },
+    {
+      "label": "DAPA",
+      "status": "ok",
+      "discoveredCount": 0,
+      "durationMs": 11283
+    },
+    {
+      "label": "NASA_INTERNATIONAL",
+      "status": "ok",
+      "discoveredCount": 25,
+      "durationMs": 49931
     }
   ],
   "sourceFamilyAudit": [
@@ -224,9 +233,19 @@
       "errorCount": 0,
       "activeCount": 0,
       "closedCount": 1
+    },
+    {
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "discoveredCount": 25,
+      "normalizedCount": 25,
+      "generatedCount": 25,
+      "excludedCount": 0,
+      "errorCount": 0,
+      "activeCount": 10,
+      "closedCount": 15
     }
   ],
-  "activeCount": 11,
-  "closedCount": 22,
-  "lastCheckedAt": "2026-10-26T13:10:44.503Z"
+  "activeCount": 21,
+  "closedCount": 37,
+  "lastCheckedAt": "2026-10-26T13:53:38.484Z"
 }

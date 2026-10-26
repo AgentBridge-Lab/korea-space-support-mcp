@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
+import { discoverNasaSources } from "./ingest-nasa-programs.mjs";
 
 const now = new Date().toISOString();
 const execFileAsync = promisify(execFile);
@@ -102,13 +103,14 @@ const procurementNoticePattern = /입찰|낙찰|제안요청|제안서|BTL|민�
 const nonProgramNoticePattern = /포털|매뉴얼|가이드|사용자\s*교육|서비스\s*개시|운영\s*안내|시스템\s*(?:점검|안내|교육|매뉴얼)/i;
 const researchApplicantPattern = /위탁연구|연구개발기관|국가연구개발혁신법|대학|출연연|연구기관|연구팀|연구책임자|전문가\s*지원|국제회의\s*참석\s*지원/i;
 
-const fetchWithCurlCffi = async (url) => {
+const fetchWithCurlCffi = async (url, referer) => {
   const script = String.raw`
 import json
 import sys
 from curl_cffi import requests
 
 url = sys.argv[1]
+referer = sys.argv[2] if len(sys.argv) > 2 and sys.argv[2] else None
 headers = {
     "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
     "User-Agent": "KoreaSpaceSupportMCP/0.1 metadata-only source discovery"
@@ -117,7 +119,7 @@ session = requests.Session(impersonate="safari")
 try:
     root = "/".join(url.split("/")[:3])
     session.get(root, headers=headers, timeout=10)
-    response = session.get(url, headers={**headers, "Referer": root + "/"}, timeout=20)
+    response = session.get(url, headers={**headers, "Referer": referer or root + "/"}, timeout=20)
     print(json.dumps({
         "ok": 200 <= response.status_code < 400,
         "status": response.status_code,
@@ -129,7 +131,7 @@ except Exception as error:
 `;
 
   try {
-    const { stdout } = await execFileAsync(pythonCommand, ["-c", script, url], {
+    const { stdout } = await execFileAsync(pythonCommand, ["-c", script, url, referer ?? ""], {
       maxBuffer: 16 * 1024 * 1024
     });
     const result = JSON.parse(stdout);
@@ -209,7 +211,7 @@ const fetchPage = async (url, options = {}) => {
   for (const strategy of strategies) {
     try {
       if (strategy === "curl_cffi") {
-        const text = await fetchWithCurlCffi(url);
+        const text = await fetchWithCurlCffi(url, options.referer);
         if (text && !isFetchErrorPage(text)) return text;
       }
       if (strategy === "jina") {
@@ -222,6 +224,7 @@ const fetchPage = async (url, options = {}) => {
           method,
           headers: {
             "user-agent": "KoreaSpaceSupportMCP/0.1 metadata-only source review",
+            ...(options.referer ? { referer: options.referer } : {}),
             ...(method === "POST" ? { "content-type": "application/json" } : {})
           },
           body: method === "POST" ? "" : undefined
@@ -1108,8 +1111,9 @@ const discoverBizinfoSources = async () => {
   return discovered.slice(0, 24);
 };
 
-const discoverKariSources = async () => {
-  const html = await fetchPage(kariResearchListUrl);
+const discoverKariSources = async (attempt = 0) => {
+  const listUrl = attempt ? `${kariResearchListUrl}?page=1&retry=${attempt}` : kariResearchListUrl;
+  const html = await fetchPage(listUrl);
   const discovered = [];
   const rows = html.match(/<li>[\s\S]*?<\/li>/gi) ?? [];
 
@@ -1148,6 +1152,8 @@ const discoverKariSources = async () => {
     });
   }
 
+  if (discovered.length === 0 && attempt < 2) return discoverKariSources(attempt + 1);
+  if (discovered.length === 0) throw new Error("KARI public research list returned no classified notices after three reads");
   return discovered.slice(0, 10);
 };
 
@@ -1452,7 +1458,7 @@ const discoverKritSources = async () => {
 
     seen.add(link[1]);
     const dateMatch = row.match(/<li[^>]*class="[^"]*\bdate\b[^"]*"[^>]*>\s*(20\d{2}-\d{2}-\d{2})\s*<\/li>/i);
-    const url = `https://www.krit.re.kr/krit/bbs/notice_view.do?bbsId=notice&article_category=&nttId=${encodeURIComponent(link[1])}&page=${encodeURIComponent(link[2])}&searchCnd=&searchWrd=&startd=&endd=&csrf=&menu_no=05010000`;
+    const url = `https://www.krit.re.kr/krit/bbs/notice_view.do?bbsId=notice&nttId=${encodeURIComponent(link[1])}&menu_no=05010000`;
 
     discovered.push({
       id: `space-krit-discovered-${link[1]}`,
@@ -1465,6 +1471,7 @@ const discoverKritSources = async () => {
       defenseOrDualUse: true,
       inferDateFromText: false,
       preferCurlCffi: true,
+      referer: kritNoticeListUrl,
       ...classification
     });
   }
@@ -1913,10 +1920,10 @@ const discoverKaiaSources = async () => {
   return discovered.slice(0, 8);
 };
 
-const dedupeSources = (sources) => {
+export const dedupeSources = (sources) => {
   const byKey = new Map();
   for (const source of sources) {
-    const key = source.dedupeKey || source.url || source.id;
+    const key = source.dedupeKey || (source.normalizedProgram ? source.id : source.url || source.id);
     const previous = byKey.get(key);
     if (!previous) {
       byKey.set(key, source);
@@ -2372,9 +2379,11 @@ const extractBizinfoOriginalAgencyUrl = (html) => {
 };
 
 const normalizeProgram = async (source) => {
+  if (source.normalizedProgram) return source.normalizedProgram;
   const html = await fetchPage(source.url, {
     preferCurlCffi: source.preferCurlCffi === true,
     preferJina: source.preferJina === true,
+    referer: source.referer,
     method: source.fetchMethod ?? "GET"
   });
   const originalAgencyUrl = source.sourceFamily === "BIZINFO" || source.sourceFamily === "MOTIE_KEIT_KIAT"
@@ -2531,7 +2540,8 @@ const discoverySources = [
   ["ITP", discoverItpSupportSources],
   ["GNTP", discoverGntpSupportSources],
   ["KAIA", discoverKaiaSources],
-  ["BIZINFO", discoverBizinfoSources]
+  ["BIZINFO", discoverBizinfoSources],
+  ["NASA_INTERNATIONAL", () => discoverNasaSources({ extractPdfText })]
 ];
 const discoveredSources = (await Promise.all(discoverySources.map(async ([label, discover]) => {
   const discovered = await runDiscovery(label, discover);
@@ -2540,6 +2550,10 @@ const discoveredSources = (await Promise.all(discoverySources.map(async ([label,
 }))).flat();
 
 const sources = dedupeSources(discoveredSources);
+const reviewedIds = discoveredSources.filter((source) => source.normalizedProgram).map((source) => source.id);
+if (reviewedIds.length !== new Set(reviewedIds).size || reviewedIds.some((id) => !sources.some((source) => source.id === id))) {
+  throw new Error("Reviewed NASA opportunity records were lost during source deduplication");
+}
 const results = [];
 let completedCount = 0;
 const normalizeSource = async (source) => {

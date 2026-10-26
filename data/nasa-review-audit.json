@@ -1,0 +1,479 @@
+{
+  "checkedAt": "2026-10-26T13:54:29.249Z",
+  "publicationWindow": {
+    "from": "2026-04-01",
+    "through": "2026-10-26"
+  },
+  "scope": "한국 기관 소속 연구자의 국제참여. 신규 세부요소·최종 실공고·새 관측 사이클 포함; 단순 정정·연장 제외.",
+  "officialAnnouncementCount": 48,
+  "generatedCount": 25,
+  "publicReaderFallbackUrls": [
+    "https://irtfweb.ifa.hawaii.edu/observing/callforproposals/",
+    "https://irtfweb.ifa.hawaii.edu/information/about.php"
+  ],
+  "included": [
+    {
+      "id": "space-nasa-irtf-2027a",
+      "announcementUrl": "https://science.nasa.gov/astrophysics/programs/cosmic-origins/community/reminder-2027a-nasa-irtf-call-for-proposals/",
+      "publishedDate": "2026-09-01",
+      "participationMode": "국제 관측시간 신청",
+      "entryDeadline": "2026-10-01T17:00:00-10:00",
+      "eligibilityEvidenceUrls": [
+        "https://irtfweb.ifa.hawaii.edu/observing/callforproposals/"
+      ],
+      "qualificationNotes": "국제참여 근거: https://irtfweb.ifa.hawaii.edu/information/about.php ; https://irtfweb.ifa.hawaii.edu/observing/callforproposals/"
+    },
+    {
+      "id": "space-nasa-jwst-cycle6",
+      "announcementUrl": "https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/community/jwst-cycle-6-call-for-proposals/",
+      "publishedDate": "2026-07-22",
+      "participationMode": "국제 관측시간 신청",
+      "entryDeadline": "2026-09-30T20:00:00-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://jwst-docs.stsci.edu/jwst-opportunities-and-policies/jwst-call-for-proposals-for-cycle-6"
+      ],
+      "qualificationNotes": "국제참여 근거: https://jwst-docs.stsci.edu/jwst-opportunities-and-policies/jwst-call-for-proposals-for-cycle-6 ; https://jwst-docs.stsci.edu/jwst-opportunities-and-policies/jwst-call-for-proposals-for-cycle-6/jwst-key-policies"
+    },
+    {
+      "id": "space-nasa-niac-2027-phase1",
+      "announcementUrl": "https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/community/niac-phase-i-forum-7-october-2026/",
+      "publishedDate": "2026-09-28",
+      "participationMode": "미국 주관팀의 무자금 Collaborator",
+      "entryDeadline": "2026-10-28T17:00:00-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-27NIAC_A1"
+      ],
+      "qualificationNotes": "국제참여 근거: https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1174119&solicitationId={22E11D9D-DD58-DEFE-6B49-B6F9763F53BE}&viewSolicitationDocument=1"
+    },
+    {
+      "id": "space-nasa-roses25-aes",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-62-new-opportunity-a-13-accelerating-earth-solutions/",
+      "publishedDate": "2026-07-17",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-10-15T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1152614&solicitationId={33D1A64A-D7B2-199F-7E02-90E363FB86BC}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-apra",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-56-d-6-apra-and-d-7-sat-final-text-and-due-dates/",
+      "publishedDate": "2026-05-08",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-06-25T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1114923&solicitationId={E355D6D2-A5D1-2E47-2937-EF289DC97E44}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-atmos",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-63-new-opportunity-a-14-atmosphere/",
+      "publishedDate": "2026-07-20",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-08-20T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1152848&solicitationId={E9BB94E5-CE65-5BCD-1F83-2C637F6DCD92}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-bios",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-64-new-opportunity-a-15-biosphere/",
+      "publishedDate": "2026-07-20",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-09-04T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1152850&solicitationId={3654508F-714C-82AF-71D8-7C551DCEA23B}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-cryo",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-71-new-opportunity-a-16-cryosphere/",
+      "publishedDate": "2026-09-01",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-10-16T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1163802&solicitationId={F94216CA-4701-DF21-96C6-C8A791B1D8AE}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-fermi-cycle20",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-80-d-3-agigo-swift-fermi-and-tess-observatories-second-opportunities-in-roses-25/",
+      "publishedDate": "2026-10-20",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2027-01-28T16:30:00-05:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1046252&solicitationId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-geo",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-77-new-opportunity-a-18-geosphere/",
+      "publishedDate": "2026-10-02",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-11-16T23:59:59-05:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1167870&solicitationId={96E486D6-50BE-ACA9-743C-3BB366950868}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-hamaq",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-54-new-opportunity-a-12-hamaq-science-team/",
+      "publishedDate": "2026-04-20",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-07-21T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1125883&solicitationId={1DE6B684-0636-E769-B912-269F22D6673D}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-hwoica",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-69-new-opportunity-d-9-habitable-worlds-observatory-instrument-concept-assessments/",
+      "publishedDate": "2026-08-25",
+      "participationMode": "collaborator_only",
+      "entryDeadline": "2026-10-14T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1162128&solicitationId={BE2AA4DC-81E7-2AF3-B465-8AA6478270A4}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-hwopsi",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-68-new-opportunity-d-8-habitable-worlds-observatory-precursor-science-investigations/",
+      "publishedDate": "2026-07-27",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-09-10T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1153992&solicitationId={7BC438A4-AB22-310E-DE69-08E348C1F294}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-hydro",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-72-new-opportunity-a-17-hydrosphere/",
+      "publishedDate": "2026-09-02",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-10-08T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1164046&solicitationId={19309C30-9666-C72E-DB44-3AE2E4DD155C}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-ixpe-cycle4",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-57-d-3-agigo-ixpe-and-nicer-general-observer-second-opportunity-in-roses-25/",
+      "publishedDate": "2026-05-15",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-09-17T16:30:00-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1046252&solicitationId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-lcas",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-78-new-opportunity-b-7-heliophysics-low-cost-access-to-space/",
+      "publishedDate": "2026-10-07",
+      "participationMode": "collaborator_only",
+      "entryDeadline": "2026-11-20T23:59:59-05:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1168674&solicitationId={D86480A9-3872-BD17-F858-92FACD04DD0D}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-nicer-cycle9",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-57-d-3-agigo-ixpe-and-nicer-general-observer-second-opportunity-in-roses-25/",
+      "publishedDate": "2026-05-15",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-09-17T16:30:00-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1046252&solicitationId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-nustar-cycle13",
+      "announcementUrl": "https://science.nasa.gov/amendment-76-d-3-agigo-nustargeneral-observer-second-opportunity-in-roses-25/",
+      "publishedDate": "2026-10-01",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2027-01-28T16:30:00-05:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1046252&solicitationId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-psef",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-65-new-opportunity-c-4-planetary-science-enabling-facilities/",
+      "publishedDate": "2026-07-21",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-11-10T23:59:59-05:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1080924&solicitationId={3150F039-5AB4-555C-A780-4C6B1347EC7A}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-sat",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-56-d-6-apra-and-d-7-sat-final-text-and-due-dates/",
+      "publishedDate": "2026-05-08",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-08-06T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1114914&solicitationId={9455D565-3411-0574-BABC-255C7945CD08}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-ssf",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-79-new-opportunity-b-8-heliophysics-spaceflight-science-foundations/",
+      "publishedDate": "2026-10-08",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-11-20T23:59:59-05:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1168998&solicitationId={470C81F1-E885-8BCE-1515-69335F637ED3}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-swift-cycle23",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-80-d-3-agigo-swift-fermi-and-tess-observatories-second-opportunities-in-roses-25/",
+      "publishedDate": "2026-10-20",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2027-01-28T16:30:00-05:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1046252&solicitationId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-tcan",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-70-new-opportunity-d-4-theoretical-and-computational-astrophysics-networks/",
+      "publishedDate": "2026-08-31",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2026-10-15T23:59:59-04:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1046259&solicitationId={5509DEBF-B8B4-2F3D-0EFB-350EFE67DCD5}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-roses25-tess-cycle10",
+      "announcementUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-80-d-3-agigo-swift-fermi-and-tess-observatories-second-opportunities-in-roses-25/",
+      "publishedDate": "2026-10-20",
+      "participationMode": "foreign_pi",
+      "entryDeadline": "2027-01-28T16:30:00-05:00",
+      "eligibilityEvidenceUrls": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1046252&solicitationId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1053488&solicitationId=%7BA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7D&viewSolicitationDocument=1"
+      ]
+    },
+    {
+      "id": "space-nasa-xrism-key-program1",
+      "announcementUrl": "https://xrism.isas.jaxa.jp/research/news/index.html",
+      "publishedDate": "2026-09-04",
+      "participationMode": "국제 관측시간 신청(JAXA ARK/RPS 접수)",
+      "entryDeadline": "2026-12-03T23:59:00Z",
+      "eligibilityEvidenceUrls": [
+        "https://xrism.isas.jaxa.jp/research/proposer/key_program/index.html"
+      ],
+      "qualificationNotes": "국제참여 근거: https://xrism.isas.jaxa.jp/research/news/index.html ; https://xrism.isas.jaxa.jp/research/proposer/key_program/index.html"
+    }
+  ],
+  "excluded": [
+    {
+      "title": "NASA Prepares ROSES-27 to Advance American Science and Leadership in Space",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/nasa-prepares-roses-27-to-advance-american-science-and-leadership-in-space/",
+      "publishedDate": "2026-10-20",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Correction to ROSES-25 B.7 Heliophysics Low-Cost Access to Space",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/correction-to-roses-25-b-7-heliophysics-low-cost-access-to-space/",
+      "publishedDate": "2026-10-16",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "A.15 Biosphere: New Requirement Added to Section 4.2.1",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/a-15-biosphere-new-requirement-added-to-section-4-2-1/",
+      "publishedDate": "2026-10-15",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "NASA Selects Projects to Engage Communities Across the US with NASA Science",
+      "sourceUrl": "https://science.nasa.gov/learn/roses25_sciact_selections/",
+      "publishedDate": "2026-10-02",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 75: Corrections to several program elements regarding SciENcv and other topics",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-75-corrections-to-several-program-elements-regarding-sciencv-and-other-topics/",
+      "publishedDate": "2026-09-22",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 74: A.14 Atmosphere Research Program Due Date Delay and Clarification Regarding the use of Generative SI",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-74-a-14-atmosphere-research-program-due-date-delay-and-clarification-regarding-the-use-of-generative-ai/",
+      "publishedDate": "2026-09-16",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Joint Observations with Swift removed from IXPE GO Cycle 4",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/joint-observations-with-swift-removed-from-ixpe-go-cycle-4/",
+      "publishedDate": "2026-09-08",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 73: D.9 Habitable Worlds Observatory Instrument Concept Assessments: Correction regarding collaborators on category 2 proposals",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-73-d-9-habitable-worlds-observatory-instrument-concept-assessments-correction-regarding-collaborators-on-category-2-proposals/",
+      "publishedDate": "2026-09-03",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "D.8 Habitable Worlds Observatory Precursor Science Investigations",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/d-8-habitable-worlds-observatory-precursor-science-investigations/",
+      "publishedDate": "2026-08-28",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Update to A.1 Earth Science Research Overview: Earth Science proposals that include NASA high-end computing resources must include costs",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/update-to-a-1-earth-science-research-overview-earth-science-proposals-that-include-nasa-high-end-computing-resources-must-include-costs/",
+      "publishedDate": "2026-08-04",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "A.14 Atmosphere Several Corrections",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/a-14-atmosphere-several-corrections/",
+      "publishedDate": "2026-07-30",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Correction to C.4 Planetary Science Enabling Facilities",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/correction-to-c-4-planetary-science-enabling-facilities/",
+      "publishedDate": "2026-07-29",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "A.13 Accelerating Earth Solutions Corrections and Clarifications",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/a-13-accelerating-earth-solutions-corrections-and-clarifications/",
+      "publishedDate": "2026-07-28",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 67: D.3 AGIGO: Change to IXPE and NICER General Observer Second Opportunity in ROSES-25",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-67-d-3-agigo-change-to-ixpe-and-nicer-general-observer-second-opportunity-in-roses-25/",
+      "publishedDate": "2026-07-27",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 66: B.2 Heliophysics Foundational Research Step-2 Due Date Announced and Correction",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-66-b-2-heliophysics-foundational-research-step-2-due-date-announced-and-correction/",
+      "publishedDate": "2026-07-24",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "ROSES-25 C.2 Solar System Science Corrections",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/roses-25-c-2-solar-system-science-corrections/",
+      "publishedDate": "2026-07-21",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 61: A.4 Rapid Response and Novel Research in Earth Science Final Close Date Deferred",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-61-a-4-rapid-response-and-novel-research-in-earth-science-final-close-date-deferred/",
+      "publishedDate": "2026-07-02",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 60: Final 2025 Due Date Extended for C.2 Solar System Science",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-60-final-2025-due-date-extended-for-c-2-solar-system-science/",
+      "publishedDate": "2026-07-02",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "ROSES-25 A.12 HAMAQ Science Team Clarified",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/a-12-hamaq-science-team-clarified/",
+      "publishedDate": "2026-06-29",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 59: Several Updates to the ROSES-25 Summary of Solicitation",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-59-several-updates-to-the-roses-25-summary-of-solicitation/",
+      "publishedDate": "2026-06-15",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Correction to B.3 Living With a Star Science",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/correction-to-b-3-living-with-a-star-science/",
+      "publishedDate": "2026-05-26",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "D.3 AGIGO: New joint observing program with XMM-Newton added to IXPE GO Cycle 4",
+      "sourceUrl": "https://science.nasa.gov/d-3-agigo-new-joint-observing-program-with-xmm-newton-added-to-ixpe-go-cycle-4/",
+      "publishedDate": "2026-05-21",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 58: F.17 Research Initiation Awards Final Text and Due Date",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-58-f-17-research-initiation-awards-final-text-and-due-date/",
+      "publishedDate": "2026-05-20",
+      "reason": "미국 소속·교육기관 등 별도 자격 제한: 한국 기관 연구자의 국제참여 공고로 채택하지 않음"
+    },
+    {
+      "title": "Correction to A.3 NISAR Mission Data, Applications, Research, and Technology Team",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/correction-to-a-3-nisar-mission-data-applications-research-and-technology-team/",
+      "publishedDate": "2026-05-05",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "ROSES-25 A.11 Early Career Investigator Program in Earth Science Correction",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/roses-25-a-11-early-career-investigator-program-in-earth-science-correction/",
+      "publishedDate": "2026-04-29",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 55: Step-2 Due Date for B.3 Living With a Star Science",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-55-step-2-due-date-for-b-3-living-with-a-star-science/",
+      "publishedDate": "2026-04-23",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "ROSES-25 A.11 Early Career Investigator Program in Earth Science Correction",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/a-11-early-career-investigator-program-in-earth-science-correction/",
+      "publishedDate": "2026-04-23",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 53: New Opportunity: Early Career Investigator Program in Earth Science",
+      "sourceUrl": "https://science.nasa.gov/amendment-53-new-opportunity-early-career-investigator-program-in-earth-science/",
+      "publishedDate": "2026-04-17",
+      "reason": "미국 소속·교육기관 등 별도 자격 제한: 한국 기관 연구자의 국제참여 공고로 채택하지 않음"
+    },
+    {
+      "title": "Correction to F.5 FINESST, SMD’s Graduate Student Research Opportunity",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/correction-to-f-5-finesst-smds-graduate-student-research-opportunity/",
+      "publishedDate": "2026-04-16",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    },
+    {
+      "title": "Amendment 52: NASA SMD Graduate Student Research Solicitation - Future Investigators in NASA Earth and Space Science and Technology",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-52-nasa-smd-graduate-student-research-solicitation-future-investigators-in-nasa-earth-and-space-science-and-technology/",
+      "publishedDate": "2026-04-14",
+      "reason": "미국 소속·교육기관 등 별도 자격 제한: 한국 기관 연구자의 국제참여 공고로 채택하지 않음"
+    },
+    {
+      "title": "Amendment 51: C.6 Development and Advancement of Lunar Instrumentation Not Solicited in ROSES-25",
+      "sourceUrl": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-51-c-6-development-and-advancement-of-lunar-instrumentation-not-solicited-in-roses-25/",
+      "publishedDate": "2026-04-13",
+      "reason": "모집 신규 개시가 아닌 수정·정정·마감 연장·결과·안내"
+    }
+  ]
+}

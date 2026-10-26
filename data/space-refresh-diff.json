@@ -1,516 +1,216 @@
 {
-  "startedAt": "2026-10-26T13:10:44.022Z",
-  "finishedAt": "2026-10-26T13:11:28.117Z",
-  "durationMs": 44095,
-  "previousGeneratedCount": 51,
-  "currentGeneratedCount": 33,
+  "startedAt": "2026-10-26T13:53:38.076Z",
+  "finishedAt": "2026-10-26T13:54:47.674Z",
+  "durationMs": 69598,
+  "previousGeneratedCount": 33,
+  "currentGeneratedCount": 58,
   "previousExcludedCount": 0,
   "currentExcludedCount": 0,
   "added": [
     {
-      "id": "space-kari-discovered-18742",
-      "sourceFamily": "KARI",
-      "title": "2026년도 대전규제자유특구 연구개발사업 2차 신규 위탁연구과제 공모",
+      "id": "space-nasa-roses25-hamaq",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA A.12 항공 관측 기반 대기질 연구팀 (HAMAQ)",
+      "status": "closed",
+      "applicationEndDate": "2026-07-21T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b1DE6B684-0636-E769-B912-269F22D6673D%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-roses25-apra",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.6 천체물리 관측장비·서브오비탈·큐브위성 연구 (APRA)",
+      "status": "closed",
+      "applicationEndDate": "2026-06-25T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bE355D6D2-A5D1-2E47-2937-EF289DC97E44%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-roses25-sat",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.7 우주망원경 전략기술 성숙도 향상 (SAT)",
+      "status": "closed",
+      "applicationEndDate": "2026-08-06T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b9455D565-3411-0574-BABC-255C7945CD08%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-roses25-aes",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA A.13 지구관측 자료를 이용한 미국 내 현안 해결 (AES)",
+      "status": "closed",
+      "applicationEndDate": "2026-10-15T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b33D1A64A-D7B2-199F-7E02-90E363FB86BC%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-roses25-atmos",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA A.14 위성·항공·모델 기반 대기 연구 (ATMOS)",
+      "status": "closed",
+      "applicationEndDate": "2026-08-20T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-ATMOS"
+    },
+    {
+      "id": "space-nasa-roses25-bios",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA A.15 지구관측 기반 생물권 연구 (BIOS)",
+      "status": "closed",
+      "applicationEndDate": "2026-09-04T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-BIOS"
+    },
+    {
+      "id": "space-nasa-roses25-psef",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA C.4 행성과학 연구 기반시설 및 연구역량 (PSEF)",
       "status": "active",
-      "applicationEndDate": "2026-11-03",
-      "sourceUrl": "https://www.kari.re.kr/kor/article/ATCLd4f64ac47/18742"
+      "applicationEndDate": "2026-11-10T23:59:59-05:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b3150F039-5AB4-555C-A780-4C6B1347EC7A%7d&path=&method=init"
     },
     {
-      "id": "space-kari-discovered-18695",
-      "sourceFamily": "KARI",
-      "title": "2026년도 차세대발사체개발사업 1단계 신규 위탁연구과제 2차 재공모",
+      "id": "space-nasa-roses25-hwopsi",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.8 Habitable Worlds Observatory 선행과학 연구 (HWOPSI)",
       "status": "closed",
-      "applicationEndDate": "2026-08-07",
-      "sourceUrl": "https://www.kari.re.kr/kor/article/ATCLd4f64ac47/18695"
+      "applicationEndDate": "2026-09-10T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HWOPSI"
     },
     {
-      "id": "space-kari-discovered-18667",
-      "sourceFamily": "KARI",
-      "title": "2026년도 차세대발사체개발사업 1단계 신규 위탁연구과제 재공모",
+      "id": "space-nasa-roses25-hwoica",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.9 Habitable Worlds Observatory 관측장비 개념 평가 (HWOICA)",
       "status": "closed",
-      "applicationEndDate": "2026-06-22",
-      "sourceUrl": "https://www.kari.re.kr/kor/article/ATCLd4f64ac47/18667"
+      "applicationEndDate": "2026-10-14T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HWOICA"
     },
     {
-      "id": "space-kasa-discovered-B000000003593Kw5vY4",
-      "sourceFamily": "KASA",
-      "title": "2026년 하반기 우주항공분야 혁신제품 지정제도 신청 공고",
+      "id": "space-nasa-roses25-tcan",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.4 이론·계산 천체물리 연구 네트워크 (TCAN)",
+      "status": "closed",
+      "applicationEndDate": "2026-10-15T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b5509DEBF-B8B4-2F3D-0EFB-350EFE67DCD5%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-roses25-cryo",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA A.16 위성관측 및 모델 기반 빙권 연구 (CRYO)",
+      "status": "closed",
+      "applicationEndDate": "2026-10-16T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-CRYO"
+    },
+    {
+      "id": "space-nasa-roses25-hydro",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA A.17 위성관측 및 모델 기반 수권 연구 (HYDRO)",
+      "status": "closed",
+      "applicationEndDate": "2026-10-08T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HYDRO"
+    },
+    {
+      "id": "space-nasa-roses25-geo",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA A.18 지구관측 기반 지질재해·지각·자원 연구 (GEO)",
       "status": "active",
-      "applicationEndDate": "2026-11-20",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003593Kw5vY4"
+      "applicationEndDate": "2026-11-16T23:59:59-05:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-GEO"
     },
     {
-      "id": "space-kasa-discovered-B000000003510Aq4zV6",
-      "sourceFamily": "KASA",
-      "title": "제4차(2026년도 제3차) 우주신기술지정제 사업 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-10-21",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003510Aq4zV6"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003461Vf3xL0",
-      "sourceFamily": "KASA",
-      "title": "2026년도 우주기술혁신인재양성(R&D)사업 [우주항공 글로벌 인력양성 및 활용] 2차 추가 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-10-09",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003461Vf3xL0"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003393Rb8lK2",
-      "sourceFamily": "KASA",
-      "title": "2026년도 신규프로젝트 탐색연구사업 재공고(다중 궤도 위성 기반 우주환경 상시 감시체계 구축 기획연구)",
-      "status": "closed",
-      "applicationEndDate": "2026-09-07",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003393Rb8lK2"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003292Sg7fX7",
-      "sourceFamily": "KASA",
-      "title": "2026년도 임무수요기반 성층권 드론 실증 플랫폼 개발 사업 2단계 신규과제 공고(수정)",
-      "status": "closed",
-      "applicationEndDate": "2026-08-31",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003292Sg7fX7"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003276Bj2zA7",
-      "sourceFamily": "KASA",
-      "title": "2026년도 차세대 항공 기체 부품 첨단제조 실증 지원 기반구축 사업 공고(재공고)",
-      "status": "closed",
-      "applicationEndDate": "2026-07-22",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003276Bj2zA7"
-    },
-    {
-      "id": "space-add-discovered-1746",
-      "sourceFamily": "ADD",
-      "title": "[공모] 위탁연구기관 선정을 위한 제안서 공모 (과제명: 위성항법시스템의 성능지표 분석 및 검증 기법 연구)",
+      "id": "space-nasa-roses25-lcas",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA B.7 태양·우주환경 관측장비 및 저비용 비행실증 (LCAS)",
       "status": "active",
-      "applicationEndDate": "2026-11-09",
-      "sourceUrl": "https://www.add.re.kr/kps/publicNtis/ntisView?pageNum=1&rowCnt=10&titleId=1746&menuId=MENU02201"
+      "applicationEndDate": "2026-11-20T23:59:59-05:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-LCAS"
     },
     {
-      "id": "space-add-discovered-1743",
-      "sourceFamily": "ADD",
-      "title": "[공모] 핵심기술 연구개발 시제업체 선정을 위한 제안서 공모(과제명 : 군집드론 대응 고출력 전자기파 기술)",
+      "id": "space-nasa-roses25-ssf",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA B.8 태양·지구 우주환경 미래 우주비행 과학 기반 연구 (SSF)",
       "status": "active",
-      "applicationEndDate": "2026-11-16",
-      "sourceUrl": "https://www.add.re.kr/kps/publicNtis/ntisView?pageNum=1&rowCnt=10&titleId=1743&menuId=MENU02201"
+      "applicationEndDate": "2026-11-20T23:59:59-05:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-SSF"
     },
     {
-      "id": "space-add-discovered-1722",
-      "sourceFamily": "ADD",
-      "title": "[재공모] 미래도전국방기술 연구개발사업 `26년 국과연 주관 PM과제(세부과제) 제안서 공모(스텔스 전투기 세부형상 설계, 스텔스 소요기술 통합 Testbed 구축 및 RCS 검증)",
+      "id": "space-nasa-roses25-ixpe-cycle4",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.3 IXPE Cycle 4 일반관측 연구",
       "status": "closed",
-      "applicationEndDate": "2026-06-22",
-      "sourceUrl": "https://www.add.re.kr/kps/publicNtis/ntisView?pageNum=2&rowCnt=10&titleId=1722&menuId=MENU02201"
+      "applicationEndDate": "2026-09-17T16:30:00-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
     },
     {
-      "id": "space-krit-discovered-6510",
-      "sourceFamily": "KRIT",
-      "title": "[인천 방산혁신클러스터사업] AI 항공(대드론) 수행기관 공모 안내문",
-      "status": "active",
-      "applicationEndDate": "2026-10-28",
-      "sourceUrl": "https://www.krit.re.kr/krit/bbs/notice_view.do?bbsId=notice&article_category=&nttId=6510&page=1&searchCnd=&searchWrd=&startd=&endd=&csrf=&menu_no=05010000"
-    },
-    {
-      "id": "space-djtp-discovered-2026-01-0122",
-      "sourceFamily": "DJTP",
-      "title": "[2026-01-0122]2026년 우주산업 혁신 기반 조성사업 특허출원지원 기업 모집 공고",
+      "id": "space-nasa-roses25-nicer-cycle9",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.3 NICER Cycle 9 일반관측 연구",
       "status": "closed",
-      "applicationEndDate": "2026-09-16",
-      "sourceUrl": "https://pms.dips.or.kr/pdfviewer/web/viewer.html?file=/pbanc/ZBJzsgoBc8wxHPm51788400116725.pdf#view=FitV&pagemode=thumbs&page=1"
+      "applicationEndDate": "2026-09-17T16:30:00-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
     },
     {
-      "id": "space-djtp-discovered-2026-01-0100",
-      "sourceFamily": "DJTP",
-      "title": "[2026-01-0100]대전 방산혁신클러스터 국방·드론분야 기술사업화 지원사업 \"민-군 브릿지 코디네이터\" 지원기업 모집 공고",
+      "id": "space-nasa-roses25-nustar-cycle13",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.3 NuSTAR Cycle 13 일반관측 연구",
+      "status": "active",
+      "applicationEndDate": "2027-01-28T16:30:00-05:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-roses25-swift-cycle23",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.3 Swift Cycle 23 일반연구자 연구",
+      "status": "active",
+      "applicationEndDate": "2027-01-28T16:30:00-05:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-roses25-fermi-cycle20",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.3 Fermi Cycle 20 일반연구자 연구",
+      "status": "active",
+      "applicationEndDate": "2027-01-28T16:30:00-05:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-roses25-tess-cycle10",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA D.3 TESS Cycle 10 일반연구자 연구",
+      "status": "active",
+      "applicationEndDate": "2027-01-28T16:30:00-05:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+    },
+    {
+      "id": "space-nasa-niac-2027-phase1",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA NIAC 2027 Phase I — 미국 주관팀 국제협력",
+      "status": "active",
+      "applicationEndDate": "2026-10-28T17:00:00-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-27NIAC_A1"
+    },
+    {
+      "id": "space-nasa-jwst-cycle6",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA/ESA/CSA JWST Cycle 6 GO·Survey·Archival Research",
       "status": "closed",
-      "applicationEndDate": "2026-07-03",
-      "sourceUrl": "https://pms.dips.or.kr/pdfviewer/web/viewer.html?file=/pbanc/Pb08RdbMs29a5cIv1781842194337.pdf#view=FitV&pagemode=thumbs&page=1"
+      "applicationEndDate": "2026-09-30T20:00:00-04:00",
+      "sourceUrl": "https://jwst-docs.stsci.edu/jwst-opportunities-and-policies/jwst-call-for-proposals-for-cycle-6"
     },
     {
-      "id": "space-gntp-discovered-3851",
-      "sourceFamily": "GNTP",
-      "title": "2026년 경남 우주산업 혁신생태계 조성 지원 사업 글로벌 마케팅 수혜기업 추가 모집 공고",
-      "status": "active",
-      "applicationEndDate": "2026-10-30",
-      "sourceUrl": "https://www.gntp.or.kr/biz/applyInfo/3851"
-    },
-    {
-      "id": "space-kaia-discovered-20260223181004012952",
-      "sourceFamily": "MOLIT_KAIA",
-      "title": "(공고-국-제11호) 2026년 공항 조류탐지 및 한국형 조류관리 핵심기술 개발 사업 시행 공고",
+      "id": "space-nasa-irtf-2027a",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA IRTF 2027A 관측 제안",
       "status": "closed",
-      "applicationEndDate": "2026-03-25",
-      "sourceUrl": "https://www.kaia.re.kr/KAIA/contents/K30101000000.do?schM=view&id=20260223181004012952"
+      "applicationEndDate": "2026-10-01T17:00:00-10:00",
+      "sourceUrl": "https://irtfweb.ifa.hawaii.edu/observing/callforproposals/"
     },
     {
-      "id": "space-bizinfo-discovered-PBLN_000000000127322",
-      "sourceFamily": "BIZINFO",
-      "title": "[전남] 2026년 드론기업 역량강화 지원사업 공고(R&D)",
+      "id": "space-nasa-xrism-key-program1",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA/JAXA XRISM 제1차 Key Program — JAXA 국제 접수",
       "status": "active",
-      "applicationEndDate": "2026-10-28",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127322"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000127318",
-      "sourceFamily": "BIZINFO",
-      "title": "[경남] 2026년 우주산업 혁신생태계 조성 지원 사업 글로벌 마케팅 지원 수혜기업 추가 모집 공고",
-      "status": "active",
-      "applicationEndDate": "2026-10-30",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127318"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000127222",
-      "sourceFamily": "BIZINFO",
-      "title": "2026년 차세대 항공 기술지원 수혜기업 모집 공고(차세대 항공 기체부품 첨단제조 실증 지원 기반구축 사업)",
-      "status": "active",
-      "applicationEndDate": "2026-10-27",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127222"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000127060",
-      "sourceFamily": "BIZINFO",
-      "title": "[대전] 2026년 드론 제품 판로개척을 위한 해외실증 지원 기업 모집 공고(드론산업 생태계 조성사업)",
-      "status": "closed",
-      "applicationEndDate": "2026-10-16",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127060"
+      "applicationEndDate": "2026-12-03T23:59:00Z",
+      "sourceUrl": "https://xrism.isas.jaxa.jp/research/proposer/key_program/index.html"
     }
   ],
-  "removed": [
-    {
-      "id": "space-kari-discovered-18410",
-      "sourceFamily": "KARI",
-      "title": "2026년도 스페이스파이오니어사업 신규과제 재공모(마이크로파 라디오미터 준광학 안테나시스템 및 저잡음 수신기)",
-      "status": "closed",
-      "applicationEndDate": "2026-02-02",
-      "sourceUrl": "https://www.kari.re.kr/kor/article/ATCLd4f64ac47/18410"
-    },
-    {
-      "id": "space-kari-discovered-18408",
-      "sourceFamily": "KARI",
-      "title": "2026년도 기본사업 신규 위탁연구과제 1차 공모 안내",
-      "status": "closed",
-      "applicationEndDate": "2026-01-29",
-      "sourceUrl": "https://www.kari.re.kr/kor/article/ATCLd4f64ac47/18408"
-    },
-    {
-      "id": "space-kari-discovered-18406",
-      "sourceFamily": "KARI",
-      "title": "2026년도 스페이스파이오니어사업 신규과제 재공모",
-      "status": "closed",
-      "applicationEndDate": "2026-01-09",
-      "sourceUrl": "https://www.kari.re.kr/kor/article/ATCLd4f64ac47/18406"
-    },
-    {
-      "id": "space-kasi-discovered-32235",
-      "sourceFamily": "KASI",
-      "title": "우주과학탐사 전문가 국제회의 참석 지원 프로그램 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-03-11",
-      "sourceUrl": "https://www.kasi.re.kr/kor/publication/post/notice/32235"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003183Wu6dI0",
-      "sourceFamily": "KASA",
-      "title": "2026년도 신규프로젝트 탐색연구 5차 신규과제(탐사) 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-29",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003183Wu6dI0"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003163Ho2oI1",
-      "sourceFamily": "KASA",
-      "title": "2026년도 신규프로젝트 탐색연구(인공위성부문) 신규기획과제 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-22",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003163Ho2oI1"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003132Me0lQ5",
-      "sourceFamily": "KASA",
-      "title": "2026년도 지속가능 열가소성 항공기 부품 핵심기술개발 사업 신규과제 3차 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-26",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003132Me0lQ5"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003115Dq3dE9",
-      "sourceFamily": "KASA",
-      "title": "2026년 투·융자 연계 기술개발사업 정책지정형(우주항공 분야) 시행계획 재공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-29",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003115Dq3dE9"
-    },
-    {
-      "id": "space-kasa-discovered-B000000003147Pn1pS7",
-      "sourceFamily": "KASA",
-      "title": "2026년도 차세대 항공 기체 부품 첨단제조 실증 지원 기반구축 사업 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-19",
-      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003147Pn1pS7"
-    },
-    {
-      "id": "space-add-discovered-1712",
-      "sourceFamily": "ADD",
-      "title": "[공모] 미래도전국방기술 연구개발사업 `26년 국과연 주관 PM과제(세부과제) 제안서 공모(스텔스 전투기 세부형상 설계, 스텔스 소요기술 통합 Testbed 구축 및 RCS 검증)",
-      "status": "active",
-      "applicationEndDate": "2026-06-12",
-      "sourceUrl": "https://www.add.re.kr/kps/publicNtis/ntisView?pageNum=1&rowCnt=10&titleId=1712&menuId=MENU02201"
-    },
-    {
-      "id": "space-add-discovered-1711",
-      "sourceFamily": "ADD",
-      "title": "[공모] 미래도전국방기술 연구개발사업 `26년 국과연 주관 PM과제(세부과제) 제안서 공모(항공용 다기능 복합소재 및 저피탐 센서 기술)",
-      "status": "active",
-      "applicationEndDate": "2026-06-12",
-      "sourceUrl": "https://www.add.re.kr/kps/publicNtis/ntisView?pageNum=1&rowCnt=10&titleId=1711&menuId=MENU02201"
-    },
-    {
-      "id": "space-add-discovered-1710",
-      "sourceFamily": "ADD",
-      "title": "[공모] 미래도전국방기술 연구개발사업 `26년 국과연 주관 PM과제(세부과제) 제안서 공모(군집드론 통제를 위한 LLM, 음성인식 기반 HMI 및 지능형 임무분석기술)",
-      "status": "active",
-      "applicationEndDate": "2026-06-15",
-      "sourceUrl": "https://www.add.re.kr/kps/publicNtis/ntisView?pageNum=1&rowCnt=10&titleId=1710&menuId=MENU02201"
-    },
-    {
-      "id": "space-kstartup-discovered-178002",
-      "sourceFamily": "KSTARTUP",
-      "title": "'26-2차 방산 중소기업 컨설팅 지원사업 지원대상기업 모집 공고문",
-      "status": "active",
-      "applicationEndDate": "2026-06-25",
-      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=178002&pbancEndYn=N"
-    },
-    {
-      "id": "space-kstartup-discovered-177853",
-      "sourceFamily": "KSTARTUP",
-      "title": "항공우주기술 기반 예비창업자 지원사업 「2026 STAR-Exploration」",
-      "status": "active",
-      "applicationEndDate": "2026-06-10",
-      "sourceUrl": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=177853&pbancEndYn=N"
-    },
-    {
-      "id": "space-tipa-smtech-discovered-2026-DCP-32",
-      "sourceFamily": "TIPA_SMTECH",
-      "title": "(2026-DCP-32_방산·우주항공·해양_딥테크 챌린지 프로젝트(DCP*))",
-      "status": "active",
-      "applicationEndDate": "2026-06-23",
-      "sourceUrl": "https://www.smtech.go.kr/front/ifg/no/notice02_list.do#2026-DCP-32"
-    },
-    {
-      "id": "space-djtp-discovered-2026-01-0080",
-      "sourceFamily": "DJTP",
-      "title": "[2026-01-0080]대전 방산혁신클러스터 국방·드론분야 기술사업화 지원사업 \"민-군 브릿지 코디네이터\" 지원기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-27",
-      "sourceUrl": "https://pms.dips.or.kr/pdfviewer/web/viewer.html?file=/pbanc/WJRWY4qE4LJuRycr1778213908257.pdf#view=FitV&pagemode=thumbs&page=1"
-    },
-    {
-      "id": "space-djtp-discovered-2026-01-0033",
-      "sourceFamily": "DJTP",
-      "title": "[2026-01-0033]대전 방산혁신클러스터 국방·드론분야 기술사업화 지원사업 \"사업화패키지\" 지원기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-03-24",
-      "sourceUrl": "https://pms.dips.or.kr/pdfviewer/web/viewer.html?file=/pbanc/XkrTqswXowKfUQAz1773291291554.pdf#view=FitV&pagemode=thumbs&page=1"
-    },
-    {
-      "id": "space-djtp-discovered-2026-01-0034",
-      "sourceFamily": "DJTP",
-      "title": "[2026-01-0034]대전 방산혁신클러스터 국방·드론분야 기술사업화 지원사업 \"고도화패키지\" 지원기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-03-24",
-      "sourceUrl": "https://pms.dips.or.kr/pdfviewer/web/viewer.html?file=/pbanc/tfIOu9oYYbxrVsUw1773291351819.pdf#view=FitV&pagemode=thumbs&page=1"
-    },
-    {
-      "id": "space-jntp-discovered-1070",
-      "sourceFamily": "JNTP",
-      "title": "「순천형 위성 개발 및 실증 사업」 참여기업 모집공고(연장)",
-      "status": "active",
-      "applicationEndDate": "2026-06-12",
-      "sourceUrl": "https://www.jntp.or.kr/base/apiAnnouncement/read?announcement=1070&searchCategory=&page=&searchType=&searchWord=&menuLevel=2&menuNo=45"
-    },
-    {
-      "id": "space-gntp-discovered-3772",
-      "sourceFamily": "GNTP",
-      "title": "2026-2차 타깃마케팅(영국)모집 추가 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-11",
-      "sourceUrl": "https://www.gntp.or.kr/biz/applyInfo/3772"
-    },
-    {
-      "id": "space-gntp-discovered-3766",
-      "sourceFamily": "GNTP",
-      "title": "2026년도 우주항공AI 국산화 상용기술개발 지원기업 추가 모집",
-      "status": "active",
-      "applicationEndDate": "2026-06-12",
-      "sourceUrl": "https://www.gntp.or.kr/biz/applyInfo/3766"
-    },
-    {
-      "id": "space-kaia-discovered-12952",
-      "sourceFamily": "MOLIT_KAIA",
-      "title": "(공고-국-제11호) 2026년 공항 조류탐지 및 한국형 조류관리 핵심기술 개발 사업 시행 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-03-25",
-      "sourceUrl": "https://www.kaia.re.kr/portal/bbs/view/B0000029/12952.do?menuNo=200110&pageIndex=1"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122927",
-      "sourceFamily": "BIZINFO",
-      "title": "[대전] 2026년 하반기 우주산업 혁신 기반 조성사업 지원기업 모집 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-12",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122927"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122923",
-      "sourceFamily": "BIZINFO",
-      "title": "[대전] 2026년 K-방산 생태계 활성화 및 강소기업 맞춤형 패키지 지원사업 대한민국국제방위산업전(KADEX 2026) 대전관(기업공동홍보관) 참여기업 모집 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-19",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122923"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122853",
-      "sourceFamily": "BIZINFO",
-      "title": "2026년 2차 방산 중소기업 컨설팅 지원사업 지원대상기업 모집 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-25",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122853"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122701",
-      "sourceFamily": "BIZINFO",
-      "title": "2026년 2차 민관협력 오픈이노베이션 지원 사업 방산 스타트업 챌린지(모두의 챌린지–방산) 수요기업 협업 과제 모집 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-22",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122701"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122663",
-      "sourceFamily": "BIZINFO",
-      "title": "2026년 2차 고흥드론센터 입주기업 역량강화 지원사업 모집 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-11",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122663"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122555",
-      "sourceFamily": "BIZINFO",
-      "title": "[전북] 2026년 탄소소재 활용 방산 관련기업 기술사업화 지원사업 지원계획 연장 공고",
-      "status": "active",
-      "applicationEndDate": "2026-06-17",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122555"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122391",
-      "sourceFamily": "BIZINFO",
-      "title": "[부산] 2026년 항공부품산업 기술고도화 지원사업 인증 및 컨설팅 지원 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-29",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122391"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122300",
-      "sourceFamily": "BIZINFO",
-      "title": "[전남] 순천시 위성 개발 및 실증 사업 참여기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-06-05",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122300"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122260",
-      "sourceFamily": "BIZINFO",
-      "title": "[경남] 2026년 특화개발지원사업(방산 스타트업 인큐베이팅 시범사업) 참여기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-06-01",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122260"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122250",
-      "sourceFamily": "BIZINFO",
-      "title": "[경북] 2026년 로컬 맞춤형 R&D 방위 R&D Spin-On 방산기업 제품 고도화 지원 참여기업 추가 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-31",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122250"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122087",
-      "sourceFamily": "BIZINFO",
-      "title": "[인천] 2026년 드론 도시관리 실증(지정) 지원사업 참여기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-22",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122087"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122053",
-      "sourceFamily": "BIZINFO",
-      "title": "[경남] 창원시 2026년 국가산단 기계ㆍ방산 분야 제조기업 대상 제조 DXㆍAX 확산 컨설팅 수혜기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-29",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122053"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122051",
-      "sourceFamily": "BIZINFO",
-      "title": "2026년 경남 우주산업 혁신생태계 조성 지원 사업 수혜기업 추가 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-28",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122051"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122046",
-      "sourceFamily": "BIZINFO",
-      "title": "[경기] 2026년 드론산업 육성 지원사업 드론기업 수요맞춤형 지원 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-06-05",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122046"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122044",
-      "sourceFamily": "BIZINFO",
-      "title": "[대전] 2026년 방산혁신클러스터 국방ㆍ드론분야 기술사업화 민-군 브릿지 코디네이터 지원기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-27",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122044"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122043",
-      "sourceFamily": "BIZINFO",
-      "title": "[대전] 2026년 방산혁신클러스터 국방ㆍ드론분야 기술사업화 제품화 패키지 지원사업 지원기업 통합 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-22",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122043"
-    },
-    {
-      "id": "space-bizinfo-discovered-PBLN_000000000122000",
-      "sourceFamily": "BIZINFO",
-      "title": "[경남] 진주시ㆍ사천시 2026년 우주항공용 세라믹섬유 융복합 소재 활용 사업화지원사업(3차연도) 시행 연장 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-05-19",
-      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000122000"
-    }
-  ],
+  "removed": [],
   "deadlineChanged": [],
-  "statusChanged": [
-    {
-      "id": "space-kari-discovered-18659",
-      "sourceFamily": "KARI",
-      "title": "2026년도 차세대발사체개발사업 1단계 신규 위탁연구과제 공모",
-      "status": "closed",
-      "applicationEndDate": "2026-06-11",
-      "sourceUrl": "https://www.kari.re.kr/kor/article/ATCLd4f64ac47/18659",
-      "previousStatus": "active"
-    },
-    {
-      "id": "space-djtp-discovered-2026-01-0092",
-      "sourceFamily": "DJTP",
-      "title": "[2026-01-0092]2026년 우주산업 혁신 기반 조성사업 하반기 지원기업 모집 공고",
-      "status": "closed",
-      "applicationEndDate": "2026-06-12",
-      "sourceUrl": "https://pms.dips.or.kr/pdfviewer/web/viewer.html?file=/pbanc/EBz1rOk8RFq77UmR1780015141292.pdf#view=FitV&pagemode=thumbs&page=1",
-      "previousStatus": "active"
-    }
-  ],
+  "statusChanged": [],
   "newExcluded": [],
   "resolvedExcluded": []
 }

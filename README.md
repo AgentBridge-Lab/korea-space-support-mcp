@@ -9,7 +9,7 @@
 [![Last commit](https://img.shields.io/github/last-commit/AgentBridge-Lab/korea-space-support-mcp)](https://github.com/AgentBridge-Lab/korea-space-support-mcp/commits/main)
 [![Stars](https://img.shields.io/github/stars/AgentBridge-Lab/korea-space-support-mcp?style=social)](https://github.com/AgentBridge-Lab/korea-space-support-mcp/stargazers)
 
-> **한국 우주·항공·국방우주·R&D 지원사업 공고**를 AI 에이전트가 곧바로 검색·매칭할 수 있도록 정리한 데이터셋과 Model Context Protocol(MCP) 서버, REST API, 검증 파이프라인입니다.
+> **한국 우주·항공·국방우주·R&D 지원사업 공고와 한국 연구자가 참여할 수 있는 NASA 국제 공고**를 AI 에이전트가 곧바로 검색·매칭할 수 있도록 정리한 데이터셋과 Model Context Protocol(MCP) 서버, REST API, 검증 파이프라인입니다.
 
 기업·스타트업·대학 연구실·연구팀·컨소시엄에게 **마감일이 명확한 실제 공고**만 추천하도록 설계되었습니다. Claude, Cursor, ChatGPT 등 도구 호출이 가능한 에이전트에서 바로 사용할 수 있습니다.
 
@@ -40,7 +40,7 @@
 
 - `/` — 검색 (필터/키워드/매칭 3탭)
 - `/program/[id]` — 공고 상세
-- `/about` — 수집 정책 · 출처 17종 · 면책
+- `/about` — 수집 정책 · 출처 18종 · 면책
 - `/api/space-programs/search`, `/match`, `/[id]`, `/ingest-report`, `/space-sources` — REST API
 
 Vercel(Hobby) 단일 배포. 기존 macOS launchd 설정은 매주 월 09:00 KST에 ingest → git push → Vercel 재배포하도록 구성되어 있습니다.
@@ -51,16 +51,16 @@ Vercel(Hobby) 단일 배포. 기존 macOS launchd 설정은 매주 월 09:00 KST
 
 | 항목 | 값 |
 |---|---|
-| 생성된 공고 | **33건** |
-| 활성(마감일 ≥ 기준일) / 마감 | **11건 / 22건** |
-| 출처 패밀리 | 9개 (KARI · KASA · ADD · KRIT · KAIA · DJTP · GNTP · ITP · Bizinfo) |
-| 수집 경로 확인 / 수집 오류 | 16개 / 0건 |
+| 생성된 공고 | **58건** (국내 33건 · NASA 국제참여 25건) |
+| 활성(마감일 ≥ 기준일) / 마감 | **21건 / 37건** (NASA 10건 / 15건) |
+| 출처 패밀리 | 10개 (KARI · KASA · ADD · KRIT · KAIA · DJTP · GNTP · ITP · Bizinfo · NASA 국제참여) |
+| 수집 경로 확인 / 수집 오류 | 17개 / 0건 |
 | 첨부파일에서 마감일 확인 | 7건 (PDF 6건 · HWPX 1건) |
 | Bizinfo 원기관 출처 URL 보유율 | 4 / 4 |
 | 제외(마감일 판독 불가 등) | 0 |
 | 자동 갱신 설정 | 매주 월 09:00 KST (기존 macOS launchd) |
 
-이 표는 2026-10-26 수집 결과입니다. 출처별 현황은 `data/space-ingest-report.json`, 변경 내역과 진행 중 공고는 [최신화 보고서](docs/space-refresh-2026-10-26.md)를 참고하세요. 기관과 기업마당에 함께 게시된 공고는 출처별 레코드로 집계합니다.
+이 표는 2026-10-26 수집 결과입니다. 국내 공고와 첨부 마감일은 [국내 최신화 보고서](docs/space-refresh-2026-10-26.md), 2026-04-01~2026-10-26 게시된 국제 공고의 자격·마감·공식 원문은 [NASA 조사 보고서](docs/nasa-international-opportunities-2026-10-26.md)를 참고하세요. 출처별 현황과 최신 변경분은 `data/space-ingest-report.json` 및 `data/space-refresh-diff.json`에 있습니다. 기관과 기업마당에 함께 게시된 공고는 출처별 레코드로 집계합니다. NASA 국제참여는 대체로 한국 기관에 NASA 연구비가 지급되지 않으며, 공고별로 자체 재원 PI, 미국 주관팀 협력자, 관측시간 신청을 구분합니다.
 
 ---
 
@@ -75,6 +75,7 @@ packages/
   shared/   검색·스코어링·분류·소스 메타·타입 정의 (모든 surface 공용)
 scripts/
   ingest-space-programs.mjs       # 크롤러 + 분류기 + 데이터 작성기
+  ingest-nasa-programs.mjs         # NASA 새 공고·국제참여 자격·NSPIRES 문서 검증
   verify-space-search-samples.mjs # 검색 UX 시나리오 회귀
   verify-space-api-mcp-smoke.mjs  # API + MCP 스모크
   run-space-refresh.mjs           # ingest + diff + history 기록
@@ -82,6 +83,7 @@ data/
   space-programs.generated.json   # 현재 데이터셋
   space-programs.excluded.json    # 제외 감사 로그
   space-ingest-report.json        # 출처별 카운트·시간
+  nasa-review-audit.json          # NASA 공식 발표 채택·제외 근거
   space-refresh-diff.json
   space-refresh-history.jsonl
 ops/launchd/
