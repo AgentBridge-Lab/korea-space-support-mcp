@@ -1,216 +1,121 @@
 {
-  "startedAt": "2026-10-26T13:53:38.076Z",
-  "finishedAt": "2026-10-26T13:54:47.674Z",
-  "durationMs": 69598,
-  "previousGeneratedCount": 33,
-  "currentGeneratedCount": 58,
+  "startedAt": "2026-11-03T10:59:52.738Z",
+  "finishedAt": "2026-11-03T11:01:44.033Z",
+  "durationMs": 111295,
+  "previousGeneratedCount": 58,
+  "currentGeneratedCount": 56,
   "previousExcludedCount": 0,
   "currentExcludedCount": 0,
   "added": [
     {
-      "id": "space-nasa-roses25-hamaq",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA A.12 항공 관측 기반 대기질 연구팀 (HAMAQ)",
-      "status": "closed",
-      "applicationEndDate": "2026-07-21T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b1DE6B684-0636-E769-B912-269F22D6673D%7d&path=&method=init"
-    },
-    {
-      "id": "space-nasa-roses25-apra",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.6 천체물리 관측장비·서브오비탈·큐브위성 연구 (APRA)",
-      "status": "closed",
-      "applicationEndDate": "2026-06-25T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bE355D6D2-A5D1-2E47-2937-EF289DC97E44%7d&path=&method=init"
-    },
-    {
-      "id": "space-nasa-roses25-sat",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.7 우주망원경 전략기술 성숙도 향상 (SAT)",
-      "status": "closed",
-      "applicationEndDate": "2026-08-06T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b9455D565-3411-0574-BABC-255C7945CD08%7d&path=&method=init"
-    },
-    {
-      "id": "space-nasa-roses25-aes",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA A.13 지구관측 자료를 이용한 미국 내 현안 해결 (AES)",
-      "status": "closed",
-      "applicationEndDate": "2026-10-15T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b33D1A64A-D7B2-199F-7E02-90E363FB86BC%7d&path=&method=init"
-    },
-    {
-      "id": "space-nasa-roses25-atmos",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA A.14 위성·항공·모델 기반 대기 연구 (ATMOS)",
-      "status": "closed",
-      "applicationEndDate": "2026-08-20T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-ATMOS"
-    },
-    {
-      "id": "space-nasa-roses25-bios",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA A.15 지구관측 기반 생물권 연구 (BIOS)",
-      "status": "closed",
-      "applicationEndDate": "2026-09-04T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-BIOS"
-    },
-    {
-      "id": "space-nasa-roses25-psef",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA C.4 행성과학 연구 기반시설 및 연구역량 (PSEF)",
+      "id": "space-kasa-discovered-B000000003603My7xF0",
+      "sourceFamily": "KASA",
+      "title": "2026년도 우주기술 상용화 실증 지원(Space-MaCS)사업 탑재체 선정 공고",
       "status": "active",
-      "applicationEndDate": "2026-11-10T23:59:59-05:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b3150F039-5AB4-555C-A780-4C6B1347EC7A%7d&path=&method=init"
+      "applicationEndDate": "2026-11-10",
+      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003603My7xF0"
     },
     {
-      "id": "space-nasa-roses25-hwopsi",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.8 Habitable Worlds Observatory 선행과학 연구 (HWOPSI)",
-      "status": "closed",
-      "applicationEndDate": "2026-09-10T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HWOPSI"
-    },
-    {
-      "id": "space-nasa-roses25-hwoica",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.9 Habitable Worlds Observatory 관측장비 개념 평가 (HWOICA)",
-      "status": "closed",
-      "applicationEndDate": "2026-10-14T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HWOICA"
-    },
-    {
-      "id": "space-nasa-roses25-tcan",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.4 이론·계산 천체물리 연구 네트워크 (TCAN)",
-      "status": "closed",
-      "applicationEndDate": "2026-10-15T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7b5509DEBF-B8B4-2F3D-0EFB-350EFE67DCD5%7d&path=&method=init"
-    },
-    {
-      "id": "space-nasa-roses25-cryo",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA A.16 위성관측 및 모델 기반 빙권 연구 (CRYO)",
-      "status": "closed",
-      "applicationEndDate": "2026-10-16T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-CRYO"
-    },
-    {
-      "id": "space-nasa-roses25-hydro",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA A.17 위성관측 및 모델 기반 수권 연구 (HYDRO)",
-      "status": "closed",
-      "applicationEndDate": "2026-10-08T23:59:59-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HYDRO"
-    },
-    {
-      "id": "space-nasa-roses25-geo",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA A.18 지구관측 기반 지질재해·지각·자원 연구 (GEO)",
+      "id": "space-krit-discovered-6561",
+      "sourceFamily": "KRIT",
+      "title": "[인천 방산혁신클러스터사업] AI 항공(대드론) 수행기관 공고문(재공고)",
       "status": "active",
-      "applicationEndDate": "2026-11-16T23:59:59-05:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-GEO"
-    },
+      "applicationEndDate": "2026-11-09",
+      "sourceUrl": "https://www.krit.re.kr/krit/bbs/notice_view.do?bbsId=notice&nttId=6561&menu_no=05010000"
+    }
+  ],
+  "removed": [
     {
-      "id": "space-nasa-roses25-lcas",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA B.7 태양·우주환경 관측장비 및 저비용 비행실증 (LCAS)",
-      "status": "active",
-      "applicationEndDate": "2026-11-20T23:59:59-05:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-LCAS"
-    },
-    {
-      "id": "space-nasa-roses25-ssf",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA B.8 태양·지구 우주환경 미래 우주비행 과학 기반 연구 (SSF)",
-      "status": "active",
-      "applicationEndDate": "2026-11-20T23:59:59-05:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-SSF"
-    },
-    {
-      "id": "space-nasa-roses25-ixpe-cycle4",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.3 IXPE Cycle 4 일반관측 연구",
+      "id": "space-kasa-discovered-B000000003292Sg7fX7",
+      "sourceFamily": "KASA",
+      "title": "2026년도 임무수요기반 성층권 드론 실증 플랫폼 개발 사업 2단계 신규과제 공고(수정)",
       "status": "closed",
-      "applicationEndDate": "2026-09-17T16:30:00-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+      "applicationEndDate": "2026-08-31",
+      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003292Sg7fX7"
     },
     {
-      "id": "space-nasa-roses25-nicer-cycle9",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.3 NICER Cycle 9 일반관측 연구",
+      "id": "space-kasa-discovered-B000000003276Bj2zA7",
+      "sourceFamily": "KASA",
+      "title": "2026년도 차세대 항공 기체 부품 첨단제조 실증 지원 기반구축 사업 공고(재공고)",
       "status": "closed",
-      "applicationEndDate": "2026-09-17T16:30:00-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+      "applicationEndDate": "2026-07-22",
+      "sourceUrl": "https://www.kasa.go.kr/bbs/BBSMSTR_000000000018/view.do?nttId=B000000003276Bj2zA7"
     },
     {
-      "id": "space-nasa-roses25-nustar-cycle13",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.3 NuSTAR Cycle 13 일반관측 연구",
+      "id": "space-krit-discovered-6510",
+      "sourceFamily": "KRIT",
+      "title": "[인천 방산혁신클러스터사업] AI 항공(대드론) 수행기관 공모 안내문",
       "status": "active",
-      "applicationEndDate": "2027-01-28T16:30:00-05:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+      "applicationEndDate": "2026-10-28",
+      "sourceUrl": "https://www.krit.re.kr/krit/bbs/notice_view.do?bbsId=notice&nttId=6510&menu_no=05010000"
     },
     {
-      "id": "space-nasa-roses25-swift-cycle23",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.3 Swift Cycle 23 일반연구자 연구",
+      "id": "space-gntp-discovered-3851",
+      "sourceFamily": "GNTP",
+      "title": "2026년 경남 우주산업 혁신생태계 조성 지원 사업 글로벌 마케팅 수혜기업 추가 모집 공고",
       "status": "active",
-      "applicationEndDate": "2027-01-28T16:30:00-05:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+      "applicationEndDate": "2026-10-30",
+      "sourceUrl": "https://www.gntp.or.kr/biz/applyInfo/3851"
+    }
+  ],
+  "deadlineChanged": [
+    {
+      "id": "space-nasa-niac-2027-phase1",
+      "sourceFamily": "NASA_INTERNATIONAL",
+      "title": "NASA NIAC 2027 Phase I — 미국 주관팀 국제협력",
+      "status": "closed",
+      "applicationEndDate": "2026-10-28T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-27NIAC_A1",
+      "previousApplicationEndDate": "2026-10-28T17:00:00-04:00"
+    }
+  ],
+  "statusChanged": [
+    {
+      "id": "space-djtp-discovered-2026-01-0070",
+      "sourceFamily": "DJTP",
+      "title": "[2026-01-0070]「2026 대전 방산혁신클러스터 시험장비 구축 및 지원」 국방·드론분야 기술지원 (보유장비활용)",
+      "status": "closed",
+      "applicationEndDate": "2026-10-30",
+      "sourceUrl": "https://pms.dips.or.kr/pdfviewer/web/viewer.html?file=/pbanc/SaAbjtwDsBpE2j2r1776933338211.pdf#view=FitV&pagemode=thumbs&page=1",
+      "previousStatus": "active"
     },
     {
-      "id": "space-nasa-roses25-fermi-cycle20",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.3 Fermi Cycle 20 일반연구자 연구",
-      "status": "active",
-      "applicationEndDate": "2027-01-28T16:30:00-05:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+      "id": "space-bizinfo-discovered-PBLN_000000000127322",
+      "sourceFamily": "BIZINFO",
+      "title": "[전남] 2026년 드론기업 역량강화 지원사업 공고(R&D)",
+      "status": "closed",
+      "applicationEndDate": "2026-10-28",
+      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127322",
+      "previousStatus": "active"
     },
     {
-      "id": "space-nasa-roses25-tess-cycle10",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA D.3 TESS Cycle 10 일반연구자 연구",
-      "status": "active",
-      "applicationEndDate": "2027-01-28T16:30:00-05:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId=%7bA952E51B-7AD4-B180-2F8C-4E8A79AFFAED%7d&path=&method=init"
+      "id": "space-bizinfo-discovered-PBLN_000000000127318",
+      "sourceFamily": "BIZINFO",
+      "title": "[경남] 2026년 우주산업 혁신생태계 조성 지원 사업 글로벌 마케팅 지원 수혜기업 추가 모집 공고",
+      "status": "closed",
+      "applicationEndDate": "2026-10-30",
+      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127318",
+      "previousStatus": "active"
+    },
+    {
+      "id": "space-bizinfo-discovered-PBLN_000000000127222",
+      "sourceFamily": "BIZINFO",
+      "title": "2026년 차세대 항공 기술지원 수혜기업 모집 공고(차세대 항공 기체부품 첨단제조 실증 지원 기반구축 사업)",
+      "status": "closed",
+      "applicationEndDate": "2026-10-27",
+      "sourceUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127222",
+      "previousStatus": "active"
     },
     {
       "id": "space-nasa-niac-2027-phase1",
       "sourceFamily": "NASA_INTERNATIONAL",
       "title": "NASA NIAC 2027 Phase I — 미국 주관팀 국제협력",
-      "status": "active",
-      "applicationEndDate": "2026-10-28T17:00:00-04:00",
-      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-27NIAC_A1"
-    },
-    {
-      "id": "space-nasa-jwst-cycle6",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA/ESA/CSA JWST Cycle 6 GO·Survey·Archival Research",
       "status": "closed",
-      "applicationEndDate": "2026-09-30T20:00:00-04:00",
-      "sourceUrl": "https://jwst-docs.stsci.edu/jwst-opportunities-and-policies/jwst-call-for-proposals-for-cycle-6"
-    },
-    {
-      "id": "space-nasa-irtf-2027a",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA IRTF 2027A 관측 제안",
-      "status": "closed",
-      "applicationEndDate": "2026-10-01T17:00:00-10:00",
-      "sourceUrl": "https://irtfweb.ifa.hawaii.edu/observing/callforproposals/"
-    },
-    {
-      "id": "space-nasa-xrism-key-program1",
-      "sourceFamily": "NASA_INTERNATIONAL",
-      "title": "NASA/JAXA XRISM 제1차 Key Program — JAXA 국제 접수",
-      "status": "active",
-      "applicationEndDate": "2026-12-03T23:59:00Z",
-      "sourceUrl": "https://xrism.isas.jaxa.jp/research/proposer/key_program/index.html"
+      "applicationEndDate": "2026-10-28T23:59:59-04:00",
+      "sourceUrl": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-27NIAC_A1",
+      "previousStatus": "active"
     }
   ],
-  "removed": [],
-  "deadlineChanged": [],
-  "statusChanged": [],
   "newExcluded": [],
   "resolvedExcluded": []
 }

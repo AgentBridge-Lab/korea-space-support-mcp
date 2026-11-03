@@ -1,13 +1,13 @@
 # Korea Space Support MCP Handoff
 
-Last updated: 2026-06-09 KST
+Last updated: 2026-11-03 KST
 
 ## Project Context
 
 Repository:
 
 ```text
-/Users/ldh/claude_projects/patents
+/Users/ldh/Workspace/work/korea-space-support-mcp
 ```
 
 Primary goal:
@@ -40,21 +40,24 @@ docs/korea-space-mcp-work-report.md
 
 ## Current State
 
-Latest verified generated data:
+Latest verified data:
 
-- generated: `48`
+- generated: `56` (`31` domestic + `25` NASA international)
 - excluded: `0`
-- discovered sources: `50`
-- source families: `12`
-- BIZINFO records with `originalAgencyUrl`: `15` / `15`
-- shared tests: `13` pass (added event-leak guard + BIZINFO provenance coverage check)
-- DJTP discovered/generated/excluded: `9` / `7` / `0`
+- active / closed: `16` / `40`
+- discovery paths / errors: `17` / `0`
+- source families: `9`
+- BIZINFO records with `originalAgencyUrl`: `4` / `4`
+- DJTP discovered/generated/excluded: `8` / `6` / `0`
 - API/MCP smoke failures: `0`
 - search sample failures: `0`
+- tests: `26` pass (`13` shared + `11` ingestion/preflight + `2` web formatting)
+- typecheck/build: shared, API, MCP, and web pass
+- production dependency audit: `0` vulnerabilities
 
 Latest known watchpoint:
 
-- `report:space` showed `slow discovery: ITP 18.0s` once. This is not a functional failure; likely reader fallback/network latency.
+- `report:space` showed slow discovery for ITP (15.8s) and NASA (97.2s). These were warnings only; both completed without collection errors.
 
 Latest important artifacts:
 
@@ -151,7 +154,7 @@ Expected current pass state:
 - `check:space`: no warnings/failures.
 - `check:space-search`: warnings `0`, failures `0`.
 - `check:space-surfaces`: warnings `0`, failures `0`.
-- shared tests: `11` pass.
+- dependency preflight regression tests: pass.
 - typecheck: shared/api/mcp/web pass.
 - build: shared/api/mcp/web pass.
 
@@ -159,14 +162,15 @@ Expected current pass state:
 
 Recommended next priorities:
 
-1. launchd registration — installed 2026-06-09
+1. launchd registration — configuration refreshed 2026-11-03
    - File: `ops/launchd/com.bidscout.space-refresh.plist`
    - Installed to `~/Library/LaunchAgents/com.bidscout.space-refresh.plist`
    - Loaded via `launchctl bootstrap gui/$(id -u)`. Schedule: every Monday 09:00 KST → `npm run refresh:space:scheduled`.
-   - Plist hardening required during install:
+   - Plist hardening:
      - Switched program from `/usr/bin/env npm` to absolute `/opt/homebrew/bin/npm` so launchd can resolve the binary without relying on PATH discovery.
-     - Set `EnvironmentVariables.PATH = /usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/usr/local/bin`. `/usr/bin` is kept ahead of `/opt/homebrew/bin` so `python3` resolves to `/usr/bin/python3` (which has `curl_cffi`/`olefile` installed); Homebrew's 3.14 in `/opt/homebrew/bin/python3` does not have these packages.
-   - Verified with `launchctl kickstart -k`: `last exit code = 0`, refresh cycle completed, `data/space-refresh-diff.json` + `space-refresh-history.jsonl` updated, `space-refresh-launchd.err.log` empty.
+     - Set `EnvironmentVariables.PATH = /usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/usr/local/bin` and `PYTHON = /usr/bin/python3` explicitly.
+     - Working directory is `/Users/ldh/Workspace/work/korea-space-support-mcp`.
+   - Refresh checks required Node dependencies before ingesting, preventing partial updates when `node_modules` is missing.
    - To unload later: `launchctl bootout gui/$(id -u)/com.bidscout.space-refresh && rm ~/Library/LaunchAgents/com.bidscout.space-refresh.plist`.
 
 2. SMTECH/IRIS provenance improvement
@@ -215,10 +219,10 @@ Recommended next priorities:
 Paste this into the new session:
 
 ```text
-We are continuing work in /Users/ldh/claude_projects/patents.
+We are continuing work in /Users/ldh/Workspace/work/korea-space-support-mcp.
 
 Read this handoff first:
-/Users/ldh/claude_projects/patents/docs/space-mcp-handoff.md
+/Users/ldh/Workspace/work/korea-space-support-mcp/docs/space-mcp-handoff.md
 
 Also keep these project instructions in mind:
 - Do not manually insert generated program records.
@@ -228,17 +232,15 @@ Also keep these project instructions in mind:
 - Use apply_patch for edits.
 - Verify before claiming completion.
 
-Current verified state:
-- generated 49
-- excluded 1
-- discovered 52
-- source families 12
+Current refreshed state:
+- generated 56
+- excluded 0
+- active 16 / closed 40
+- discovery paths 17 with 0 errors
+- source families 9
 - check:space/search/surfaces all pass
 - verify:space passes
 
 Recommended next task:
-Start with remaining work item 2 from the handoff: SMTECH/IRIS provenance improvement. Inspect the current TIPA_SMTECH discovery in scripts/ingest-space-programs.mjs, determine whether stable public detail URLs can be reconstructed without login/manual work, make only safe automated changes, update docs/report, and run npm run verify:space.
-
-If you find SMTECH/IRIS cannot be improved safely, document why and move to Bizinfo/K-Startup original agency provenance.
+Run the next scheduled refresh from the stable checkout, review `data/space-refresh-diff.json`, then publish only after the full verification chain passes.
 ```
-

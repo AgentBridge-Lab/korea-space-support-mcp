@@ -7,7 +7,7 @@
   <string>com.bidscout.space-refresh</string>
 
   <key>WorkingDirectory</key>
-  <string>/Users/ldh/claude_projects/patents</string>
+  <string>/Users/ldh/Workspace/work/korea-space-support-mcp</string>
 
   <key>ProgramArguments</key>
   <array>
@@ -20,6 +20,8 @@
   <dict>
     <key>PATH</key>
     <string>/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/usr/local/bin</string>
+    <key>PYTHON</key>
+    <string>/usr/bin/python3</string>
   </dict>
 
   <key>StartCalendarInterval</key>
@@ -35,9 +37,9 @@
   </array>
 
   <key>StandardOutPath</key>
-  <string>/Users/ldh/claude_projects/patents/data/space-refresh-launchd.log</string>
+  <string>/Users/ldh/Workspace/work/korea-space-support-mcp/data/space-refresh-launchd.log</string>
 
   <key>StandardErrorPath</key>
-  <string>/Users/ldh/claude_projects/patents/data/space-refresh-launchd.err.log</string>
+  <string>/Users/ldh/Workspace/work/korea-space-support-mcp/data/space-refresh-launchd.err.log</string>
 </dict>
 </plist>

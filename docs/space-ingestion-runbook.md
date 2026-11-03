@@ -28,8 +28,11 @@ Recommended cadence:
 Commands:
 
 ```bash
+npm ci
 npm run refresh:space
 ```
+
+`npm ci`는 새 체크아웃과 의존성 변경 뒤에 반드시 실행합니다. 사전점검은 TypeScript 같은 필수 패키지가 없으면 ingest 전에 중단하므로, 수집만 끝나고 검증에서 실패한 반쪽짜리 데이터 갱신을 만들지 않습니다.
 
 The refresh command works on Windows as well as macOS/Linux. Install the Python
 packages with `python -m pip install curl_cffi olefile pypdf` on Windows (use
@@ -112,13 +115,13 @@ Acceptance gates:
 Cron example for a weekly Monday 09:00 KST refresh:
 
 ```cron
-0 9 * * 1 cd /Users/ldh/claude_projects/patents && /usr/bin/env npm run refresh:space:scheduled >> data/space-refresh-cron.log 2>&1
+0 9 * * 1 cd /Users/ldh/Workspace/work/korea-space-support-mcp && PYTHON=/usr/bin/python3 /usr/bin/env npm run refresh:space:scheduled >> data/space-refresh-cron.log 2>&1
 ```
 
 During heavy government R&D announcement periods, use daily weekday refresh:
 
 ```cron
-0 9 * * 1-5 cd /Users/ldh/claude_projects/patents && /usr/bin/env npm run refresh:space:scheduled >> data/space-refresh-cron.log 2>&1
+0 9 * * 1-5 cd /Users/ldh/Workspace/work/korea-space-support-mcp && PYTHON=/usr/bin/python3 /usr/bin/env npm run refresh:space:scheduled >> data/space-refresh-cron.log 2>&1
 ```
 
 For macOS launchd, use the checked-in plist:
@@ -135,6 +138,8 @@ The plist runs every Monday 09:00 local time and writes stdout/stderr to:
 data/space-refresh-launchd.log
 data/space-refresh-launchd.err.log
 ```
+
+이 스케줄은 로컬 데이터 수집·검증·변경 이력 작성까지만 수행합니다. 공개 반영은 전체 검증 후 변경을 커밋·푸시하고 Vercel 운영 배포가 완료됐는지 별도로 확인합니다.
 
 Run `npm run verify:space` manually after code, classifier, parser, source, search-filter, API/MCP schema, or generated-data schema changes. The scheduled wrapper intentionally runs the lighter recurring chain: ingest, check, search-sample check, report, diff, and history.
 

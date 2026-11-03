@@ -1,5 +1,6 @@
 import { appendFile, readFile, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
+import { assertRefreshDependencies } from "./verify-space-refresh-dependencies.mjs";
 
 const generatedPath = "data/space-programs.generated.json";
 const excludedPath = "data/space-programs.excluded.json";
@@ -136,6 +137,7 @@ const printDiffSummary = (diff) => {
 };
 
 const startedAt = new Date();
+assertRefreshDependencies();
 const previousGenerated = await loadJson(generatedPath, []);
 const previousExcluded = await loadJson(excludedPath, []);
 

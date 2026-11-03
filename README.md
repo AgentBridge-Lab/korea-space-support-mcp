@@ -43,24 +43,24 @@
 - `/about` — 수집 정책 · 출처 18종 · 면책
 - `/api/space-programs/search`, `/match`, `/[id]`, `/ingest-report`, `/space-sources` — REST API
 
-Vercel(Hobby) 단일 배포. 기존 macOS launchd 설정은 매주 월 09:00 KST에 ingest → git push → Vercel 재배포하도록 구성되어 있습니다.
+Vercel(Hobby) 단일 배포입니다. macOS launchd는 매주 월요일 09:00 KST에 로컬 데이터를 수집·검증하고 변경 이력을 남깁니다. 공개 사이트 반영은 검증된 변경을 `main`에 푸시한 뒤 Vercel 배포가 완료되어야 합니다.
 
 ---
 
-## 현재 데이터 스냅샷 (2026-10-26 KST)
+## 현재 데이터 스냅샷 (2026-11-03 KST)
 
 | 항목 | 값 |
 |---|---|
-| 생성된 공고 | **58건** (국내 33건 · NASA 국제참여 25건) |
-| 활성(마감일 ≥ 기준일) / 마감 | **21건 / 37건** (NASA 10건 / 15건) |
-| 출처 패밀리 | 10개 (KARI · KASA · ADD · KRIT · KAIA · DJTP · GNTP · ITP · Bizinfo · NASA 국제참여) |
+| 생성된 공고 | **56건** (국내 31건 · NASA 국제참여 25건) |
+| 활성(마감일 ≥ 기준일) / 마감 | **16건 / 40건** (NASA 9건 / 16건) |
+| 출처 패밀리 | 9개 (KARI · KASA · ADD · KRIT · KAIA · DJTP · ITP · Bizinfo · NASA 국제참여) |
 | 수집 경로 확인 / 수집 오류 | 17개 / 0건 |
-| 첨부파일에서 마감일 확인 | 7건 (PDF 6건 · HWPX 1건) |
+| 첨부파일에서 마감일 확인 | 6건 |
 | Bizinfo 원기관 출처 URL 보유율 | 4 / 4 |
 | 제외(마감일 판독 불가 등) | 0 |
 | 자동 갱신 설정 | 매주 월 09:00 KST (기존 macOS launchd) |
 
-이 표는 2026-10-26 수집 결과입니다. 국내 공고와 첨부 마감일은 [국내 최신화 보고서](docs/space-refresh-2026-10-26.md), 2026-04-01~2026-10-26 게시된 국제 공고의 자격·마감·공식 원문은 [NASA 조사 보고서](docs/nasa-international-opportunities-2026-10-26.md)를 참고하세요. 출처별 현황과 최신 변경분은 `data/space-ingest-report.json` 및 `data/space-refresh-diff.json`에 있습니다. 기관과 기업마당에 함께 게시된 공고는 출처별 레코드로 집계합니다. NASA 국제참여는 대체로 한국 기관에 NASA 연구비가 지급되지 않으며, 공고별로 자체 재원 PI, 미국 주관팀 협력자, 관측시간 신청을 구분합니다.
+이 표는 2026-11-03 수집 결과입니다. 새 공고와 마감·상태 변경은 [11월 3일 최신화 보고서](docs/space-refresh-2026-11-03.md), 국제 공고의 자격·마감·공식 원문은 [NASA 조사 보고서](docs/nasa-international-opportunities-2026-10-26.md)를 참고하세요. 출처별 현황과 최신 변경분은 `data/space-ingest-report.json` 및 `data/space-refresh-diff.json`에 있습니다. 기관과 기업마당에 함께 게시된 공고는 출처별 레코드로 집계합니다. NASA 국제참여는 대체로 한국 기관에 NASA 연구비가 지급되지 않으며, 공고별로 자체 재원 PI, 미국 주관팀 협력자, 관측시간 신청을 구분합니다.
 
 ---
 
@@ -101,7 +101,7 @@ docs/
 ```bash
 git clone https://github.com/AgentBridge-Lab/korea-space-support-mcp.git
 cd korea-space-support-mcp
-npm install
+npm ci
 
 # (선택) 출처에서 새로 ingest 하려면 Python 의존성 1회 설치
 python3 -m pip install --user curl_cffi beautifulsoup4 pyyaml olefile pypdf
@@ -220,7 +220,7 @@ npm run verify:space
 #           Node 테스트 → typecheck → build (shared + api + mcp + web)
 ```
 
-현재 상태: **테스트 16/16 PASS**, 경고 0건, 실패 0건.
+현재 상태: **테스트 26/26 PASS**, 경고 0건, 실패 0건.
 
 ---
 
