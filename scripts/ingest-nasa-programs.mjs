@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { fetchPublicSource, readResponseBytes } from "./public-source-security.mjs";
 import { mkdtemp, readFile, rm, writeFile, mkdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -74,9 +75,9 @@ async function getBytes(url) {
     let lastError;
     for (let attempt = 0; attempt < 2; attempt += 1) {
       try {
-        const response = await fetch(url, { signal: AbortSignal.timeout(30000), headers: { "user-agent": "KoreaSpaceSupportMCP/0.1 public metadata research" } });
+        const response = await fetchPublicSource(url, { signal: AbortSignal.timeout(30000), headers: { "user-agent": "KoreaSpaceSupportMCP/0.1 public metadata research" } });
         if (!response.ok) throw new Error(`NASA source HTTP ${response.status}: ${url}`);
-        const bytes = Buffer.from(await response.arrayBuffer());
+        const bytes = await readResponseBytes(response, 24 * 1024 * 1024);
         if (cachePath) {
           await mkdir(cacheDir, { recursive: true });
           await writeFile(`${cachePath}.json`, JSON.stringify({ fetchedAt: Date.now(), body: bytes.toString("base64") }));

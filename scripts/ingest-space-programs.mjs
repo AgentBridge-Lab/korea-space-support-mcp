@@ -1,10 +1,17 @@
-import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { discoverNasaSources } from "./ingest-nasa-programs.mjs";
+import {
+  assertPublicSourceUrl,
+  fetchPublicSource,
+  isAllowedPublicSourceUrl,
+  readResponseBytes,
+  validatePublicSourceUrl
+} from "./public-source-security.mjs";
 
 const now = new Date().toISOString();
 const execFileAsync = promisify(execFile);
@@ -12,13 +19,19 @@ const pythonCommand = process.env.PYTHON ?? (process.platform === "win32" ? "pyt
 // Python writes Korean metadata through pipes on Windows as well as Unix.
 process.env.PYTHONIOENCODING = "utf-8";
 let pdfTextBackend = "pdftotext";
+const maxAttachmentBytes = 24 * 1024 * 1024;
+const maxPageBytes = 8 * 1024 * 1024;
+const parserTimeoutMs = 30_000;
 
 const extractPdfText = async (path) => {
   const command = pdfTextBackend === "pdftotext" ? "pdftotext" : pythonCommand;
   const args = pdfTextBackend === "pdftotext"
     ? [path, "-"]
     : ["-c", "import sys; from pypdf import PdfReader; print('\\n'.join(page.extract_text() or '' for page in PdfReader(sys.argv[1]).pages))", path];
-  const { stdout } = await execFileAsync(command, args, { maxBuffer: 8 * 1024 * 1024 });
+  const { stdout } = await execFileAsync(command, args, {
+    maxBuffer: 8 * 1024 * 1024,
+    timeout: parserTimeoutMs
+  });
   return stdout.replace(/\s+/g, " ").trim();
 };
 
@@ -104,6 +117,8 @@ const nonProgramNoticePattern = /포털|매뉴얼|가이드|사용자\s*교육|�
 const researchApplicantPattern = /위탁연구|연구개발기관|국가연구개발혁신법|대학|출연연|연구기관|연구팀|연구책임자|전문가\s*지원|국제회의\s*참석\s*지원/i;
 
 const fetchWithCurlCffi = async (url, referer) => {
+  await assertPublicSourceUrl(url);
+  if (referer) await assertPublicSourceUrl(referer);
   const script = String.raw`
 import json
 import sys
@@ -118,13 +133,23 @@ headers = {
 session = requests.Session(impersonate="safari")
 try:
     root = "/".join(url.split("/")[:3])
-    session.get(root, headers=headers, timeout=10)
-    response = session.get(url, headers={**headers, "Referer": referer or root + "/"}, timeout=20)
+    warmup = session.get(root, headers=headers, timeout=10, allow_redirects=False, stream=True)
+    warmup.close()
+    response = session.get(url, headers={**headers, "Referer": referer or root + "/"}, timeout=20, allow_redirects=False, stream=True)
+    content_length = int(response.headers.get("content-length", "0") or "0")
+    if content_length > ${maxPageBytes}:
+        raise ValueError("page exceeds size limit")
+    body = bytearray()
+    for chunk in response.iter_content(chunk_size=64 * 1024):
+        body.extend(chunk)
+        if len(body) > ${maxPageBytes}:
+            response.close()
+            raise ValueError("page exceeds size limit")
     print(json.dumps({
         "ok": 200 <= response.status_code < 400,
         "status": response.status_code,
         "url": response.url,
-        "text": response.text
+        "text": bytes(body).decode(response.encoding or "utf-8", errors="replace")
     }, ensure_ascii=False))
 except Exception as error:
     print(json.dumps({"ok": False, "error": str(error)}, ensure_ascii=False))
@@ -135,7 +160,10 @@ except Exception as error:
       maxBuffer: 16 * 1024 * 1024
     });
     const result = JSON.parse(stdout);
-    if (result.ok && typeof result.text === "string") return result.text;
+    if (result.ok && typeof result.text === "string" && typeof result.url === "string") {
+      validatePublicSourceUrl(result.url);
+      return result.text;
+    }
   } catch {
     return undefined;
   }
@@ -143,6 +171,7 @@ except Exception as error:
 };
 
 const fetchBinaryWithCurlCffi = async (url) => {
+  await assertPublicSourceUrl(url);
   const script = String.raw`
 import base64
 import json
@@ -155,13 +184,24 @@ headers = {
 }
 session = requests.Session(impersonate="safari")
 try:
-    response = session.get(url, headers=headers, timeout=30)
+    response = session.get(url, headers=headers, timeout=30, allow_redirects=False, stream=True)
+    content_length = int(response.headers.get("content-length", "0") or "0")
+    if content_length > ${maxAttachmentBytes}:
+        raise ValueError("attachment exceeds size limit")
+    body = bytearray()
+    for chunk in response.iter_content(chunk_size=64 * 1024):
+        body.extend(chunk)
+        if len(body) > ${maxAttachmentBytes}:
+            response.close()
+            raise ValueError("attachment exceeds size limit")
+    body = bytes(body)
     print(json.dumps({
         "ok": 200 <= response.status_code < 400,
         "status": response.status_code,
+        "url": response.url,
         "contentType": response.headers.get("content-type", ""),
         "contentDisposition": response.headers.get("content-disposition", ""),
-        "body": base64.b64encode(response.content).decode("ascii")
+        "body": base64.b64encode(body).decode("ascii")
     }, ensure_ascii=False))
 except Exception as error:
     print(json.dumps({"ok": False, "error": str(error)}, ensure_ascii=False))
@@ -171,7 +211,8 @@ except Exception as error:
     maxBuffer: 32 * 1024 * 1024
   });
   const result = JSON.parse(stdout);
-  if (!result.ok || typeof result.body !== "string") return undefined;
+  if (!result.ok || typeof result.body !== "string" || typeof result.url !== "string") return undefined;
+  validatePublicSourceUrl(result.url);
   return {
     bytes: Buffer.from(result.body, "base64"),
     contentType: result.contentType ?? "",
@@ -185,14 +226,15 @@ const toJinaReaderUrl = (url) =>
     : `https://r.jina.ai/http://${url}`;
 
 const fetchWithJina = async (url) => {
-  const response = await fetch(toJinaReaderUrl(url), {
+  await assertPublicSourceUrl(url);
+  const response = await fetchPublicSource(toJinaReaderUrl(url), {
     signal: AbortSignal.timeout(30000),
     headers: {
       "user-agent": "KoreaSpaceSupportMCP/0.1 metadata-only source discovery"
     }
   });
   if (!response.ok) return undefined;
-  return response.text();
+  return (await readResponseBytes(response, maxPageBytes)).toString("utf8");
 };
 
 const isFetchErrorPage = (text) =>
@@ -219,7 +261,7 @@ const fetchPage = async (url, options = {}) => {
         if (text && !isFetchErrorPage(text)) return text;
       }
       if (strategy === "node") {
-        const response = await fetch(url, {
+        const response = await fetchPublicSource(url, {
           signal: AbortSignal.timeout(30000),
           method,
           headers: {
@@ -230,7 +272,7 @@ const fetchPage = async (url, options = {}) => {
           body: method === "POST" ? "" : undefined
         });
         if (response.ok) {
-          const text = await response.text();
+          const text = (await readResponseBytes(response, maxPageBytes)).toString("utf8");
           if (!isFetchErrorPage(text)) return text;
         }
       }
@@ -1535,7 +1577,7 @@ const fetchKeitSupportList = async ({ year, searchTerm, pageIndex }) => {
     pageIndex: String(pageIndex),
     orderBySe: "default"
   });
-  const response = await fetch(keitSupportListJsonUrl, {
+  const response = await fetchPublicSource(keitSupportListJsonUrl, {
     signal: AbortSignal.timeout(30000),
     method: "POST",
     headers: {
@@ -1545,7 +1587,7 @@ const fetchKeitSupportList = async ({ year, searchTerm, pageIndex }) => {
     body
   });
   if (!response.ok) throw new Error(`KEIT support list failed: ${response.status}`);
-  return response.json();
+  return JSON.parse((await readResponseBytes(response, maxPageBytes)).toString("utf8"));
 };
 
 const discoverKeitSupportSources = async () => {
@@ -2085,8 +2127,14 @@ from xml.etree import ElementTree
 path = sys.argv[1]
 parts = []
 with zipfile.ZipFile(path) as z:
-    names = [name for name in z.namelist() if name.endswith(".xml")]
-    names += [name for name in z.namelist() if name.endswith("PrvText.txt")]
+    infos = [info for info in z.infolist() if info.filename.endswith((".xml", "PrvText.txt"))]
+    total_size = sum(info.file_size for info in infos)
+    compressed_size = sum(info.compress_size for info in infos)
+    if len(infos) > 200 or total_size > 16 * 1024 * 1024:
+        raise ValueError("HWPX archive exceeds extraction limits")
+    if compressed_size > 0 and total_size / compressed_size > 100:
+        raise ValueError("HWPX archive compression ratio is unsafe")
+    names = [info.filename for info in infos]
     for name in names:
         raw = z.read(name)
         try:
@@ -2099,20 +2147,13 @@ with zipfile.ZipFile(path) as z:
 print(re.sub(r"\s+", " ", " ".join(parts)).strip())
 `;
   const { stdout } = await execFileAsync(pythonCommand, ["-c", script, path], {
-    maxBuffer: 8 * 1024 * 1024
+    maxBuffer: 8 * 1024 * 1024,
+    timeout: parserTimeoutMs
   });
   return stdout.replace(/\s+/g, " ").trim();
 };
 
 const extractLegacyHwpText = async (path) => {
-  try {
-    const { toMarkdown } = await import("@ohah/hwpjs");
-    const { markdown } = toMarkdown(await readFile(path), { image: "blob" });
-    const text = cleanNoticeText(stripHtml(markdown));
-    if (text) return text;
-  } catch {
-    // Retain the legacy extractor for unsupported native runtimes or damaged files.
-  }
   const script = String.raw`
 import re
 import sys
@@ -2131,16 +2172,32 @@ except Exception:
     compressed = False
 
 parts = []
+total_bytes = 0
 for name in ole.listdir(streams=True):
     joined = "/".join(name)
     if not joined.startswith("BodyText/Section"):
         continue
     raw = ole.openstream(name).read()
+    remaining_bytes = 16 * 1024 * 1024 - total_bytes
     if compressed:
         try:
-            raw = zlib.decompress(raw, -15)
+            decompressor = zlib.decompressobj(-15)
+            decoded = decompressor.decompress(raw, remaining_bytes + 1)
+            if len(decoded) > remaining_bytes or decompressor.unconsumed_tail:
+                raise ValueError("HWP document exceeds extraction limits")
+            decoded += decompressor.flush(remaining_bytes - len(decoded) + 1)
+            if len(decoded) > remaining_bytes:
+                raise ValueError("HWP document exceeds extraction limits")
+            raw = decoded
+        except ValueError:
+            raise
         except Exception:
             pass
+    elif len(raw) > remaining_bytes:
+        raise ValueError("HWP document exceeds extraction limits")
+    total_bytes += len(raw)
+    if total_bytes > 16 * 1024 * 1024:
+        raise ValueError("HWP document exceeds extraction limits")
     text = raw.decode("utf-16le", "ignore")
     # HWP records include binary/control data. Keep readable Korean, ASCII, numbers,
     # punctuation used in dates, and whitespace so deadline regexes can still work.
@@ -2150,7 +2207,8 @@ for name in ole.listdir(streams=True):
 print(re.sub(r"\\s+", " ", " ".join(parts)).strip())
 `;
   const { stdout } = await execFileAsync(pythonCommand, ["-c", script, path], {
-    maxBuffer: 12 * 1024 * 1024
+    maxBuffer: 12 * 1024 * 1024,
+    timeout: parserTimeoutMs
   });
   return stdout.replace(/\s+/g, " ").trim();
 };
@@ -2226,11 +2284,16 @@ const inferStatus = (deadline) => {
   return deadlineTime < Date.now() ? "closed" : "active";
 };
 
+export const sanitizeStoredNoticeText = (value, maxLength) => cleanNoticeText(value)
+  .replace(/\b[A-Z0-9._%+-]+\s*@\s*[A-Z0-9.-]+\s*\.\s*[A-Z]{2,}\b/gi, "[연락처는 원문 참조]")
+  .replace(/\b0\d{1,2}[- )]?\d{3,4}[- ]?\d{4}\b/g, "[연락처는 원문 참조]")
+  .slice(0, maxLength);
+
 const makeDeadlineEvidence = ({ source, date, text, url, format }) => ({
   source,
   date,
   url,
-  text: cleanNoticeText(`${format ? `[${format}] ` : ""}${text ?? ""}`).slice(0, 500)
+  text: sanitizeStoredNoticeText(`${format ? `[${format}] ` : ""}${text ?? ""}`, 320)
 });
 
 const chooseDeadlineCandidate = ({
@@ -2375,7 +2438,7 @@ const extractBizinfoOriginalAgencyUrl = (html) => {
     ?? html.match(/<a[^>]+id="barogagi"[^>]*href="([^"]+)"/i);
   if (!match) return undefined;
   const url = decodeHtmlEntities(match[1]).replace(/#none$/, "");
-  return /^https?:\/\//i.test(url) ? url : undefined;
+  return isAllowedPublicSourceUrl(url) ? url : undefined;
 };
 
 const normalizeProgram = async (source) => {
@@ -2398,7 +2461,7 @@ const normalizeProgram = async (source) => {
   const attachmentUrls = [...new Set([
     ...(source.seedAttachmentUrls ?? []),
     ...extractAttachmentUrls(html, source.url)
-  ])];
+  ])].filter(isAllowedPublicSourceUrl);
   const htmlDeadline = findDeadline(relevantText);
   const attachmentResult = source.defaultDeadline || (source.preferHtmlDeadline && htmlDeadline)
     ? undefined
@@ -2475,7 +2538,7 @@ const normalizeProgram = async (source) => {
     deadlineExtractionStatus: deadline ? "found" : missingDeadline?.deadlineExtractionStatus,
     deadlineExtractionNote: missingDeadline?.deadlineExtractionNote,
     missingDeadlineReasonCategory: missingDeadline?.reasonCategory,
-    summary: relevantText.slice(0, 320),
+    summary: sanitizeStoredNoticeText(relevantText, 320),
     targetCompanyType,
     eligibilityText,
     requiredDocuments: [],
@@ -2487,7 +2550,7 @@ const normalizeProgram = async (source) => {
       source.universityOrResearchPartnerRequired === false && source.sourceFamily === "KSTARTUP"
         ? false
         : source.universityOrResearchPartnerRequired === true || researcherOrInstitutionNotice,
-    rawText: relevantText.slice(0, 1200),
+    rawText: undefined,
     attachmentUrls: attachmentUrls.length > 0 ? attachmentUrls : [source.url],
     originalAgencyUrl,
     status: inferStatus(deadline),
@@ -2602,7 +2665,7 @@ const normalizeSource = async (source) => {
       participationType: source.participationType,
       consortiumRequired: source.consortiumRequired,
       universityOrResearchPartnerRequired: source.universityOrResearchPartnerRequired ?? false,
-      rawText: "",
+      rawText: undefined,
       attachmentUrls: source.seedAttachmentUrls?.length ? source.seedAttachmentUrls : [source.url],
       status: "stale",
       deadlineExtractionStatus: missingDeadline.deadlineExtractionStatus,

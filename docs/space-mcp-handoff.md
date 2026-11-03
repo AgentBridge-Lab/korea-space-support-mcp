@@ -51,7 +51,7 @@ Latest verified data:
 - DJTP discovered/generated/excluded: `8` / `6` / `0`
 - API/MCP smoke failures: `0`
 - search sample failures: `0`
-- tests: `26` pass (`13` shared + `11` ingestion/preflight + `2` web formatting)
+- tests: `38` pass (`15` shared + `15` ingestion/security/preflight + `8` web/API validation)
 - typecheck/build: shared, API, MCP, and web pass
 - production dependency audit: `0` vulnerabilities
 
@@ -114,7 +114,7 @@ https://www.djtp.or.kr/pbanc?mid=a20101000000&nPage=1..6
 - Uses per-notice PMS viewer URLs as `sourceUrl` and `deadlineEvidenceUrl`.
 - Preserves PMS business URL in `sourceTextOverride`.
 - Direct PDF paths are not used as canonical source URL.
-- Current DJTP generated records: `7`.
+- Current DJTP generated records: `6`.
 
 Claude review history:
 
@@ -181,7 +181,7 @@ Recommended next priorities:
 
 3. Bizinfo/K-Startup original agency provenance
    - Investigated 2026-06-09. Outcome:
-     - Bizinfo (`BIZINFO`, `MOTIE_KEIT_KIAT` families): detail page exposes a stable `<a id="barogagi" ...>` "출처 바로가기" link pointing to the original-agency notice URL. Crawler now extracts it during `normalizeProgram` and stores it on a new optional `SpaceProgram.originalAgencyUrl` field. 15/15 current Bizinfo records carry the field (KDIA, MSS, BTP, JBTP, JNTP, etc.).
+     - Bizinfo (`BIZINFO`, `MOTIE_KEIT_KIAT` families): detail page exposes a stable `<a id="barogagi" ...>` "출처 바로가기" link pointing to the original-agency notice URL. Crawler extracts it during `normalizeProgram` and stores it on `SpaceProgram.originalAgencyUrl`. The current snapshot has the field on 4/4 Bizinfo records.
      - K-Startup: detail page only exposes "사업안내 바로가기" via `javascript:fn_open_window('URL')` driven by per-notice attachments (Google Drive folders, agency homepages). URLs are inconsistent (some are storage links, not original notice pages) and the executing agency is already on the record as `agency`. Not surfaced as `originalAgencyUrl` since the link target is not a notice-detail URL in general.
    - Status: closed for Bizinfo. K-Startup left as aggregator URL with executing agency in `agency`, which is the canonical public reference.
 

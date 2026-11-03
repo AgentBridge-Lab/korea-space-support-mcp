@@ -1,38 +1,32 @@
 import { NextResponse } from "next/server";
 import {
   scoreSpaceProgramFit,
-  searchSpacePrograms,
-  type SpaceCompanyProfile,
-  type SpaceProgramSearchInput
+  searchSpacePrograms
 } from "@bidscout/shared";
+import {
+  getCompanyProfileValue,
+  parseCompanyProfile,
+  parseJsonRecord,
+  parseSearchBody,
+  RequestValidationError
+} from "../../../../lib/request-validation";
 
 export const dynamic = "force-dynamic";
 
-const normalize = (body: Record<string, unknown>): SpaceProgramSearchInput => ({
-  query: body.query as string | undefined,
-  spaceCategory: (body.spaceCategory ?? body.space_category) as SpaceProgramSearchInput["spaceCategory"],
-  sourceFamily: (body.sourceFamily ?? body.source_family) as string | undefined,
-  status: body.status as SpaceProgramSearchInput["status"],
-  region: body.region as string | undefined,
-  applicantType: (body.applicantType ?? body.applicant_type) as SpaceProgramSearchInput["applicantType"],
-  deadlineWithinDays: (body.deadlineWithinDays ?? body.deadline_within_days) as number | undefined,
-  includeAdjacent: (body.includeAdjacent ?? body.include_adjacent) as boolean | undefined,
-  includeDefense: (body.includeDefense ?? body.include_defense) as boolean | undefined,
-  defenseOnly: (body.defenseOnly ?? body.defense_only) as boolean | undefined,
-  adjacentOnly: (body.adjacentOnly ?? body.adjacent_only) as boolean | undefined,
-  includeClosed: (body.includeClosed ?? body.include_closed) as boolean | undefined,
-  sortBy: (body.sortBy ?? body.sort_by) as SpaceProgramSearchInput["sortBy"],
-  limit: (body.limit as number | undefined) ?? 10
-});
-
 export async function POST(request: Request) {
-  const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
-  const profile = (body.companyProfile ?? body.company_profile) as SpaceCompanyProfile | undefined;
-  if (!profile) {
-    return NextResponse.json({ error: "companyProfile or company_profile is required" }, { status: 400 });
+  let profile;
+  let input;
+  try {
+    const body = await parseJsonRecord(request);
+    profile = parseCompanyProfile(getCompanyProfileValue(body));
+    const parsedSearch = parseSearchBody(body);
+    input = { ...parsedSearch, limit: parsedSearch.limit ?? 10 };
+  } catch (error) {
+    const message = error instanceof RequestValidationError ? error.message : "Invalid request";
+    return NextResponse.json({ error: "Invalid request", message }, { status: 400 });
   }
 
-  const programs = searchSpacePrograms(normalize(body));
+  const programs = searchSpacePrograms(input);
   const matches = programs
     .map((program) => {
       const fit = scoreSpaceProgramFit(program, profile);

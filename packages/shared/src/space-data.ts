@@ -17,11 +17,27 @@ const requiredString = (value: unknown, fallback: string): string =>
 const optionalString = (value: unknown): string | undefined =>
   typeof value === "string" && value.length > 0 ? value : undefined;
 
+const httpUrl = (value: unknown): string | undefined => {
+  const candidate = optionalString(value);
+  if (!candidate) return undefined;
+  try {
+    const url = new URL(candidate);
+    return (url.protocol === "https:" || url.protocol === "http:") && !url.username && !url.password
+      ? url.href
+      : undefined;
+  } catch {
+    return undefined;
+  }
+};
+
 const optionalBoolean = (value: unknown): boolean | undefined =>
   typeof value === "boolean" ? value : undefined;
 
 const stringArray = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+
+const httpUrlArray = (value: unknown): string[] =>
+  stringArray(value).map(httpUrl).filter((item): item is string => Boolean(item));
 
 const numberRecord = (value: unknown): Record<string, number> | undefined => {
   if (!value || typeof value !== "object" || Array.isArray(value)) return undefined;
@@ -81,7 +97,7 @@ const sanitizeSpaceProgram = (value: unknown): SpaceProgram | undefined => {
   const record = value as Record<string, unknown>;
   const id = optionalString(record.id);
   const title = optionalString(record.title);
-  const sourceUrl = optionalString(record.sourceUrl);
+  const sourceUrl = httpUrl(record.sourceUrl);
   if (!id || !title || !sourceUrl) return undefined;
 
   const storedStatus = requiredString(record.status, "active") as SpaceProgramStatus;
@@ -112,7 +128,7 @@ const sanitizeSpaceProgram = (value: unknown): SpaceProgram | undefined => {
     applicationEndDate: optionalString(record.applicationEndDate),
     deadlineSource: optionalString(record.deadlineSource),
     deadlineEvidenceText: optionalString(record.deadlineEvidenceText),
-    deadlineEvidenceUrl: optionalString(record.deadlineEvidenceUrl),
+    deadlineEvidenceUrl: httpUrl(record.deadlineEvidenceUrl),
     announcementDate: optionalString(record.announcementDate),
     summary: optionalString(record.summary),
     eligibilityText: optionalString(record.eligibilityText),
@@ -126,8 +142,8 @@ const sanitizeSpaceProgram = (value: unknown): SpaceProgram | undefined => {
     consortiumRequired: optionalBoolean(record.consortiumRequired),
     universityOrResearchPartnerRequired: optionalBoolean(record.universityOrResearchPartnerRequired),
     rawText: optionalString(record.rawText),
-    attachmentUrls: stringArray(record.attachmentUrls),
-    originalAgencyUrl: optionalString(record.originalAgencyUrl),
+    attachmentUrls: httpUrlArray(record.attachmentUrls),
+    originalAgencyUrl: httpUrl(record.originalAgencyUrl),
     status: deriveSpaceProgramStatus(optionalString(record.applicationEndDate), storedStatus),
     lastCheckedAt: requiredString(record.lastCheckedAt, new Date().toISOString())
   };
@@ -166,7 +182,7 @@ const sanitizeExcludedSpaceProgram = (value: unknown): ExcludedSpaceProgram | un
   const id = optionalString(record.id);
   const sourceFamily = optionalString(record.sourceFamily);
   const title = optionalString(record.title);
-  const sourceUrl = optionalString(record.sourceUrl);
+  const sourceUrl = httpUrl(record.sourceUrl);
   const reason = optionalString(record.reason);
   if (!id || !sourceFamily || !title || !sourceUrl || !reason) return undefined;
 

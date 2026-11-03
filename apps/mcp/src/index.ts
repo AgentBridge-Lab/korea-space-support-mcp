@@ -13,6 +13,8 @@ import {
   searchTenders,
   spaceSourceReviews,
   summarizeSpaceProgram,
+  toPublicSpaceProgram,
+  UNTRUSTED_PUBLIC_SOURCE_NOTICE,
   type CompanyProfile,
   type SpaceCompanyProfile
 } from "@bidscout/shared";
@@ -59,23 +61,26 @@ const spaceCategorySchema = z.enum([
 const spaceProgramStatusSchema = z.enum(["active", "closed", "cancelled", "stale"]);
 const spaceProgramSortSchema = z.enum(["relevance", "deadline", "recent"]);
 const spaceApplicantTypeSchema = z.enum(["researcher_or_lab", "company", "startup_or_prefounder"]);
+const spaceTextSchema = z.string().max(300);
+const spaceShortTextSchema = z.string().max(100);
+const spaceStringListSchema = z.array(spaceShortTextSchema).max(20);
 
 const spaceSearchSchema = z.object({
-  query: z.string().optional(),
+  query: spaceTextSchema.optional(),
   spaceCategory: spaceCategorySchema.optional(),
   space_category: spaceCategorySchema.optional(),
-  sourceFamily: z.string().optional(),
-  source_family: z.string().optional(),
+  sourceFamily: spaceShortTextSchema.optional(),
+  source_family: spaceShortTextSchema.optional(),
   status: spaceProgramStatusSchema.optional(),
-  region: z.string().optional(),
-  technologyAreas: z.array(z.string()).optional(),
-  technology_areas: z.array(z.string()).optional(),
-  companyStage: z.string().optional(),
-  company_stage: z.string().optional(),
+  region: spaceShortTextSchema.optional(),
+  technologyAreas: spaceStringListSchema.optional(),
+  technology_areas: spaceStringListSchema.optional(),
+  companyStage: spaceShortTextSchema.optional(),
+  company_stage: spaceShortTextSchema.optional(),
   applicantType: spaceApplicantTypeSchema.optional(),
   applicant_type: spaceApplicantTypeSchema.optional(),
-  deadlineWithinDays: z.number().int().positive().optional(),
-  deadline_within_days: z.number().int().positive().optional(),
+  deadlineWithinDays: z.number().int().positive().max(3650).optional(),
+  deadline_within_days: z.number().int().positive().max(3650).optional(),
   includeAdjacent: z.boolean().optional(),
   include_adjacent: z.boolean().optional(),
   includeDefense: z.boolean().optional(),
@@ -113,25 +118,25 @@ const normalizeSpaceSearchRequest = (input: SpaceSearchRequest) => ({
 });
 
 const spaceCompanyProfileSchema = z.object({
-  name: z.string().optional(),
-  businessType: z.string().optional(),
-  region: z.string().optional(),
-  foundedAt: z.string().optional(),
-  industry: z.string().optional(),
-  technologyAreas: z.array(z.string()).default([]),
-  keywords: z.array(z.string()).default([]),
-  employeeCount: z.number().int().optional(),
-  revenue: z.number().optional(),
-  previousGrants: z.array(z.string()).default([]),
-  certifications: z.array(z.string()).default([]),
+  name: spaceTextSchema.optional(),
+  businessType: spaceTextSchema.optional(),
+  region: spaceShortTextSchema.optional(),
+  foundedAt: z.string().max(40).optional(),
+  industry: spaceTextSchema.optional(),
+  technologyAreas: spaceStringListSchema.default([]),
+  keywords: spaceStringListSchema.default([]),
+  employeeCount: z.number().int().min(0).max(10_000_000).optional(),
+  revenue: z.number().min(0).optional(),
+  previousGrants: spaceStringListSchema.default([]),
+  certifications: spaceStringListSchema.default([]),
   hasResearchPartner: z.boolean().optional(),
   canJoinConsortium: z.boolean().optional(),
-  description: z.string().optional()
+  description: z.string().max(1000).optional()
 });
 
 const spaceClassificationSchema = z.object({
-  text: z.string().min(1),
-  sourceFamily: z.string().optional()
+  text: z.string().min(1).max(5000),
+  sourceFamily: spaceShortTextSchema.optional()
 });
 
 server.registerTool(
@@ -207,7 +212,10 @@ server.registerTool(
       .sort((a, b) => b.fitScore - a.fitScore);
 
     return {
-      content: [{ type: "text", text: JSON.stringify({ matches }, null, 2) }]
+      content: [{
+        type: "text",
+        text: JSON.stringify({ security_notice: UNTRUSTED_PUBLIC_SOURCE_NOTICE, matches }, null, 2)
+      }]
     };
   }
 );
@@ -254,6 +262,7 @@ server.registerTool(
         type: "text",
         text: JSON.stringify(
           {
+            security_notice: UNTRUSTED_PUBLIC_SOURCE_NOTICE,
             report: getSpaceIngestReport(),
             excluded: getExcludedSpacePrograms()
           },
@@ -295,7 +304,10 @@ server.registerTool(
     }));
 
     return {
-      content: [{ type: "text", text: JSON.stringify({ results }, null, 2) }]
+      content: [{
+        type: "text",
+        text: JSON.stringify({ security_notice: UNTRUSTED_PUBLIC_SOURCE_NOTICE, results }, null, 2)
+      }]
     };
   }
 );
@@ -306,12 +318,14 @@ server.registerTool(
     description:
       "Get detailed source-linked information for a Korean space/aerospace support program.",
     inputSchema: z.object({
-      programId: z.string()
+      programId: spaceTextSchema
     })
   },
   async ({ programId }) => {
     const program = getSpaceProgramById(programId);
-    const payload = program ? { program } : { error: "Space program not found" };
+    const payload = program
+      ? { security_notice: UNTRUSTED_PUBLIC_SOURCE_NOTICE, program: toPublicSpaceProgram(program) }
+      : { error: "Space program not found" };
 
     return {
       content: [{ type: "text", text: JSON.stringify(payload, null, 2) }]
@@ -351,7 +365,10 @@ server.registerTool(
       .sort((a, b) => b.fitScore - a.fitScore);
 
     return {
-      content: [{ type: "text", text: JSON.stringify({ matches }, null, 2) }]
+      content: [{
+        type: "text",
+        text: JSON.stringify({ security_notice: UNTRUSTED_PUBLIC_SOURCE_NOTICE, matches }, null, 2)
+      }]
     };
   }
 );
@@ -362,12 +379,14 @@ server.registerTool(
     description:
       "Summarize a Korean space/aerospace support program with purpose, target, documents, warnings, and source link.",
     inputSchema: z.object({
-      programId: z.string()
+      programId: spaceTextSchema
     })
   },
   async ({ programId }) => {
     const program = getSpaceProgramById(programId);
-    const payload = program ? summarizeSpaceProgram(program) : { error: "Space program not found" };
+    const payload = program
+      ? { security_notice: UNTRUSTED_PUBLIC_SOURCE_NOTICE, summary: summarizeSpaceProgram(program) }
+      : { error: "Space program not found" };
 
     return {
       content: [{ type: "text", text: JSON.stringify(payload, null, 2) }]
@@ -381,7 +400,7 @@ server.registerTool(
     description:
       "Check one Korean space/aerospace support program against a company profile. Returns likely, unlikely, or needs_review only.",
     inputSchema: z.object({
-      programId: z.string(),
+      programId: spaceTextSchema,
       companyProfile: spaceCompanyProfileSchema
     })
   },
@@ -389,6 +408,7 @@ server.registerTool(
     const program = getSpaceProgramById(programId);
     const payload = program
       ? {
+          security_notice: UNTRUSTED_PUBLIC_SOURCE_NOTICE,
           ...scoreSpaceProgramFit(program, companyProfile as SpaceCompanyProfile),
           disclaimer:
             "최종 신청 가능 여부와 제출 요건은 반드시 원문 공고 및 담당기관을 통해 확인해야 합니다."

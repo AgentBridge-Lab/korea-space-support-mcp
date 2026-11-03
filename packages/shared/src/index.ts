@@ -8,4 +8,5 @@ export * from "./space-sample-data.js";
 export * from "./space-data.js";
 export * from "./space-sources.js";
 export * from "./space-classifier.js";
+export * from "./space-public.js";
 export * from "./date-utils.js";

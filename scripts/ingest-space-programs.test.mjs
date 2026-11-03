@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { classifyBizinfoNotice, classifyKasaNotice, dedupeSources, findDeadline } from "./ingest-space-programs.mjs";
+import {
+  classifyBizinfoNotice,
+  classifyKasaNotice,
+  dedupeSources,
+  findDeadline,
+  sanitizeStoredNoticeText
+} from "./ingest-space-programs.mjs";
 
 test("distinct NASA observing cycles on one NSPIRES page remain separate records", () => {
   const url = "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=D.3";
@@ -32,4 +38,15 @@ test("Bizinfo filters homonyms, generic defense, and exhibitions", () => {
   ]) assert.equal(classifyBizinfoNotice(title), undefined, title);
   assert.equal(classifyBizinfoNotice("2026년 차세대 항공 기술지원 수혜기업 모집 공고").spaceCategory, "aviation_industry");
   assert.equal(classifyBizinfoNotice("2026년 드론기업 역량강화 지원사업 공고(R&D)").spaceCategory, "drone_uam_adjacent");
+});
+
+test("stored notice snippets redact direct contact details", () => {
+  const sanitized = sanitizeStoredNoticeText(
+    "문의 042-860-2122 또는 person@example.org, angel @kari.re.kr 신청 마감 2026-11-03",
+    320
+  );
+  assert.equal(sanitized.includes("person@example.org"), false);
+  assert.equal(sanitized.includes("angel @kari.re.kr"), false);
+  assert.equal(sanitized.includes("042-860-2122"), false);
+  assert.match(sanitized, /연락처는 원문 참조/);
 });

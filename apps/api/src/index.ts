@@ -12,11 +12,13 @@ import {
   searchTenders,
   spaceSourceReviews,
   summarizeSpaceProgram,
+  toPublicSpaceProgram,
+  UNTRUSTED_PUBLIC_SOURCE_NOTICE,
   type CompanyProfile,
   type SpaceCompanyProfile
 } from "@bidscout/shared";
 
-const server = Fastify({ logger: true });
+const server = Fastify({ logger: true, bodyLimit: 32 * 1024 });
 
 server.setErrorHandler((error, _request, reply) => {
   if (error instanceof z.ZodError) {
@@ -27,6 +29,13 @@ server.setErrorHandler((error, _request, reply) => {
         message: issue.message
       }))
     });
+  }
+
+  const statusCode = error && typeof error === "object" && "statusCode" in error
+    ? (error as { statusCode?: unknown }).statusCode
+    : undefined;
+  if (typeof statusCode === "number" && statusCode >= 400 && statusCode < 500) {
+    return reply.status(statusCode).send({ error: "Invalid request" });
   }
 
   requestLogSafe(error);
@@ -89,23 +98,26 @@ const spaceCategorySchema = z.enum([
 const spaceProgramStatusSchema = z.enum(["active", "closed", "cancelled", "stale"]);
 const spaceProgramSortSchema = z.enum(["relevance", "deadline", "recent"]);
 const spaceApplicantTypeSchema = z.enum(["researcher_or_lab", "company", "startup_or_prefounder"]);
+const spaceTextSchema = z.string().max(300);
+const spaceShortTextSchema = z.string().max(100);
+const spaceStringListSchema = z.array(spaceShortTextSchema).max(20);
 
 const spaceSearchSchema = z.object({
-  query: z.string().optional(),
+  query: spaceTextSchema.optional(),
   spaceCategory: spaceCategorySchema.optional(),
   space_category: spaceCategorySchema.optional(),
-  sourceFamily: z.string().optional(),
-  source_family: z.string().optional(),
+  sourceFamily: spaceShortTextSchema.optional(),
+  source_family: spaceShortTextSchema.optional(),
   status: spaceProgramStatusSchema.optional(),
-  region: z.string().optional(),
-  technologyAreas: z.array(z.string()).optional(),
-  technology_areas: z.array(z.string()).optional(),
-  companyStage: z.string().optional(),
-  company_stage: z.string().optional(),
+  region: spaceShortTextSchema.optional(),
+  technologyAreas: spaceStringListSchema.optional(),
+  technology_areas: spaceStringListSchema.optional(),
+  companyStage: spaceShortTextSchema.optional(),
+  company_stage: spaceShortTextSchema.optional(),
   applicantType: spaceApplicantTypeSchema.optional(),
   applicant_type: spaceApplicantTypeSchema.optional(),
-  deadlineWithinDays: z.number().int().positive().optional(),
-  deadline_within_days: z.number().int().positive().optional(),
+  deadlineWithinDays: z.number().int().positive().max(3650).optional(),
+  deadline_within_days: z.number().int().positive().max(3650).optional(),
   includeAdjacent: z.boolean().optional(),
   include_adjacent: z.boolean().optional(),
   includeDefense: z.boolean().optional(),
@@ -143,25 +155,25 @@ const normalizeSpaceSearchRequest = (input: SpaceSearchRequest) => ({
 });
 
 const spaceCompanyProfileSchema = z.object({
-  name: z.string().optional(),
-  businessType: z.string().optional(),
-  region: z.string().optional(),
-  foundedAt: z.string().optional(),
-  industry: z.string().optional(),
-  technologyAreas: z.array(z.string()).default([]),
-  keywords: z.array(z.string()).default([]),
-  employeeCount: z.number().int().optional(),
-  revenue: z.number().optional(),
-  previousGrants: z.array(z.string()).default([]),
-  certifications: z.array(z.string()).default([]),
+  name: spaceTextSchema.optional(),
+  businessType: spaceTextSchema.optional(),
+  region: spaceShortTextSchema.optional(),
+  foundedAt: z.string().max(40).optional(),
+  industry: spaceTextSchema.optional(),
+  technologyAreas: spaceStringListSchema.default([]),
+  keywords: spaceStringListSchema.default([]),
+  employeeCount: z.number().int().min(0).max(10_000_000).optional(),
+  revenue: z.number().min(0).optional(),
+  previousGrants: spaceStringListSchema.default([]),
+  certifications: spaceStringListSchema.default([]),
   hasResearchPartner: z.boolean().optional(),
   canJoinConsortium: z.boolean().optional(),
-  description: z.string().optional()
+  description: z.string().max(1000).optional()
 });
 
 const spaceClassificationSchema = z.object({
-  text: z.string().min(1),
-  sourceFamily: z.string().optional()
+  text: z.string().min(1).max(5000),
+  sourceFamily: spaceShortTextSchema.optional()
 });
 
 server.get("/health", async () => ({
@@ -292,48 +304,23 @@ server.post("/space-programs/search", async (request, reply) => {
 });
 
 server.get("/space-programs/:id", async (request, reply) => {
-  const params = z.object({ id: z.string() }).parse(request.params);
+  const params = z.object({ id: spaceTextSchema }).parse(request.params);
   const program = getSpaceProgramById(params.id);
 
   if (!program) {
     return reply.status(404).send({ error: "Space program not found" });
   }
 
-  return reply.send({ program });
+  return reply.send({
+    dataTrust: UNTRUSTED_PUBLIC_SOURCE_NOTICE,
+    program: toPublicSpaceProgram(program)
+  });
 });
 
 server.post("/space-programs/match", async (request, reply) => {
-  const body = z.object({
+  const body = spaceSearchSchema.extend({
     companyProfile: spaceCompanyProfileSchema.optional(),
-    company_profile: spaceCompanyProfileSchema.optional(),
-    query: z.string().optional(),
-    spaceCategory: spaceCategorySchema.optional(),
-    space_category: spaceCategorySchema.optional(),
-    sourceFamily: z.string().optional(),
-    source_family: z.string().optional(),
-    status: spaceProgramStatusSchema.optional(),
-    region: z.string().optional(),
-    technologyAreas: z.array(z.string()).optional(),
-	    technology_areas: z.array(z.string()).optional(),
-	    companyStage: z.string().optional(),
-	    company_stage: z.string().optional(),
-	    applicantType: spaceApplicantTypeSchema.optional(),
-	    applicant_type: spaceApplicantTypeSchema.optional(),
-	    deadlineWithinDays: z.number().int().positive().optional(),
-	    deadline_within_days: z.number().int().positive().optional(),
-	    includeAdjacent: z.boolean().optional(),
-	    include_adjacent: z.boolean().optional(),
-	    includeDefense: z.boolean().optional(),
-	    include_defense: z.boolean().optional(),
-	    defenseOnly: z.boolean().optional(),
-	    defense_only: z.boolean().optional(),
-	    adjacentOnly: z.boolean().optional(),
-	    adjacent_only: z.boolean().optional(),
-	    includeClosed: z.boolean().optional(),
-    include_closed: z.boolean().optional(),
-    sortBy: spaceProgramSortSchema.optional(),
-    sort_by: spaceProgramSortSchema.optional(),
-    limit: z.number().int().positive().max(50).optional()
+    company_profile: spaceCompanyProfileSchema.optional()
   }).parse(request.body);
 
   const profile = body.companyProfile ?? body.company_profile;
@@ -365,7 +352,7 @@ server.post("/space-programs/match", async (request, reply) => {
 });
 
 server.post("/space-programs/:id/check-eligibility", async (request, reply) => {
-  const params = z.object({ id: z.string() }).parse(request.params);
+  const params = z.object({ id: spaceTextSchema }).parse(request.params);
   const body = z.object({
     companyProfile: spaceCompanyProfileSchema
   }).parse(request.body);
@@ -384,7 +371,7 @@ server.post("/space-programs/:id/check-eligibility", async (request, reply) => {
 });
 
 server.post("/space-programs/:id/summarize", async (request, reply) => {
-  const params = z.object({ id: z.string() }).parse(request.params);
+  const params = z.object({ id: spaceTextSchema }).parse(request.params);
   const program = getSpaceProgramById(params.id);
 
   if (!program) {

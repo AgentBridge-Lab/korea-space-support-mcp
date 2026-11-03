@@ -101,6 +101,9 @@ Acceptance gates:
 - `data/space-refresh-history.jsonl` is appended on each recurring refresh so count drift and recurring changes can be audited later.
 - `data/space-search-sample-report.json` has no failures for researcher/lab, company, startup, drone/UAM, defense-only, and upcoming-deadline search samples.
 - `data/space-api-mcp-smoke-report.json` has no failures when API endpoints and MCP tools are exercised through their real runtime surfaces.
+- Generated records do not persist `rawText`; stored summaries and deadline evidence redact direct email addresses and phone numbers.
+- Every fetched source or attachment uses an allowlisted official HTTPS hostname. Redirects to other hosts, credentials, IP literals, localhost, and private/link-local DNS results are rejected.
+- Remote page bodies stop while streaming at 8 MiB and attachments at 24 MiB. HWPX and legacy HWP extraction enforce bounded expanded output, HWPX also checks entry count and compression ratio, and external parsers have a 30-second timeout.
 
 ## Scheduled Refresh
 

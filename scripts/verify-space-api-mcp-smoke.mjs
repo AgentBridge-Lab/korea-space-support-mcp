@@ -102,11 +102,19 @@ const runApiSmoke = async () => {
       "API defense_only search returned a non-defense result."
     );
 
+    const oversizedResponse = await fetch(`${baseUrl}/space-programs/search`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ query: "x".repeat(33 * 1024) })
+    });
+    assert(oversizedResponse.status === 413, "API did not reject a request body above 32 KiB.");
+
     const detailId = researcher.results[0]?.program_id;
     if (detailId) {
       const detailResponse = await fetch(`${baseUrl}/space-programs/${encodeURIComponent(detailId)}`);
       const detail = await detailResponse.json();
       assert(detailResponse.ok && detail?.program?.id === detailId, "API detail endpoint did not return the requested program.");
+      assert(!Object.hasOwn(detail?.program ?? {}, "rawText"), "API detail exposed rawText.");
     }
 
     return {
@@ -153,6 +161,7 @@ const runMcpSmoke = async () => {
         limit: 5
       }
     }));
+    assert(typeof researcher.security_notice === "string", "MCP search omitted the external-data security notice.");
     assert(Array.isArray(researcher.results) && researcher.results.length > 0, "MCP researcher search returned no results.");
     assert(
       researcher.results.some((program) => program.university_or_research_partner_required === true),
@@ -178,6 +187,30 @@ const runMcpSmoke = async () => {
       arguments: {}
     }));
     assert(ingest?.report?.generatedCount > 0, "MCP ingest report did not expose generatedCount.");
+
+    const detailId = researcher.results[0]?.program_id;
+    if (detailId) {
+      const detail = parseToolJson(await client.callTool({
+        name: "get_space_program_detail",
+        arguments: { programId: detailId }
+      }));
+      const matches = parseToolJson(await client.callTool({
+        name: "match_space_programs_to_company",
+        arguments: { companyProfile: {}, include_closed: true, limit: 1 }
+      }));
+      const summary = parseToolJson(await client.callTool({
+        name: "summarize_space_program",
+        arguments: { programId: detailId }
+      }));
+      const eligibility = parseToolJson(await client.callTool({
+        name: "check_space_program_eligibility",
+        arguments: { programId: detailId, companyProfile: {} }
+      }));
+      for (const [surface, payload] of Object.entries({ detail, matches, summary, eligibility })) {
+        assert(typeof payload.security_notice === "string", `MCP ${surface} omitted the external-data security notice.`);
+      }
+      assert(!Object.hasOwn(detail?.program ?? {}, "rawText"), "MCP detail exposed rawText.");
+    }
 
     return {
       toolNames,

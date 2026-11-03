@@ -133,3 +133,25 @@ test("BIZINFO records carry an original-agency provenance URL", () => {
   );
   assert.ok(withProvenance.every((program) => /^https?:\/\//.test(program.originalAgencyUrl ?? "")));
 });
+
+test("generated records do not redistribute full notice bodies or direct contacts", () => {
+  const programs = getSpacePrograms();
+  const directContact = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\b0\d{1,2}[- )]?\d{3,4}[- ]?\d{4}\b/i;
+  assert.equal(programs.some((program) => Boolean(program.rawText)), false);
+  assert.equal(programs.some((program) => directContact.test(`${program.summary ?? ""} ${program.deadlineEvidenceText ?? ""}`)), false);
+});
+
+test("generated record links use HTTP(S) without embedded credentials", () => {
+  for (const program of getSpacePrograms()) {
+    for (const value of [
+      program.sourceUrl,
+      program.originalAgencyUrl,
+      program.deadlineEvidenceUrl,
+      ...program.attachmentUrls
+    ].filter((item): item is string => Boolean(item))) {
+      const url = new URL(value);
+      assert.ok(url.protocol === "https:" || url.protocol === "http:", value);
+      assert.equal(url.username || url.password, "", value);
+    }
+  }
+});
